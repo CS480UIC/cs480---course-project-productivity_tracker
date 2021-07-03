@@ -11,4 +11,4 @@ Our application allows teams and individual users to organize tasks and be able 
 
 > **Database ER diagram**
 
-![drawSQL-export-2021-07-03_13_45](https://user-images.githubusercontent.com/54045615/124365881-a6be2a00-dc10-11eb-86cc-af58cae9d49c.png)
+![drawSQL-export-2021-07-03_13_45](https://github.com/diamalab/cs480---course-project-productivity_tracker/blob/main/documentation/ER_diagram.png)
