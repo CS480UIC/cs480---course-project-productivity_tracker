@@ -1,18 +1,24 @@
 DROP TABLE IF EXISTS Team;
+DROP TABLE IF EXISTS TaskUser;
 DROP TABLE IF EXISTS User;
 DROP TABLE IF EXISTS Task;
+DROP TABLE IF EXISTS PriorityDescription;
+DROP TABLE IF EXISTS Category;
+
 CREATE TABLE Team (
     team_id int NOT NULL,
     team_name TEXT NOT NULL,
     PRIMARY KEY (team_id),
     FOREIGN KEY (team_id) REFERENCES TeamUser(team_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
 CREATE TABLE TeamUser (
     team_id int NOT NULL,
     user_id int NOT NULL,
     FOREIGN KEY (team_id) REFERENCES Team(team_id) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (team_id) REFERENCES User(user_id) ON UPDATE CASCADE ON DELETE CASCADE
 ); 
+
 
 CREATE TABLE User (
     user_id int NOT NULL,
@@ -48,7 +54,6 @@ CREATE TABLE PriorityDescription (
     FOREIGN KEY (priority) REFERENCES Task(priority) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-
 CREATE TABLE Category (
     category_id int NOT NULL,
     name TEXT NOT NULL,
@@ -56,7 +61,15 @@ CREATE TABLE Category (
     FOREIGN KEY (category_id) REFERENCES Task(category_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+-- Populating Team
+INSERT INTO Team(team_id,team_name) VALUES (1,"Cereal Killers");
+INSERT INTO Team(team_id,team_name) VALUES (2,"Hungry Hippos");
+INSERT INTO Team(team_id,team_name) VALUES (3,"Dill with it");
+INSERT INTO Team(team_id,team_name) VALUES (4,"Chicken Noodle Hoop");
+INSERT INTO Team(team_id,team_name) VALUES (5,"Cereal Killers");
+-- testing SELECT * FROM Team;
 
+-- Populating Tasks
 INSERT INTO Task (
         task_id,
         task_name,
@@ -181,3 +194,4 @@ VALUES (
         'true',
         3
     );
+-- testing SELECT * FROM Task;
