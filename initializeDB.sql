@@ -19,7 +19,6 @@ CREATE TABLE TeamUser (
     FOREIGN KEY (team_id) REFERENCES User(user_id) ON UPDATE CASCADE ON DELETE CASCADE
 ); 
 
-
 CREATE TABLE User (
     user_id int NOT NULL,
     user_name TEXT NOT NULL,
@@ -61,13 +60,43 @@ CREATE TABLE Category (
     FOREIGN KEY (category_id) REFERENCES Task(category_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+-- Populating Users
+INSERT INTO User(user_id,user_name,email,team_position,password) 
+VALUES (1001, 'DanielRiccardo', 'danric@gmail.com','Project Manager', 'Mydoglovescheese123!');
+INSERT INTO User(user_id,user_name,email,team_position,password) 
+VALUES (1002, 'LewisHamiltton', 'louis@gmail.com','Project Manager', 'jablsdfjkb2!');
+INSERT INTO User(user_id,user_name,email,team_position,password) 
+VALUES (1003, 'CharlesLeclerc', 'CharlesLec@gmail.com','QA', 'hotdogsforlunch');
+INSERT INTO User(user_id,user_name,email,team_position,password) 
+VALUES (1004, 'LandoNorris', 'lando@gmail.com','QA', 'CantSwim!');
+INSERT INTO User(user_id,user_name,email,team_position,password) 
+VALUES (1005, 'PierreGastly', 'gas123@gmail.com','Software Engineer', 'CheeseyBread824901');
+INSERT INTO User(user_id,user_name,email,team_position,password) 
+VALUES (1006, 'SergioPerrez', 'sergi01@gmail.com','Software Engineer', 'toyotacorrolla');
+INSERT INTO User(user_id,user_name,email,team_position,password) 
+VALUES (1007, 'MaxVerstappen', 'stapp@gmail.com','Software Engineer', 'Ihave11ToEs');
+INSERT INTO User(user_id,user_name,email,team_position,password) 
+VALUES (1008, 'ValtteriBottas', 'bottas41@gmail.com','Software Engineer', 'dontRunAfterSwimming');
+
+-- Populating Team User
+INSERT INTO TeamUser(team_id,user_id) VALUES (1,1001);
+INSERT INTO TeamUser(team_id,user_id) VALUES (2,1002);
+INSERT INTO TeamUser(team_id,user_id) VALUES (1,1003);
+INSERT INTO TeamUser(team_id,user_id) VALUES (2,1004);
+INSERT INTO TeamUser(team_id,user_id) VALUES (1,1005);
+INSERT INTO TeamUser(team_id,user_id) VALUES (2,1006);
+INSERT INTO TeamUser(team_id,user_id) VALUES (1,1007);
+INSERT INTO TeamUser(team_id,user_id) VALUES (2,1008);
+-- test query SELECT * FROM TeamUser WHERE team_id = 1;
+
 -- Populating Team
 INSERT INTO Team(team_id,team_name) VALUES (1,"Cereal Killers");
 INSERT INTO Team(team_id,team_name) VALUES (2,"Hungry Hippos");
 INSERT INTO Team(team_id,team_name) VALUES (3,"Dill with it");
 INSERT INTO Team(team_id,team_name) VALUES (4,"Chicken Noodle Hoop");
 INSERT INTO Team(team_id,team_name) VALUES (5,"Cereal Killers");
--- testing SELECT * FROM Team;
+-- test query SELECT * FROM Team;
+
 
 -- Populating Tasks
 INSERT INTO Task (
@@ -194,4 +223,4 @@ VALUES (
         'true',
         3
     );
--- testing SELECT * FROM Task;
+-- test query SELECT * FROM Task;
