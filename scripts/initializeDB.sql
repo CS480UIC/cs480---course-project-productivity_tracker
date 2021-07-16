@@ -8,16 +8,14 @@ CREATE TABLE Team (
     team_id int NOT NULL,
     team_name TEXT NOT NULL,
     PRIMARY KEY (team_id),
-    FOREIGN KEY (team_id) REFERENCES TeamUser(team_id) ON UPDATE CASCADE ON DELETE CASCADE
+    --FOREIGN KEY (team_id) REFERENCES TeamUser(team_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
-
-# ERROR 1824 (HY000): Failed to open the referenced table 'TeamUser'
 
 CREATE TABLE TeamUser (
     team_id int NOT NULL,
     user_id int NOT NULL,
     FOREIGN KEY (team_id) REFERENCES Team(team_id) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY (team_id) REFERENCES User(user_id) ON UPDATE CASCADE ON DELETE CASCADE
+    --FOREIGN KEY (team_id) REFERENCES User(user_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 CREATE TABLE User (
     user_id int NOT NULL,
@@ -26,7 +24,7 @@ CREATE TABLE User (
     team_position TEXT NOT NULL,
     password TEXT NOT NULL,
     PRIMARY KEY (user_id),
-    FOREIGN KEY (user_id) REFERENCES Task(user_id) ON UPDATE CASCADE ON DELETE CASCADE
+    --FOREIGN KEY (user_id) REFERENCES Task(user_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 CREATE TABLE Task (
     task_id int NOT NULL,
@@ -41,21 +39,26 @@ CREATE TABLE Task (
     is_completed boolean NOT NULL,
     category_id,
     PRIMARY KEY (task_id),
-    FOREIGN KEY (user_id) REFERENCES User(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY (team_id) REFERENCES Team(team_id) ON UPDATE CASCADE ON DELETE CASCADE
+    --FOREIGN KEY (user_id) REFERENCES User(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
+    --FOREIGN KEY (team_id) REFERENCES Team(team_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 CREATE TABLE PriorityDescription (
     priority int NOT NULL,
     description TEXT NOT NULL,
     PRIMARY KEY (priority),
-    FOREIGN KEY (priority) REFERENCES Task(priority) ON UPDATE CASCADE ON DELETE CASCADE
+    --FOREIGN KEY (priority) REFERENCES Task(priority) ON UPDATE CASCADE ON DELETE CASCADE
 );
 CREATE TABLE Category (
     category_id int NOT NULL,
     name TEXT NOT NULL,
     PRIMARY KEY (category_id),
-    FOREIGN KEY (category_id) REFERENCES Task(category_id) ON UPDATE CASCADE ON DELETE CASCADE
+    --FOREIGN KEY (category_id) REFERENCES Task(category_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+--ADD Foreign Keys for all tables
+
+
+
 INSERT INTO Category(category_id, name)
 VALUES (10, 'Documentation');
 INSERT INTO Category(category_id, name)
