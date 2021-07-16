@@ -39,7 +39,7 @@ CREATE TABLE Task (
     dead_line_date date,
     completed_date date,
     priority int,
-    is_completed boolean,
+    is_completed boolean NOT NULL,
     category_id,
     PRIMARY KEY (task_id),
     FOREIGN KEY (user_id) REFERENCES User(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -52,7 +52,6 @@ CREATE TABLE PriorityDescription (
     PRIMARY KEY (priority),
     FOREIGN KEY (priority) REFERENCES Task(priority) ON UPDATE CASCADE ON DELETE CASCADE
 );
-
 CREATE TABLE Category (
     category_id int NOT NULL,
     name TEXT NOT NULL,
@@ -60,7 +59,13 @@ CREATE TABLE Category (
     FOREIGN KEY (category_id) REFERENCES Task(category_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
--- Populating Users
+INSERT INTO Category(category_id,name) VALUES (10, 'Documentation');
+INSERT INTO Category(category_id,name) VALUES (20,'Merged to package');
+INSERT INTO Category(category_id,name) VALUES (30,'Merged to branch');
+INSERT INTO Category(category_id,name) VALUES (40,'Issue/Bug');
+INSERT INTO Category(category_id,name) VALUES (50,'Test Case');
+-- test query SELECT * FROM Category;
+
 INSERT INTO User(user_id,user_name,email,team_position,password) 
 VALUES (1001, 'DanielRiccardo', 'danric@gmail.com','Project Manager', 'Mydoglovescheese123!');
 INSERT INTO User(user_id,user_name,email,team_position,password) 
@@ -77,8 +82,9 @@ INSERT INTO User(user_id,user_name,email,team_position,password)
 VALUES (1007, 'MaxVerstappen', 'stapp@gmail.com','Software Engineer', 'Ihave11ToEs');
 INSERT INTO User(user_id,user_name,email,team_position,password) 
 VALUES (1008, 'ValtteriBottas', 'bottas41@gmail.com','Software Engineer', 'dontRunAfterSwimming');
+-- test query SELECT * FROM User;
 
--- Populating Team User
+
 INSERT INTO TeamUser(team_id,user_id) VALUES (1,1001);
 INSERT INTO TeamUser(team_id,user_id) VALUES (2,1002);
 INSERT INTO TeamUser(team_id,user_id) VALUES (1,1003);
@@ -89,7 +95,6 @@ INSERT INTO TeamUser(team_id,user_id) VALUES (1,1007);
 INSERT INTO TeamUser(team_id,user_id) VALUES (2,1008);
 -- test query SELECT * FROM TeamUser WHERE team_id = 1;
 
--- Populating Team
 INSERT INTO Team(team_id,team_name) VALUES (1,"Cereal Killers");
 INSERT INTO Team(team_id,team_name) VALUES (2,"Hungry Hippos");
 INSERT INTO Team(team_id,team_name) VALUES (3,"Dill with it");
@@ -98,7 +103,12 @@ INSERT INTO Team(team_id,team_name) VALUES (5,"Cereal Killers");
 -- test query SELECT * FROM Team;
 
 
--- Populating Tasks
+INSERT INTO PriorityDescription(priority,description) VALUES (1,"Immediate Priority");
+INSERT INTO PriorityDescription(priority,description) VALUES (2,"High Priority");
+INSERT INTO PriorityDescription(priority,description) VALUES (3,"Moderate Priority");
+INSERT INTO PriorityDescription(priority,description) VALUES (4,"Low Priority");
+-- test query SELECT * FROM PriorityDescription;
+
 INSERT INTO Task (
         task_id,
         task_name,
@@ -119,7 +129,7 @@ VALUES (
         2,
         '2021-05-1',
         '2021-05-2',
-        5,
+        2,
         'false',
         1
     );
@@ -143,7 +153,7 @@ VALUES (
         2,
         '2021-05-21',
         '2021-05-22',
-        10,
+        1,
         'false',
         1
     );
@@ -193,7 +203,7 @@ VALUES (
         2,
         '2021-05-19',
         '2021-05-19',
-        4,
+        3,
         'false',
         2
     );
