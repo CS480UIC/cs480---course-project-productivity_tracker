@@ -89,6 +89,7 @@ VALUES (40, 'Issue/Bug');
 INSERT INTO Category(category_id, name)
 VALUES (50, 'Test Case');
 -- test query SELECT * FROM Category;
+
 INSERT INTO User(user_id, user_name, email, team_position, password)
 VALUES (
         1001,
@@ -154,6 +155,19 @@ VALUES (
         'dontRunAfterSwimming'
     );
 -- test query SELECT * FROM User;
+
+INSERT INTO Team(team_id, team_name)
+VALUES (1, "Cereal Killers");
+INSERT INTO Team(team_id, team_name)
+VALUES (2, "Hungry Hippos");
+INSERT INTO Team(team_id, team_name)
+VALUES (3, "Dill with it");
+INSERT INTO Team(team_id, team_name)
+VALUES (4, "Chicken Noodle Hoop");
+INSERT INTO Team(team_id, team_name)
+VALUES (5, "Cereal Killers");
+-- test query SELECT * FROM Team;
+
 INSERT INTO TeamUser(team_id, user_id)
 VALUES (1, 1001);
 INSERT INTO TeamUser(team_id, user_id)
@@ -171,17 +185,8 @@ VALUES (1, 1007);
 INSERT INTO TeamUser(team_id, user_id)
 VALUES (2, 1008);
 -- test query SELECT * FROM TeamUser WHERE team_id = 1;
-INSERT INTO Team(team_id, team_name)
-VALUES (1, "Cereal Killers");
-INSERT INTO Team(team_id, team_name)
-VALUES (2, "Hungry Hippos");
-INSERT INTO Team(team_id, team_name)
-VALUES (3, "Dill with it");
-INSERT INTO Team(team_id, team_name)
-VALUES (4, "Chicken Noodle Hoop");
-INSERT INTO Team(team_id, team_name)
-VALUES (5, "Cereal Killers");
--- test query SELECT * FROM Team;
+
+
 INSERT INTO PriorityDescription(priority, description)
 VALUES (1, "Immediate Priority");
 INSERT INTO PriorityDescription(priority, description)
