@@ -1,62 +1,81 @@
 CREATE DATABASE ProductivityTracker;
 USE ProductivityTracker;
-DROP TABLE IF EXISTS User;
+DROP TABLE IF EXISTS TeamUser;
 DROP TABLE IF EXISTS Task;
+DROP TABLE IF EXISTS User;
+DROP TABLE IF EXISTS Team;
 DROP TABLE IF EXISTS PriorityDescription;
 DROP TABLE IF EXISTS Category;
+
+
 CREATE TABLE Team (
-    team_id int NOT NULL,
+    team_id INTEGER NOT NULL,
     team_name TEXT NOT NULL,
-    PRIMARY KEY (team_id),
-    --FOREIGN KEY (team_id) REFERENCES TeamUser(team_id) ON UPDATE CASCADE ON DELETE CASCADE
+    PRIMARY KEY (team_id)
 );
 
 CREATE TABLE TeamUser (
-    team_id int NOT NULL,
-    user_id int NOT NULL,
-    FOREIGN KEY (team_id) REFERENCES Team(team_id) ON UPDATE CASCADE ON DELETE CASCADE,
-    --FOREIGN KEY (team_id) REFERENCES User(user_id) ON UPDATE CASCADE ON DELETE CASCADE
+    team_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL
 );
 CREATE TABLE User (
-    user_id int NOT NULL,
+    user_id INTEGER NOT NULL,
     user_name TEXT NOT NULL,
     email TEXT NOT NULL,
     team_position TEXT NOT NULL,
     password TEXT NOT NULL,
-    PRIMARY KEY (user_id),
-    --FOREIGN KEY (user_id) REFERENCES Task(user_id) ON UPDATE CASCADE ON DELETE CASCADE
+    PRIMARY KEY (user_id)
 );
 CREATE TABLE Task (
-    task_id int NOT NULL,
+    task_id INTEGER NOT NULL,
     task_name TEXT NOT NULL,
     task_description TEXT NOT NULL,
-    user_id int NOT NULL,
-    team_id int NOT NULL,
+    user_id INTEGER NOT NULL,
+    team_id INTEGER NOT NULL,
     creation_date date,
     dead_line_date date,
     completed_date date,
-    priority int,
+    priority INTEGER,
     is_completed boolean NOT NULL,
-    category_id,
-    PRIMARY KEY (task_id),
-    --FOREIGN KEY (user_id) REFERENCES User(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
-    --FOREIGN KEY (team_id) REFERENCES Team(team_id) ON UPDATE CASCADE ON DELETE CASCADE
+    category_id INTEGER,
+    PRIMARY KEY (task_id)
 );
 CREATE TABLE PriorityDescription (
-    priority int NOT NULL,
+    priority INTEGER NOT NULL,
     description TEXT NOT NULL,
-    PRIMARY KEY (priority),
-    --FOREIGN KEY (priority) REFERENCES Task(priority) ON UPDATE CASCADE ON DELETE CASCADE
+    PRIMARY KEY (priority)
 );
 CREATE TABLE Category (
-    category_id int NOT NULL,
+    category_id INTEGER NOT NULL,
     name TEXT NOT NULL,
-    PRIMARY KEY (category_id),
-    --FOREIGN KEY (category_id) REFERENCES Task(category_id) ON UPDATE CASCADE ON DELETE CASCADE
+    PRIMARY KEY (category_id)
 );
 
---ADD Foreign Keys for all tables
+-- ADD Foreign Keys for all tables
 
+ALTER TABLE TeamUser
+ADD CONSTRAINT FK_TeamUser_user_id
+FOREIGN KEY (user_id) REFERENCES User(user_id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE TeamUser
+ADD CONSTRAINT FK_TeamUser_team_id
+FOREIGN KEY (team_id) REFERENCES Team(team_id) ON UPDATE CASCADE ON DELETE CASCADE; 
+
+ALTER TABLE Task
+ADD CONSTRAINT FK_Task_user_id
+FOREIGN KEY (user_id) REFERENCES User(user_id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE Task
+ADD CONSTRAINT FK_Task_team_id
+FOREIGN KEY (team_id) REFERENCES Team(team_id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE Task
+ADD CONSTRAINT FK_PriorityDescription_priority
+FOREIGN KEY (priority) REFERENCES PriorityDescription(priority) ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE Task
+ADD CONSTRAINT FK_Category_category_id
+FOREIGN KEY (category_id) REFERENCES Category(category_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 INSERT INTO Category(category_id, name)
