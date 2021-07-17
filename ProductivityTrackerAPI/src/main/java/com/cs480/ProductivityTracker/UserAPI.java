@@ -12,14 +12,52 @@ public class UserAPI
 	private static Statement statement = null;
 	private static PreparedStatement preparedStatement = null;
 	private static ResultSet resultSet = null;
+	
+	public static boolean verifyUser(String username, String password)
+	{
+		try 
+		{
+			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+			connect = DriverManager
+			          .getConnection("jdbc:mysql://localhost:3306/"+ App.MySqlDatabase+"?"
+				              + "user="+App.MySqlUser+"&password="+App.MySqlPassword);
+			String sql = "SELECT * FROM User";
+			preparedStatement = connect.prepareStatement(sql);
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next())
+			{
+		    	String rUsername = resultSet.getString("user_name");
+		    	String rPassword = resultSet.getString("password");
+		    	if(username.equals(rUsername) && password.equals(rPassword))
+		    	{
+		    		close();
+		    		return true;
+		    	}
+			}
+			
+			
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally
+		{
+			close();
+		}
+		
+		return false;
+	}
+	
 	public static void printAllUsers()
 	{
 		try
         {
         	Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 			connect = DriverManager
-			          .getConnection("jdbc:mysql://localhost:3306/ProductivityTracker?"
-				              + "user=root&password=a2bf77d41C");
+			          .getConnection("jdbc:mysql://localhost:3306/"+ App.MySqlDatabase+"?"
+				              + "user="+App.MySqlUser+"&password="+App.MySqlPassword);
 			String sql = "SELECT * FROM User";
 			preparedStatement = connect.prepareStatement(sql);
 			resultSet = preparedStatement.executeQuery();
