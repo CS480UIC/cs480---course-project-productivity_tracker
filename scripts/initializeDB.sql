@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS Category;
 
 CREATE TABLE Team (
     team_id INTEGER NOT NULL,
-    team_name TEXT NOT NULL,
+    team_name VARCHAR(50) NOT NULL,
     PRIMARY KEY (team_id)
 );
 
@@ -20,15 +20,15 @@ CREATE TABLE TeamUser (
 );
 CREATE TABLE User (
     user_id INTEGER NOT NULL,
-    user_name TEXT NOT NULL,
+    user_name VARCHAR(20) UNIQUE NOT NULL,
     email TEXT NOT NULL,
-    team_position TEXT NOT NULL,
+    team_position VARCHAR(20) NOT NULL,
     password TEXT NOT NULL,
     PRIMARY KEY (user_id)
 );
 CREATE TABLE Task (
     task_id INTEGER NOT NULL,
-    task_name TEXT NOT NULL,
+    task_name VARCHAR(50) NOT NULL,
     task_description TEXT NOT NULL,
     user_id INTEGER NOT NULL,
     team_id INTEGER,
@@ -47,7 +47,7 @@ CREATE TABLE PriorityDescription (
 );
 CREATE TABLE Category (
     category_id INTEGER NOT NULL,
-    name TEXT NOT NULL,
+    name VARCHAR(20) NOT NULL,
     PRIMARY KEY (category_id)
 );
 
