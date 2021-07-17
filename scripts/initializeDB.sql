@@ -31,7 +31,7 @@ CREATE TABLE Task (
     task_name TEXT NOT NULL,
     task_description TEXT NOT NULL,
     user_id INTEGER NOT NULL,
-    team_id INTEGER NOT NULL,
+    team_id INTEGER,
     creation_date date,
     dead_line_date date,
     completed_date date,
@@ -89,6 +89,7 @@ VALUES (40, 'Issue/Bug');
 INSERT INTO Category(category_id, name)
 VALUES (50, 'Test Case');
 -- test query SELECT * FROM Category;
+
 INSERT INTO User(user_id, user_name, email, team_position, password)
 VALUES (
         1001,
@@ -154,23 +155,7 @@ VALUES (
         'dontRunAfterSwimming'
     );
 -- test query SELECT * FROM User;
-INSERT INTO TeamUser(team_id, user_id)
-VALUES (1, 1001);
-INSERT INTO TeamUser(team_id, user_id)
-VALUES (2, 1002);
-INSERT INTO TeamUser(team_id, user_id)
-VALUES (1, 1003);
-INSERT INTO TeamUser(team_id, user_id)
-VALUES (2, 1004);
-INSERT INTO TeamUser(team_id, user_id)
-VALUES (1, 1005);
-INSERT INTO TeamUser(team_id, user_id)
-VALUES (2, 1006);
-INSERT INTO TeamUser(team_id, user_id)
-VALUES (1, 1007);
-INSERT INTO TeamUser(team_id, user_id)
-VALUES (2, 1008);
--- test query SELECT * FROM TeamUser WHERE team_id = 1;
+
 INSERT INTO Team(team_id, team_name)
 VALUES (1, "Cereal Killers");
 INSERT INTO Team(team_id, team_name)
@@ -182,6 +167,26 @@ VALUES (4, "Chicken Noodle Hoop");
 INSERT INTO Team(team_id, team_name)
 VALUES (5, "Cereal Killers");
 -- test query SELECT * FROM Team;
+
+INSERT INTO TeamUser(team_id, user_id)
+VALUES (1, 1001);
+INSERT INTO TeamUser(team_id, user_id)
+VALUES (2, 1002);
+INSERT INTO TeamUser(team_id, user_id)
+VALUES (1, 1003);
+INSERT INTO TeamUser(team_id, user_id)
+VALUES (3, 1004);
+INSERT INTO TeamUser(team_id, user_id)
+VALUES (4, 1005);
+INSERT INTO TeamUser(team_id, user_id)
+VALUES (2, 1006);
+INSERT INTO TeamUser(team_id, user_id)
+VALUES (1, 1007);
+INSERT INTO TeamUser(team_id, user_id)
+VALUES (5, 1008);
+-- test query SELECT * FROM TeamUser WHERE team_id = 1;
+
+
 INSERT INTO PriorityDescription(priority, description)
 VALUES (1, "Immediate Priority");
 INSERT INTO PriorityDescription(priority, description)
@@ -207,38 +212,15 @@ VALUES (
         40010,
         "Create Implementation tests",
         "make some test!",
+        1001,
         1,
-        2,
         '2021-05-1',
         '2021-05-2',
         2,
-        'false',
-        1
+        0,
+        50
     );
-INSERT INTO Task (
-        task_id,
-        task_name,
-        task_description,
-        user_id,
-        team_id,
-        creation_date,
-        dead_line_date,
-        priority,
-        is_completed,
-        category_id
-    )
-VALUES (
-        40020,
-        "Buy cookie ingredients",
-        "Buy flour, milk, chocolate chips",
-        1,
-        2,
-        '2021-05-21',
-        '2021-05-22',
-        1,
-        'false',
-        1
-    );
+
 INSERT INTO Task (
         task_id,
         task_name,
@@ -253,17 +235,17 @@ INSERT INTO Task (
         category_id
     )
 VALUES (
-        40030,
+        40020,
         "Deploy new feature!",
         "Go through the checklist and deploy!",
-        1,
-        2,
+        1005,
+        4,
         '2021-05-21',
         '2021-05-22',
         '2021-05-22',
         1,
-        'true',
-        2
+        1,
+        20
     );
 INSERT INTO Task (
         task_id,
@@ -281,13 +263,13 @@ VALUES (
         40040,
         "Test changes",
         "Run tests with jenkins.",
-        1,
+        1002,
         2,
         '2021-05-19',
         '2021-05-19',
         3,
-        'false',
-        2
+        0,
+        50
     );
 INSERT INTO Task (
         task_id,
@@ -298,7 +280,7 @@ INSERT INTO Task (
         creation_date,
         dead_line_date,
         completed_date,
-        priority,show 
+        priority, 
         is_completed,
         category_id
     )
@@ -306,13 +288,13 @@ VALUES (
         40050,
         "Run regression testing on PR-2021",
         "Go through checklist and run regression tests.",
+        1007,
         1,
-        2,
         '2021-05-21',
         '2021-05-22',
         '2021-05-22',
         3,
-        'true',
-        3
+        1,
+        50
     );
 -- test query SELECT * FROM Task;
