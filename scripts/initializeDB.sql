@@ -154,6 +154,15 @@ VALUES (
         'Software Engineer',
         'dontRunAfterSwimming'
     );
+
+INSERT INTO User(user_id, user_name, email, team_position, password)
+VALUES (
+        0,
+        'admin',
+        'admin@admin.com',
+        'admin',
+        'admin'
+    );
 -- test query SELECT * FROM User;
 
 INSERT INTO Team(team_id, team_name)
