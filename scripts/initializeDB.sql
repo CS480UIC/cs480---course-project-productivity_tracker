@@ -27,7 +27,7 @@ CREATE TABLE User (
     PRIMARY KEY (user_id)
 );
 CREATE TABLE Task (
-    task_id INTEGER NOT NULL,
+    task_id INTEGER AUTO_INCREMENT NOT NULL,
     task_name VARCHAR(50) NOT NULL,
     task_description TEXT NOT NULL,
     user_id INTEGER NOT NULL,
@@ -206,7 +206,7 @@ INSERT INTO PriorityDescription(priority, description)
 VALUES (4, "Low Priority");
 -- test query SELECT * FROM PriorityDescription;
 INSERT INTO Task (
-        task_id,
+        
         task_name,
         task_description,
         user_id,
@@ -218,7 +218,7 @@ INSERT INTO Task (
         category_id
     )
 VALUES (
-        40010,
+        
         "Create Implementation tests",
         "make some test!",
         1001,
@@ -231,7 +231,7 @@ VALUES (
     );
 
 INSERT INTO Task (
-        task_id,
+        
         task_name,
         task_description,
         user_id,
@@ -244,7 +244,7 @@ INSERT INTO Task (
         category_id
     )
 VALUES (
-        40020,
+        
         "Deploy new feature!",
         "Go through the checklist and deploy!",
         1005,
@@ -257,7 +257,7 @@ VALUES (
         20
     );
 INSERT INTO Task (
-        task_id,
+        
         task_name,
         task_description,
         user_id,
@@ -269,7 +269,7 @@ INSERT INTO Task (
         category_id
     )
 VALUES (
-        40040,
+        
         "Test changes",
         "Run tests with jenkins.",
         1002,
@@ -281,7 +281,7 @@ VALUES (
         50
     );
 INSERT INTO Task (
-        task_id,
+        
         task_name,
         task_description,
         user_id,
@@ -294,7 +294,7 @@ INSERT INTO Task (
         category_id
     )
 VALUES (
-        40050,
+        
         "Run regression testing on PR-2021",
         "Go through checklist and run regression tests.",
         1007,
