@@ -22,7 +22,7 @@ CREATE TABLE User (
     user_id INTEGER NOT NULL,
     user_name VARCHAR(20) UNIQUE NOT NULL,
     email TEXT NOT NULL,
-    team_position VARCHAR(20) NOT NULL,
+    team_position VARCHAR(20),
     password TEXT NOT NULL,
     PRIMARY KEY (user_id)
 );
