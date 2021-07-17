@@ -53,6 +53,7 @@ public class App
 			System.out.println("3. Tasks");
 			System.out.println("4. Exit");
 			option = sc.nextInt();
+			sc.nextLine();
 			
 			try {
 				switch(option)
@@ -108,6 +109,7 @@ public class App
 			System.out.println("4. Search user");
 			System.out.println("5. Back");
 			option = sc.nextInt();
+			sc.nextLine();
 			
 			switch(option)
 			{
@@ -118,7 +120,7 @@ public class App
 					String user_name;
 					String email;
 					String password;
-					System.out.println("Enter user_id:");
+					System.out.println("\nEnter user_id:");
 					user_id = sc.nextInt();
 					sc.nextLine();
 
@@ -142,12 +144,64 @@ public class App
 				case 2:
 				{
 					//TODO: Delete existing user
+					String user_name;
+					System.out.println("\nEnter user name:");
+					user_name = sc.nextLine();
+					
+					if(UserAPI.deleteUserByUserName(user_name))
+						System.out.println("User deleted successfully. (If existed)");
+					else
+						System.out.println("Failed to delete user.");
+					
+					
 					break;
 				}
 				
 				case 3:
 				{
 					//TODO: Modify existing user
+					String user_name;
+					System.out.println("\nEnter user name:");
+					user_name = sc.nextLine();
+					
+					System.out.println("Select attribute:");
+					System.out.println("1. password");
+					System.out.println("2. email");
+					System.out.println("3. team position");
+					int _option = sc.nextInt();
+					sc.nextLine();
+					
+					String updateString = "";
+					switch(_option)
+					{
+						case 1:
+						{
+							System.out.println("Enter new password:");
+							updateString = sc.nextLine();
+							UserAPI.modifyUser(user_name, updateString, UserAPI.UPDATE_PASSWORD);
+							break;
+						}
+						case 2:
+						{
+							System.out.println("Enter new email");
+							updateString = sc.nextLine();
+							UserAPI.modifyUser(user_name, updateString, UserAPI.UPDATE_EMAIL);
+							break;
+						}
+						case 3:
+						{
+							System.out.println("Enter new team positon:");
+							updateString = sc.nextLine();
+							UserAPI.modifyUser(user_name, updateString, UserAPI.UPDATE_TEAM_POSITION);
+							break;
+						}
+						default:
+						{
+							break;
+						}
+					}
+					
+					
 					break;
 				}
 				
@@ -157,11 +211,11 @@ public class App
 					int _option = -1;
 					do
 					{
-						System.out.println("1. Display all users");
+						System.out.println("\n1. Display all users");
 						System.out.println("2. Search by user name");
-						System.out.println("3. Search by user id");
-					    System.out.println("4. Back");
+					    System.out.println("3. Back");
 						_option = sc.nextInt();
+						sc.nextLine();
 						
 						switch(_option)
 						{
@@ -175,16 +229,13 @@ public class App
 							case 2:
 							{
 								//TODO: Search by user name
+								System.out.println("\nEnter user name:");
+								String temp = sc.nextLine();
+								UserAPI.printUser(temp);
 								break;
 							}
 							
-							case 3:
-							{
-								//TODO: Search by user id
-								break;
-							}
-							
-							case 4: break;
+							case 3: break;
 							
 							default:
 							{
@@ -193,7 +244,7 @@ public class App
 						
 						}
 						
-					}while(_option != 4);
+					}while(_option != 3);
 					
 					
 					break;
@@ -228,6 +279,7 @@ public class App
 			System.out.println("6. Remove a user from a team");
 			System.out.println("7. Back");
 			option = sc.nextInt();
+			sc.nextLine();
 			
 			switch(option)
 			{
@@ -292,6 +344,7 @@ public class App
 			System.out.println("4. Search task");
 			System.out.println("5. Back");
 			option = sc.nextInt();
+			sc.nextLine();
 			
 			switch(option)
 			{
