@@ -1,6 +1,7 @@
 CREATE DATABASE ProductivityTracker;
 USE ProductivityTracker;
 
+
 CREATE TABLE Team
 (
 	team_id INTEGER NOT NULL AUTO_INCREMENT,

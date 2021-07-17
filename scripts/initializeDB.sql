@@ -7,9 +7,8 @@ DROP TABLE IF EXISTS Team;
 DROP TABLE IF EXISTS PriorityDescription;
 DROP TABLE IF EXISTS Category;
 
-
 CREATE TABLE Team (
-    team_id INTEGER NOT NULL,
+    team_id INTEGER NOT NULL AUTO_INCREMENT,
     team_name VARCHAR(50) NOT NULL,
     PRIMARY KEY (team_id)
 );
