@@ -50,6 +50,37 @@ public class UserAPI
 		return false;
 	}
 	
+	
+	public static boolean addUser(int user_id, String user_name, String email, String password)
+	{
+		try 
+		{
+			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+			connect = DriverManager
+			          .getConnection("jdbc:mysql://localhost:3306/"+ App.MySqlDatabase+"?"
+				              + "user="+App.MySqlUser+"&password="+App.MySqlPassword);
+			String sql = "INSERT INTO User(user_id, user_name, email, password) "
+					+ "VALUES ("
+					+ user_id +","
+					+ "'"+ user_name +"',"
+					+ "'"+ email +"',"
+					+ "'"+ password +"'"
+					+ ");";
+			preparedStatement = connect.prepareStatement(sql);
+			preparedStatement.executeUpdate();
+			
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+			close();
+			return false;
+		}
+		close();
+		return true;
+	}
+	
+	
 	public static void printAllUsers()
 	{
 		try

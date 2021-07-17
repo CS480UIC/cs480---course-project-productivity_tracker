@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -53,33 +54,39 @@ public class App
 			System.out.println("4. Exit");
 			option = sc.nextInt();
 			
-			switch(option)
-			{
-				case 1:
+			try {
+				switch(option)
 				{
-					user();
-					break;
-				}
+					case 1:
+					{
+						user();
+						break;
+					}
 				
-				case 2:
-				{
-					team();
-					break;
-				}
+					case 2:
+					{
+						team();
+						break;
+					}
 				
-				case 3:
-				{
-					task();
-					break;
-				}
+					case 3:
+					{
+						task();
+						break;
+					}
 				
-				case 4: break;
+					case 4: break;
 				
-				default:
-				{
-					System.out.println("Invalied option!!");
-				}
+					default:
+					{
+						System.out.println("Invalied option!!");
+					}
 			
+				}
+			}
+			catch(InputMismatchException e)
+			{
+				System.out.println("Oops, an invalid value was enterd :(");
 			}
 			
 		}while(option != 4);
@@ -107,6 +114,28 @@ public class App
 				case 1:
 				{
 					//TODO: Create new user
+					int user_id;
+					String user_name;
+					String email;
+					String password;
+					System.out.println("Enter user_id:");
+					user_id = sc.nextInt();
+					sc.nextLine();
+
+					System.out.println("Enter user name:");
+					user_name = sc.nextLine();
+
+					System.out.println("Enter email:");
+					email = sc.nextLine();
+
+					System.out.println("Enter password:");
+					password = sc.nextLine();
+					
+					if(UserAPI.addUser(user_id, user_name, email, password))
+						System.out.println("User added successfully.");
+					else
+						System.out.println("Failed to add user.");
+					
 					break;
 				}
 				
@@ -125,14 +154,53 @@ public class App
 				case 4:
 				{
 					//TODO: Search user
+					int _option = -1;
+					do
+					{
+						System.out.println("1. Display all users");
+						System.out.println("2. Search by user name");
+						System.out.println("3. Search by user id");
+					    System.out.println("4. Back");
+						_option = sc.nextInt();
+						
+						switch(_option)
+						{
+							case 1:
+							{
+								//TODO: Display all users
+								UserAPI.printAllUsers();
+								break;
+							}
+							
+							case 2:
+							{
+								//TODO: Search by user name
+								break;
+							}
+							
+							case 3:
+							{
+								//TODO: Search by user id
+								break;
+							}
+							
+							case 4: break;
+							
+							default:
+							{
+								System.out.println("Invalid option!");
+							}
+						
+						}
+						
+					}while(_option != 4);
+					
+					
 					break;
 				}
 				
-				case 5:
-				{
-					//TODO: Search user
-					break;
-				}
+				case 5: break;
+				
 				
 				
 				default:
