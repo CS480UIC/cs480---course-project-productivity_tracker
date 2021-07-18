@@ -371,8 +371,12 @@ public class App {
           }
         case 4:
           {
-            //TODO: Search task
-            TaskAPI.printAllTasks();
+            System.out.println("\nSearch Task");
+            System.out.println("__________________\n");
+            Integer task_id;
+            System.out.println("\nEnter a task_id:");
+            task_id = sc.nextInt();
+            TaskAPI.searchTask(task_id);
             break;
           }
         case 5:

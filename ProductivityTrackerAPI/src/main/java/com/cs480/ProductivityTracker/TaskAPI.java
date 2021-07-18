@@ -13,6 +13,31 @@ public class TaskAPI {
   private static PreparedStatement preparedStatement = null;
   private static ResultSet resultSet = null;
 
+  public static void searchTask(Integer id) {
+    try {
+      executeQuery("SELECT * FROM Task WHERE task_id ='" + id + "'");
+      while (resultSet.next()) {
+        String task_id = resultSet.getString("task_id");
+        String task_name = resultSet.getString("task_name");
+        String task_description = resultSet.getString("task_description");
+        String user_id = resultSet.getString("user_id");
+        String creation_date = resultSet.getString("creation_date");
+        String dead_line_date = resultSet.getString("dead_line_date");
+        String completed_date = resultSet.getString("completed_date");
+        System.out.println("\n\n" + task_name + "(ID:" + task_id + ")");
+        System.out.println("___________");
+        System.out.println("Description:\t" + task_description);
+        System.out.println("user_id:\t" + user_id);
+        System.out.println("creation_date:\t" + creation_date);
+        System.out.println("dead_line_date:\t" + dead_line_date);
+        System.out.println("completed_date:\t" + completed_date);
+        System.out.println("___________");
+      }
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+  }
+
   public static void printAllTasks() {
     try {
       executeQuery("SELECT * FROM Task");
@@ -25,14 +50,13 @@ public class TaskAPI {
         String creation_date = resultSet.getString("creation_date");
         String dead_line_date = resultSet.getString("dead_line_date");
         String completed_date = resultSet.getString("completed_date");
-
         System.out.println("\n\n" + task_name + "(ID:" + task_id + ")");
         System.out.println("___________");
         System.out.println("Description:\t" + task_description);
         System.out.println("user_id:\t" + user_id);
         System.out.println("creation_date:\t" + creation_date);
-        System.out.println("dead_line_date:\t" + creation_date);
-        System.out.println("completed_date:\t" + creation_date);
+        System.out.println("dead_line_date:\t" + dead_line_date);
+        System.out.println("completed_date:\t" + completed_date);
         System.out.println("___________");
       }
     } catch (Exception e) {
