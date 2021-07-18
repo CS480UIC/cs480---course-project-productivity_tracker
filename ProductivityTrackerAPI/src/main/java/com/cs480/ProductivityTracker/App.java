@@ -361,7 +361,19 @@ public class App {
           }
         case 2:
           {
-            //TODO: Delete existing task
+            System.out.println("\nDelete Task");
+            System.out.println("__________________\n");
+            Integer task_id;
+            System.out.println("\nEnter a task_id:");
+            task_id = sc.nextInt();
+            if (TaskAPI.deleteTask(task_id) == true) {
+              TaskAPI.printAllTasks();
+              System.out.println(
+                "Successfully deleted task with id:" + task_id + "!"
+              );
+            } else {
+              System.out.println("Error deleting task with id:" + task_id);
+            }
             break;
           }
         case 3:

@@ -13,6 +13,18 @@ public class TaskAPI {
   private static PreparedStatement preparedStatement = null;
   private static ResultSet resultSet = null;
 
+  public static boolean deleteTask(Integer id) {
+    try {
+      executeUpdate("DELETE FROM Task WHERE task_id =" + id);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      close();
+      return false;
+    }
+    close();
+    return true;
+  }
+
   public static void searchTask(Integer id) {
     try {
       executeQuery("SELECT * FROM Task WHERE task_id ='" + id + "'");
