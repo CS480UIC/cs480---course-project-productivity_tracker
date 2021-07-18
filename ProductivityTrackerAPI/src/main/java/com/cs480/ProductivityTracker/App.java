@@ -115,11 +115,12 @@ public class App {
             System.out.println("Enter password:");
             password = sc.nextLine();
 
-            if (
-              UserAPI.addUser(user_id, user_name, email, password)
-            ) System.out.println(
-              "User added successfully."
-            ); else System.out.println("Failed to add user.");
+            if (UserAPI.addUser(user_id, user_name, email, password)) {
+              System.out.println("User added successfully.");
+              UserAPI.printAllUsers();
+            } else {
+              System.out.println("Failed to add user.");
+            }
 
             break;
           }
@@ -130,9 +131,10 @@ public class App {
             System.out.println("\nEnter user name:");
             user_name = sc.nextLine();
 
-            if (UserAPI.deleteUserByUserName(user_name)) System.out.println(
-              "User deleted successfully. (If existed)"
-            ); else System.out.println("Failed to delete user.");
+            if (UserAPI.deleteUserByUserName(user_name)) {
+              System.out.println("User deleted successfully. (If existed)");
+              UserAPI.printAllUsers();
+            } else System.out.println("Failed to delete user.");
 
             break;
           }
@@ -161,6 +163,7 @@ public class App {
                     updateString,
                     UserAPI.UPDATE_PASSWORD
                   );
+                  UserAPI.printAllUsers();
                   break;
                 }
               case 2:
@@ -172,6 +175,7 @@ public class App {
                     updateString,
                     UserAPI.UPDATE_EMAIL
                   );
+                  UserAPI.printAllUsers();
                   break;
                 }
               case 3:
@@ -183,6 +187,7 @@ public class App {
                     updateString,
                     UserAPI.UPDATE_TEAM_POSITION
                   );
+                  UserAPI.printAllUsers();
                   break;
                 }
               default:
@@ -367,6 +372,7 @@ public class App {
         case 4:
           {
             //TODO: Search task
+            TaskAPI.printAllTasks();
             break;
           }
         case 5:
