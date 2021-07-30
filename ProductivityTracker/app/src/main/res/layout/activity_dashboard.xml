@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#15202B"
+    tools:context=".DashboardActivity"
+    android:paddingTop="20dp"
+    android:paddingHorizontal="20dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/dashboard_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dashboard"
+            android:textSize="32dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/your_tasks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Your Tasks"
+            android:textSize="26dp"
+            android:textColor="@color/white"
+            android:layout_marginTop="15dp"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/team_rv"
+            android:layout_width="match_parent"
+            android:minHeight="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:padding="10dp"
+            android:background="@drawable/rounded_grey_box"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/add_task_id"
+                android:layout_width="218dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#1DA1F2"
+                android:padding="15dp"
+                android:layout_marginRight="10dp"
+                android:text="Add Task" />
+
+            <Button
+                android:id="@+id/delete_task_id"
+                android:layout_width="145dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#1E4156"
+                android:padding="15dp"
+                android:text="Delete Task" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/your_team"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Your Team"
+            android:textSize="26dp"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/white"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/task_rv"
+            android:minHeight="200dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:padding="10dp"
+            android:background="@drawable/rounded_grey_box"
+            />
+
+        <Button
+            android:id="@+id/view_team_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#1DA1F2"
+            android:padding="15dp"
+            android:layout_marginRight="10dp"
+            android:text="View Team" />
+
+        <TextView
+            android:id="@+id/your_profile_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Profile Details"
+            android:textSize="26dp"
+            android:textColor="@color/white"
+            android:layout_marginTop="15dp"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/rounded_grey_box"
+            >
+        </View>
+        <Button
+            android:id="@+id/edit_profile_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#1DA1F2"
+            android:padding="15dp"
+            android:layout_marginTop="10dp"
+            android:text="Edit Profile" />
+
+        <TextView
+            android:id="@+id/completed_tasks_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Completed Tasks"
+            android:textSize="26dp"
+            android:textColor="@color/white"
+            android:layout_marginTop="15dp"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/completed_tasks_rv"
+            android:minHeight="200dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:padding="10dp"
+            android:background="@drawable/rounded_grey_box"
+            />
+    </LinearLayout>
+</ScrollView>
+

@@ -1,6 +1,9 @@
+
 package com.cs480.productivitytracker;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -38,10 +41,15 @@ public class LoginActivity extends AppCompatActivity {
         userNameValue = userNameInput.getText().toString();
         passwordValue = passwordInput.getText().toString();
 
-        if (UserAPI.verifyUser(userNameValue, passwordValue)) {
-            Log.i("Login Activity", "Inputs: "+userNameValue+" | "+passwordValue);
-        } else {
-            Log.i("Login Activity", "Error");
-        }
+        Intent startDashboard = new Intent(LoginActivity.this,DashboardActivity.class );
+        startDashboard.putExtra("put","username and password here"); //Optional parameters
+        LoginActivity.this.startActivity(startDashboard);
+
+//        if (UserAPI.verifyUser(userNameValue, passwordValue)) {
+//            // todo GO TO DASHBOARD ACTIVITY IF SUCCESSFULL
+//            Log.i("Login Activity", "Inputs: "+userNameValue+" | "+passwordValue);
+//        } else {
+//            Log.i("Login Activity", "Error");
+//        }
     }
 }
