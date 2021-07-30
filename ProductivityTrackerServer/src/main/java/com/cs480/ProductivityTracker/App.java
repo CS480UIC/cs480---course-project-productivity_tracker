@@ -22,10 +22,11 @@ import java.net.InetSocketAddress;
  */
 public class App {
 
-  public static String MySqlDatabase = "ProductivityTracker";
-  public static String MySqlUser = "root";
-  public static String MySqlPassword = "a2bf77d41C";
+  public static String MySqlDatabase = config.MySqlDatabase;
+  public static String MySqlUser = config.MySqlUser;
+  public static String MySqlPassword = config.MySqlPassword;
 
+  
   public static String LoggedInUser;
 
   public static void main(String[] args) 
@@ -42,7 +43,7 @@ public class App {
 	  //hs.run();
 	  try
 	  {
-		  HttpServer server = HttpServer.create(new InetSocketAddress("192.168.0.110", 8080), 0);
+		  HttpServer server = HttpServer.create(new InetSocketAddress(config.IP, config.Port), 0);
 	      server.createContext("/", new MyHttpHandler());
 	      server.setExecutor(null); 
 	      server.start();

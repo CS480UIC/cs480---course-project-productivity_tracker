@@ -4,6 +4,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
+import com.cs480.config;
+
 public class ConnectionThread extends Thread
 {
 
@@ -21,10 +23,10 @@ public class ConnectionThread extends Thread
     private static ConnectionThreadHandler connectionThreadHandler;
 
     //IP
-    public static String IP = "192.168.0.110";
+    public static String IP = config.IP;
 
     //Port
-    public static int PORT = 8080;
+    public static int PORT = config.PORT;
 
     private ConnectionThread()
     {
