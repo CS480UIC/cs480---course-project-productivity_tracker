@@ -38,6 +38,13 @@
     	<version>20070405</version>
 	</dependency>
 	
+	<dependency>
+    	<groupId>org.json</groupId>
+    	<artifactId>json</artifactId>
+    	<version>20160810</version>
+</dependency>
+	
+	
   </dependencies>
 
   <build>

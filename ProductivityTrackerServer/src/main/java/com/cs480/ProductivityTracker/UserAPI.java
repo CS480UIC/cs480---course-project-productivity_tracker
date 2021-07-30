@@ -6,6 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class UserAPI {
 
   public static final int UPDATE_PASSWORD = 100;
@@ -54,6 +57,11 @@ public class UserAPI {
   public static boolean deleteUserByUserName(String username) {
     //DELETE FROM table_name
     //WHERE condition;
+	 
+	//Cannot delete admin user
+	if(username.equals("admin")) return false;
+	
+	  
     try {
       Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
       connect =
@@ -125,10 +133,12 @@ public class UserAPI {
     //SET column1 = value1, column2 = value2, ...
     //WHERE condition;
 
+
     String sql = "";
     switch (option) {
       case UPDATE_PASSWORD:
         {
+
           sql =
             "UPDATE User SET password = '" +
             update +
@@ -139,6 +149,7 @@ public class UserAPI {
         }
       case UPDATE_EMAIL:
         {
+
           sql =
             "UPDATE User SET email = '" +
             update +
@@ -149,6 +160,7 @@ public class UserAPI {
         }
       case UPDATE_TEAM_POSITION:
         {
+
           sql =
             "UPDATE User SET team_position = '" +
             update +
@@ -174,6 +186,7 @@ public class UserAPI {
       preparedStatement = connect.prepareStatement(sql);
       preparedStatement.executeUpdate();
     } catch (Exception e) {
+    	System.out.println(" catch");
       System.out.println(e.getMessage());
       close();
       return false;
@@ -181,6 +194,62 @@ public class UserAPI {
     close();
     return true;
   }
+  
+  public static String getAllUsers()
+  {
+	  JSONArray ja = new JSONArray();
+	  try {
+	      Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+	      connect =
+	        DriverManager.getConnection(
+	          "jdbc:mysql://localhost:3306/" +
+	          App.MySqlDatabase +
+	          "?" +
+	          "user=" +
+	          App.MySqlUser +
+	          "&password=" +
+	          App.MySqlPassword
+	        );
+	      String sql = "SELECT * FROM User";
+	      preparedStatement = connect.prepareStatement(sql);
+	      resultSet = preparedStatement.executeQuery();
+
+	      System.out.println("Users:");
+	      System.out.println(
+	        "user_id" + "\t" + "user_name" + "\t" + "email" + "\t" + "password"
+	      );
+	      
+	      while (resultSet.next()) {
+	        String user_id = resultSet.getString("user_id");
+	        String name = resultSet.getString("user_name");
+	        String email = resultSet.getString("email");
+	        String password = resultSet.getString("password");
+	        String team_position = resultSet.getString("team_position");
+	        
+	        //Create JSON Object
+	        JSONObject jo = new JSONObject();
+	        jo.put("user_id", user_id);
+	        jo.put("name", name);
+	        jo.put("email", email);
+	        jo.put("password", password);
+	        jo.put("team_position", team_position);
+	        
+	        //Add to JSONArray
+	        ja.put(jo);
+	          
+	        
+	      }
+	    } catch (Exception e) {
+	      System.out.println(e.getMessage());
+	      return "error";
+	    }
+	  	finally {
+	    	
+	      close();
+	      return ja.toString();
+	    }  
+  }
+  
 
   public static void printAllUsers() {
     try {
