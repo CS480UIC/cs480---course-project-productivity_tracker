@@ -1,15 +1,11 @@
 package com.cs480.threadingConstructs;
 
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
-import com.cs480.databaseAPI.CreateUserActivityAPI;
-import com.cs480.databaseAPI.LoginActivityAPI;
-import com.cs480.productivitytracker.CreateUserActivity;
-import com.cs480.productivitytracker.LoginActivity;
+import com.cs480.databaseAPI.userCrud;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -47,14 +43,37 @@ public class ConnectionThreadHandler extends Handler
 
         switch(what)
         {
+
             case LOGIN_ACTIVITY_VERIFY_USER:
+            {
+                String user = (String) msg.getData().get("user");
+                String password = (String) msg.getData().get("password");
+
+                //get result from db
+                Boolean result = userCrud.verifyUser(user, password);
+
+                //put result in bundle
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("verifyUser", result);
+
+                //create message with reply and bundle
+                Message replyMsg = new Message();
+                replyMsg.what = UIHandler.VERIFY_USER_RESULT;
+                replyMsg.setData(bundle);
+
+                Log.i(TAG, "Sending verify user result");
+                //send message to ui thread
+                uiHandler.sendMessage(replyMsg);
+            }
+
+            case CREATE_USER_ACTIVITY_CREATE_USER:
             {
                 String user = (String) msg.getData().get("user");
                 String password = (String) msg.getData().get("password");
                 String email = (String) msg.getData().get("email");
 
                 //get result from db
-                Boolean result = CreateUserActivityAPI.addUser(user, password, email);
+                Boolean result = userCrud.addUser(user, password, email);
 
                 //put result in bundle
                 Bundle bundle = new Bundle();
