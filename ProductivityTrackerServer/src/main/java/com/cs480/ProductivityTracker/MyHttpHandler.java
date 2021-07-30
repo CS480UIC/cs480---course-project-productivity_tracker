@@ -16,13 +16,12 @@ public class MyHttpHandler implements HttpHandler
 	public void handle(HttpExchange t) throws IOException 
 	{
 		 URI requestURI = t.getRequestURI();
-	     printRequestInfo(t);
+	     //printRequestInfo(t);
 		  // "/func1?param1&param2&param3"
 	     String request = requestURI.toString();
 	     System.out.println(request);
 	     
 	     request = request.split("/")[1];
-	     System.out.println(request);
 	     
 	     String function = request.split("\\?")[0];
 	     String[] params = request.split("\\?")[1].split("&");
@@ -30,22 +29,11 @@ public class MyHttpHandler implements HttpHandler
 	     System.out.println("Params = " + params[0] + ", " + params[1]);
 	     
 	     String response = getResponseFromFunction(function, params);
-/*
- *	  // "func1?param1&param2&param3"
-	     request = request.split("/")[1];
-	     
-	  //[0] = func1, [1] => param1, [2] => param2..."
-	     String functionCall = request.split("?")[0];
-	     String[] params = request.split("?")[1].split("&");
-	     
-	     System.out.println("Function = " + functionCall);
-	     System.out.println("Params = " + params);
- */
-
-        t.sendResponseHeaders(200, response.length());
-        OutputStream os = t.getResponseBody();
-        os.write(response.getBytes());
-        os.close();
+	     System.out.println("Response = " + response);
+	     t.sendResponseHeaders(200, response.length());
+	     OutputStream os = t.getResponseBody();
+	     os.write(response.getBytes());
+	     os.close();
 		
 	}
 	
@@ -73,9 +61,17 @@ public class MyHttpHandler implements HttpHandler
 
 		  if(function.equals("verifyUser"))
 		  {
+			 //Eg: http://192.168.0.110:8080/verifyUser?admin&admin
 			 boolean result = UserAPI.verifyUser(params[0], params[1]);		 
 			 return Boolean.toString(result);
 		  }
+		  if(function.equals("addUser"))
+		  {
+			  //Eg: http://192.168.0.110:8080/addUser?admin3&admin3&admin3
+			  boolean result = UserAPI.addUser(params[0], params[1], params[2]);
+			  return Boolean.toString(result);
+		  }
+		  
 		  
 		return null;
 		  

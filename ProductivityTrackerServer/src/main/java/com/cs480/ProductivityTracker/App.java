@@ -30,7 +30,8 @@ public class App {
 
   public static void main(String[] args) 
   {
-	  consoleApp();
+	  //consoleApp();
+	  startHttpServer();
   }
   
   public static void startHttpServer()
@@ -42,7 +43,7 @@ public class App {
 	  try
 	  {
 		  HttpServer server = HttpServer.create(new InetSocketAddress("192.168.0.110", 8080), 0);
-	      server.createContext("/verifyUser", new MyHttpHandler());
+	      server.createContext("/", new MyHttpHandler());
 	      server.setExecutor(null); 
 	      server.start();
 	  }
