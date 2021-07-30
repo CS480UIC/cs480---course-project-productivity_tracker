@@ -1,5 +1,6 @@
 package com.cs480.ProductivityTracker;
 
+import java.net.InetSocketAddress;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,6 +9,13 @@ import java.sql.SQLException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpServer;
+ 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
 /**
  * Hello world!
  *
@@ -16,71 +24,96 @@ public class App {
 
   public static String MySqlDatabase = "ProductivityTracker";
   public static String MySqlUser = "root";
-  public static String MySqlPassword = "capnsdelight12";
+  public static String MySqlPassword = "a2bf77d41C";
 
   public static String LoggedInUser;
 
-  public static void main(String[] args) {
-    Scanner sc = new Scanner(System.in);
-    String username;
-    String password;
-
-    System.out.println("Please Login");
-    System.out.print("\\>username:");
-    username = sc.nextLine();
-    System.out.print("\\>password:");
-    password = sc.nextLine();
-
-    if (UserAPI.verifyUser(username, password)) {
-      System.out.println("Login Successful!");
-    } else {
-      System.out.println("This user does not exist");
-      System.exit(1);
-    }
-
-    //Login Successful
-    int option = -1;
-    do {
-      System.out.println("\nSelect entity for CRUD operations:");
-      System.out.println("1. Users");
-      System.out.println("2. Team");
-      System.out.println("3. Tasks");
-      System.out.println("4. Exit");
-      option = sc.nextInt();
-      sc.nextLine();
-
-      try {
-        switch (option) {
-          case 1:
-            {
-              user();
-              break;
-            }
-          case 2:
-            {
-              team();
-              break;
-            }
-          case 3:
-            {
-              task();
-              break;
-            }
-          case 4:
-            break;
-          default:
-            {
-              System.out.println("Invalied option!!");
-            }
-        }
-      } catch (InputMismatchException e) {
-        System.out.println("Oops, an invalid value was enterd :(");
-      }
-    } while (option != 4);
-
-    System.exit(1);
+  public static void main(String[] args) 
+  {
+	  System.out.println("Start");
+	  //HttpServer hs = new HttpServer();
+	  //hs.run();
+	  try
+	  {
+		  HttpServer server = HttpServer.create(new InetSocketAddress("192.168.0.110", 8080), 0);
+	      server.createContext("/verifyUser", new MyHttpHandler());
+	      server.setExecutor(null); 
+	      server.start();
+	  }
+	  catch(Exception e)
+	  {
+		  e.printStackTrace();
+	  }
+      
+      
+	  System.out.println("End");
   }
+ 
 
+  
+  public static void consoleApp()
+  {
+	  Scanner sc = new Scanner(System.in);
+	    String username;
+	    String password;
+
+	    System.out.println("Please Login");
+	    System.out.print("\\>username:");
+	    username = sc.nextLine();
+	    System.out.print("\\>password:");
+	    password = sc.nextLine();
+
+	    if (UserAPI.verifyUser(username, password)) {
+	      System.out.println("Login Successful!");
+	    } else {
+	      System.out.println("This user does not exist");
+	      System.exit(1);
+	    }
+
+	    //Login Successful
+	    int option = -1;
+	    do {
+	      System.out.println("\nSelect entity for CRUD operations:");
+	      System.out.println("1. Users");
+	      System.out.println("2. Team");
+	      System.out.println("3. Tasks");
+	      System.out.println("4. Exit");
+	      option = sc.nextInt();
+	      sc.nextLine();
+
+	      try {
+	        switch (option) {
+	          case 1:
+	            {
+	              user();
+	              break;
+	            }
+	          case 2:
+	            {
+	              team();
+	              break;
+	            }
+	          case 3:
+	            {
+	              task();
+	              break;
+	            }
+	          case 4:
+	            break;
+	          default:
+	            {
+	              System.out.println("Invalied option!!");
+	            }
+	        }
+	      } catch (InputMismatchException e) {
+	        System.out.println("Oops, an invalid value was enterd :(");
+	      }
+	    } while (option != 4);
+
+	    System.exit(1);
+  }
+  
+  
   public static void user() {
     Scanner sc = new Scanner(System.in);
     int option = -1;
