@@ -61,6 +61,16 @@ public class LoginActivity extends AppCompatActivity
         userNameValue = userNameInput.getText().toString();
         passwordValue = passwordInput.getText().toString();
 
+        Intent startDashboard = new Intent(LoginActivity.this,DashboardActivity.class );
+        startDashboard.putExtra("put","username and password here"); //Optional parameters
+        LoginActivity.this.startActivity(startDashboard);
+
+//        if (UserAPI.verifyUser(userNameValue, passwordValue)) {
+//            // todo GO TO DASHBOARD ACTIVITY IF SUCCESSFULL
+//            Log.i("Login Activity", "Inputs: "+userNameValue+" | "+passwordValue);
+//        } else {
+//            Log.i("Login Activity", "Error");
+//        }
         /*
         if (UserAPI.verifyUser(userNameValue, passwordValue)) {
             Log.i("Login Activity", "Inputs: "+userNameValue+" | "+passwordValue);
