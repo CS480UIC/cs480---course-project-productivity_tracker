@@ -14,10 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Profile Details"
+        android:textColor="@color/white"
         android:textSize="32dp"
         android:textStyle="bold"
-        android:textColor="@color/white"
-        />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="20dp" />
 
     <TextView
         android:id="@+id/profile_name_label"

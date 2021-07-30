@@ -12,4 +12,13 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
     </style>
+
+    <style name="Theme.ProductivityTracker.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.ProductivityTracker.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.ProductivityTracker.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

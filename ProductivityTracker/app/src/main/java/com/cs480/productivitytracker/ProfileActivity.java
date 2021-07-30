@@ -16,6 +16,9 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        getSupportActionBar().hide(); // hide the title bar
+
+        // Grab ui elements
         profileName = (TextView) findViewById(R.id.profile_name_label);
         profileUsername = (TextView) findViewById(R.id.profile_username_label);
         profileEmail = (TextView) findViewById(R.id.profile_email_label);

@@ -47,7 +47,8 @@
             android:backgroundTint="#1DA1F2"
             android:padding="15dp"
             android:layout_marginTop="10dp"
-            android:text="Edit Profile" />
+            android:text="Edit Profile"
+            android:onClick="handleEditProfileBtn"/>
 
 
         <TextView
@@ -80,7 +81,8 @@
                 android:backgroundTint="#1DA1F2"
                 android:padding="15dp"
                 android:layout_marginRight="10dp"
-                android:text="Add Tasks" />
+                android:text="Add Tasks"
+                android:onClick="handleAddTaskBtn"/>
 
             <Button
                 android:id="@+id/delete_task_id"
@@ -90,7 +92,6 @@
                 android:padding="15dp"
                 android:text="Delete Task" />
         </LinearLayout>
-
 
         <TextView
             android:id="@+id/your_team"
