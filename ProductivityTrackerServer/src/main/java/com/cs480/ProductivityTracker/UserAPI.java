@@ -195,6 +195,48 @@ public class UserAPI {
     return true;
   }
   
+  
+  public static String getUser(String user_name) 
+  {
+	    JSONObject jo = new JSONObject();
+	    try {
+	      Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+	      connect =
+	        DriverManager.getConnection(
+	          "jdbc:mysql://localhost:3306/" +
+	          App.MySqlDatabase +
+	          "?" +
+	          "user=" +
+	          App.MySqlUser +
+	          "&password=" +
+	          App.MySqlPassword
+	        );
+	      String sql = "SELECT * FROM User WHERE user_name = '" + user_name + "'";
+	      preparedStatement = connect.prepareStatement(sql);
+	      resultSet = preparedStatement.executeQuery();
+
+	      while (resultSet.next()) {
+	        String user_id = resultSet.getString("user_id");
+	        String name = resultSet.getString("user_name");
+	        String email = resultSet.getString("email");
+	        String password = resultSet.getString("password");
+	        String team_position = resultSet.getString("team_position");
+	        
+	        jo.put("user_id", user_id);
+	        jo.put("name", name);
+	        jo.put("email", email);
+	        jo.put("password", password);
+	        jo.put("team_position", team_position);
+	      }
+	    } catch (Exception e) {
+	      System.out.println(e.getMessage());
+	      return "error";
+	    } finally {
+	      close();
+	      return jo.toString();
+	    }
+	  }
+  
   public static String getAllUsers()
   {
 	  JSONArray ja = new JSONArray();
@@ -213,11 +255,6 @@ public class UserAPI {
 	      String sql = "SELECT * FROM User";
 	      preparedStatement = connect.prepareStatement(sql);
 	      resultSet = preparedStatement.executeQuery();
-
-	      System.out.println("Users:");
-	      System.out.println(
-	        "user_id" + "\t" + "user_name" + "\t" + "email" + "\t" + "password"
-	      );
 	      
 	      while (resultSet.next()) {
 	        String user_id = resultSet.getString("user_id");
@@ -289,6 +326,8 @@ public class UserAPI {
       close();
     }
   }
+  
+  
 
   public static void printUser(String user_name) {
     try {

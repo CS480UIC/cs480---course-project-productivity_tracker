@@ -96,6 +96,14 @@ public class MyHttpHandler implements HttpHandler
 			  return result;
 		  }
 		  
+		//Delete
+		  if(function.equals("getUser"))
+		  {
+			  //Eg: http://192.168.0.110:8080/getUser?username
+			  String result = UserAPI.getUser(params[0]);
+			  return result;
+		  }
+		  
 		  //Read
 		  if(function.equals("verifyUser"))
 		  {
