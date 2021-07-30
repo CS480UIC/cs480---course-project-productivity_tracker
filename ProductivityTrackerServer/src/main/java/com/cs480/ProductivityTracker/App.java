@@ -30,6 +30,12 @@ public class App {
 
   public static void main(String[] args) 
   {
+	  consoleApp();
+  }
+  
+  public static void startHttpServer()
+  {
+	  
 	  System.out.println("Start");
 	  //HttpServer hs = new HttpServer();
 	  //hs.run();
@@ -135,9 +141,10 @@ public class App {
             String user_name;
             String email;
             String password;
+            /*
             System.out.println("\nEnter user_id:");
             user_id = sc.nextInt();
-            sc.nextLine();
+            sc.nextLine();*/
 
             System.out.println("Enter user name:");
             user_name = sc.nextLine();
@@ -148,7 +155,7 @@ public class App {
             System.out.println("Enter password:");
             password = sc.nextLine();
 
-            if (UserAPI.addUser(user_id, user_name, email, password)) {
+            if (UserAPI.addUser(user_name, email, password)) {
               System.out.println("User added successfully.");
               UserAPI.printAllUsers();
             } else {

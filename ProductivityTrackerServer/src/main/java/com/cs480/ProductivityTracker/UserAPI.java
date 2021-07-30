@@ -78,9 +78,7 @@ public class UserAPI {
     return true;
   }
 
-  // ! Do we need to have user_id if it is autoincremented
   public static boolean addUser(
-    int user_id,
     String user_name,
     String email,
     String password
@@ -97,21 +95,20 @@ public class UserAPI {
           "&password=" +
           App.MySqlPassword
         );
+      
       String sql =
-        "INSERT INTO User(user_id, user_name, email, password) " +
-        "VALUES (" +
-        user_id +
-        "," +
-        "'" +
-        user_name +
-        "'," +
-        "'" +
-        email +
-        "'," +
-        "'" +
-        password +
-        "'" +
-        ");";
+    	        "INSERT INTO User(user_name, email, password) " +
+    	        "VALUES (" +
+    	        "'" +
+    	        user_name +
+    	        "'," +
+    	        "'" +
+    	        email +
+    	        "'," +
+    	        "'" +
+    	        password +
+    	        "'" +
+    	        ");"; 
       preparedStatement = connect.prepareStatement(sql);
       preparedStatement.executeUpdate();
     } catch (Exception e) {
