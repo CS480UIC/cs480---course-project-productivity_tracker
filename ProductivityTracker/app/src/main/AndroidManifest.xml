@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProductivityTracker"
         android:usesCleartextTraffic="true">
+        <activity android:name=".CreateUserActivity"></activity>
         <activity
             android:name=".DeleteTaskActivity"
             android:exported="true" />

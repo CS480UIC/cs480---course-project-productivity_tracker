@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.cs480.databaseAPI.*;
 import com.cs480.threadingConstructs.ConnectionThread;
 import com.cs480.threadingConstructs.ConnectionThreadHandler;
+import com.cs480.threadingConstructs.UIHandler;
 
 
 public class LoginActivity extends AppCompatActivity
@@ -23,11 +24,10 @@ public class LoginActivity extends AppCompatActivity
     //Logcat TAG
     private static final String TAG = "Login Activity";
 
-    //Message Codes
-    public static final int VERIFY_USER_RESULT = 100;
+    //Activity Instance
+    public static LoginActivity loginActivityInstance;
 
     //Threading Constructs
-    Handler uiHandler;
     ConnectionThread connectionThread;
 
     String userNameValue, passwordValue;
@@ -41,16 +41,20 @@ public class LoginActivity extends AppCompatActivity
         getSupportActionBar().hide(); // hide the title bar
         setContentView(R.layout.login_activity);
 
-        //Create threading constructs
-        initUIHandler();
+        //Threading instances
+        UIHandler.initUIHandler();
         connectionThread = ConnectionThread.getConnectionThread();
-        connectionThread.setuiHandler(uiHandler);
+        connectionThread.setuiHandler(UIHandler.uiHandler);
         connectionThread.start();
 
         // Form UI
         userNameInput = (EditText) findViewById(R.id.username_input);
         passwordInput = (EditText) findViewById(R.id.password_input);
         signInBtn = (Button) findViewById(R.id.sign_in_btn);
+        //TODO: Add button to create user
+
+        //Activity Instance: Used to access methods from UIHandler
+        loginActivityInstance = this;
     }
     public void handleSignIn(View view) {
         // Grab field values
@@ -71,56 +75,46 @@ public class LoginActivity extends AppCompatActivity
         connectionThread
                 .getConnectionThreadHandler()
                 .sendMessage(msgToConnectionThread);
-
     }
 
-    public void onSuccessfulLogin()
+    public void onSuccessfulLogin(boolean result)
     {
-        Toast.makeText(LoginActivity.this,"Login Successful",Toast.LENGTH_SHORT).show();
+        /*
+        result = true => Login successful
+        result = false => Login unsuccessful
+         */
 
-        Intent startDashboard = new Intent(LoginActivity.this,DashboardActivity.class );
-        startDashboard.putExtra("put","username and password here"); //Optional parameters
-        LoginActivity.this.startActivity(startDashboard);
-    }
-
-
-    //Thread stuff
-    private void initUIHandler()
-    {
-        this.uiHandler = new Handler(Looper.getMainLooper())
+        //Update GUI accroding to result
+        if (result)
         {
-            public void handleMessage(Message msg)
-            {
-                Log.i(TAG, "New message");
-                int what = msg.what;
+            Log.i(TAG, "Login Successful");
 
-                switch(what)
-                {
-                    case VERIFY_USER_RESULT:
-                    {
+            //make toast to indicate success
+            Toast.makeText(LoginActivity.this,"Login Successful",Toast.LENGTH_SHORT).show();
 
-                        boolean result  = msg.getData().getBoolean("verifyUser");
-                        Log.i(TAG, "Handler: Received verify user result");
+            //start dashboard activity
+            Intent startDashboard = new Intent(LoginActivity.this,DashboardActivity.class );
+            startDashboard.putExtra("put","username and password here"); //Optional parameters
+            LoginActivity.this.startActivity(startDashboard);
+        }
+        else
+        {
+            Log.i(TAG, "Error Logging in");
 
-                        //Update GUI accroding to result
-                        if (result)
-                        {
-                            Log.i(TAG, "Handler: Login Successful");
-                            onSuccessfulLogin();
-                        }
-                        else
-                        {
-                            Log.i(TAG, "Handler: Error Logging in");
-                            Toast.makeText(LoginActivity.this,"Error logging in",Toast.LENGTH_SHORT).show();
-                        }
-
-
-
-                    }
-                }
-            }
-
-        };
+            //make toast to indicate failure
+            Toast.makeText(LoginActivity.loginActivityInstance,"Error logging in",Toast.LENGTH_SHORT).show();
+        }
     }
 
+    public void handleCreateNewUser(View view)
+    {
+        //TODO: (Jacob) Start CreateUserActivity on Button press
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        loginActivityInstance =  null;
+        super.onDestroy();
+    }
 }

@@ -6,7 +6,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import com.cs480.databaseAPI.CreateUserActivityAPI;
 import com.cs480.databaseAPI.LoginActivityAPI;
+import com.cs480.productivitytracker.CreateUserActivity;
 import com.cs480.productivitytracker.LoginActivity;
 
 import java.io.BufferedReader;
@@ -29,6 +31,7 @@ public class ConnectionThreadHandler extends Handler
 
     //Message Codes
     public final static int LOGIN_ACTIVITY_VERIFY_USER = 100;
+    public final static int CREATE_USER_ACTIVITY_CREATE_USER = 101;
 
 
 
@@ -48,23 +51,26 @@ public class ConnectionThreadHandler extends Handler
             {
                 String user = (String) msg.getData().get("user");
                 String password = (String) msg.getData().get("password");
+                String email = (String) msg.getData().get("email");
 
                 //get result from db
-                Boolean result = LoginActivityAPI.verifyUser(user, password);
+                Boolean result = CreateUserActivityAPI.addUser(user, password, email);
 
                 //put result in bundle
                 Bundle bundle = new Bundle();
-                bundle.putBoolean("verifyUser", result);
+                bundle.putBoolean("addUser", result);
 
                 //create message with reply and bundle
                 Message replyMsg = new Message();
-                replyMsg.what = LoginActivity.VERIFY_USER_RESULT;
+                replyMsg.what = UIHandler.CREATE_USER_RESULT;
                 replyMsg.setData(bundle);
 
-                Log.i(TAG, "Sending verify user result");
+                Log.i(TAG, "Sending add user result");
                 //send message to ui thread
                 uiHandler.sendMessage(replyMsg);
             }
+
+
         }
 
 

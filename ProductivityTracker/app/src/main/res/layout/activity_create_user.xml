@@ -4,8 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#15202B"
-    android:theme="@android:style/Theme.Black.NoTitleBar"
-    tools:context=".MainActivity"
-    >
+    tools:context=".CreateUserActivity">
+
 </androidx.constraintlayout.widget.ConstraintLayout>
