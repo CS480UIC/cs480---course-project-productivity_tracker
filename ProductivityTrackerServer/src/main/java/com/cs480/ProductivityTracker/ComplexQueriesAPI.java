@@ -94,6 +94,40 @@ public class ComplexQueriesAPI {
 		      close();
 		      return ja.toString();
 		    }  
+	  }	  
+	  
+	  public static String getTeamsSoftwareEngineeringTasks(String teamId){
+		  JSONArray ja = new JSONArray();
+		  try {
+		      executeQuery("SELECT User.user_name, Task.task_name, Task.task_description \n"
+		      		+ "FROM Team\n"
+		      		+ "JOIN TeamUser on TeamUser.team_id = Team.team_id\n"
+		      		+ "JOIN User On  User.user_id = TeamUser.user_id\n"
+		      		+ "JOIN Task ON Task.user_id = User.user_id\n"
+		      		+ "WHERE Team.team_id = "+teamId+" AND User.team_position = \"Software Engineer\";\n");
+		      
+		      while (resultSet.next()) {
+		        String user_name = resultSet.getString("user_name");
+		        String task_name = resultSet.getString("task_name");
+		        String task_description = resultSet.getString("task_description");
+
+		        //Create JSON Object
+		        JSONObject jo = new JSONObject();
+		        jo.put("user_name", user_name);
+		        jo.put("task_name", task_name);
+		        jo.put("task_description", task_description);
+		        
+		        //Add to JSONArray
+		        ja.put(jo);	        
+		      }
+		    } catch (Exception e) {
+		      System.out.println(e.getMessage());
+		      return "error";
+		    }
+		  	finally {
+		      close();
+		      return ja.toString();
+		    }  
 	  }
 	private static void executeQuery(String sql) {
 		try {

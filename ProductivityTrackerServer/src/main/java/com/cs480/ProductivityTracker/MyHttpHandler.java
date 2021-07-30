@@ -91,6 +91,10 @@ public class MyHttpHandler implements HttpHandler
 			  String result = ComplexQueriesAPI.getUsersHighestPriorityTasks(params[0]);
 			  return result;
 		  }
+		  if(function.equals("complexGetSWETasks")){
+			  String result = ComplexQueriesAPI.getTeamsSoftwareEngineeringTasks(params[0]);
+			  return result;
+		  }
 		  return null;
 	  }
 	  
