@@ -26,6 +26,31 @@
             />
 
         <TextView
+            android:id="@+id/your_profile_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Profile Details"
+            android:textSize="26dp"
+            android:textColor="@color/white"
+            android:layout_marginTop="15dp"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/rounded_grey_box"
+            >
+        </View>
+        <Button
+            android:id="@+id/edit_profile_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#1DA1F2"
+            android:padding="15dp"
+            android:layout_marginTop="10dp"
+            android:text="Edit Profile" />
+
+
+        <TextView
             android:id="@+id/your_tasks"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,7 +80,7 @@
                 android:backgroundTint="#1DA1F2"
                 android:padding="15dp"
                 android:layout_marginRight="10dp"
-                android:text="Add Task" />
+                android:text="Add Tasks" />
 
             <Button
                 android:id="@+id/delete_task_id"
@@ -95,30 +120,6 @@
             android:padding="15dp"
             android:layout_marginRight="10dp"
             android:text="View Team" />
-
-        <TextView
-            android:id="@+id/your_profile_header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Profile Details"
-            android:textSize="26dp"
-            android:textColor="@color/white"
-            android:layout_marginTop="15dp"
-            />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@drawable/rounded_grey_box"
-            >
-        </View>
-        <Button
-            android:id="@+id/edit_profile_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#1DA1F2"
-            android:padding="15dp"
-            android:layout_marginTop="10dp"
-            android:text="Edit Profile" />
 
         <TextView
             android:id="@+id/completed_tasks_header"
