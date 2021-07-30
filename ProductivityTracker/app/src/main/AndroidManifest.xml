@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProductivityTracker">
         <activity
+            android:name=".DeleteTaskActivity"
+            android:exported="true" />
+        <activity
             android:name=".AddTaskActivity"
             android:exported="true" />
         <activity

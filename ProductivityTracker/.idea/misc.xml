@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/layout/activity_add_task.xml" value="0.271875" />
         <entry key="app/src/main/res/layout/activity_dashboard.xml" value="0.1859375" />
+        <entry key="app/src/main/res/layout/activity_delete_task.xml" value="0.271875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_task.xml" value="0.2" />

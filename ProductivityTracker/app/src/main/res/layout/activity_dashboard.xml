@@ -90,7 +90,8 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="#1E4156"
                 android:padding="15dp"
-                android:text="Delete Task" />
+                android:text="Delete Task"
+                android:onClick="handleDeleteTaskBtn"/>
         </LinearLayout>
 
         <TextView

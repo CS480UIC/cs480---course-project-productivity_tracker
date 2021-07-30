@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#15202B"
+    android:paddingTop="20dp"
+    android:paddingHorizontal="20dp"
+    tools:context=".DeleteTaskActivity">
+
+    <TextView
+        android:id="@+id/delete_task_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Task"
+        android:textColor="@color/white"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="20dp" />
+
+
+    <EditText
+        android:id="@+id/delete_task_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="15dp"
+        android:background="@drawable/rounded_grey_box"
+        android:ems="10"
+        android:hint="Task ID"
+        android:padding="15dp"
+        android:textColor="@color/white"
+        android:textColorHint="#8B8F96"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/delete_task_header" />
+
+    <Button
+        android:id="@+id/delete_task_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="#1DA1F2"
+        android:onClick="handleDeleteTaskBtn"
+        android:padding="15dp"
+        android:text="Delete Task"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="25dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

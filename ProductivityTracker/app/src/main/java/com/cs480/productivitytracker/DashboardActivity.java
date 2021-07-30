@@ -26,4 +26,10 @@ public class DashboardActivity extends AppCompatActivity {
         startAddTask.putExtra("",""); //Optional parameters
         DashboardActivity.this.startActivity(startAddTask);
     }
+
+    public void handleDeleteTaskBtn(View view) {
+        Intent startDeleteTask = new Intent(DashboardActivity.this,DeleteTaskActivity.class );
+        startDeleteTask.putExtra("",""); //Optional parameters
+        DashboardActivity.this.startActivity(startDeleteTask);
+    }
 }
