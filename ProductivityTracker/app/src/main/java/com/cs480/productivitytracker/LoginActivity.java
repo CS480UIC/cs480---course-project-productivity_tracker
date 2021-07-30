@@ -1,6 +1,8 @@
 package com.cs480.productivitytracker;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -32,12 +34,6 @@ public class LoginActivity extends AppCompatActivity
     EditText userNameInput,passwordInput;
     Button signInBtn;
 
-
-    public static String MySqlDatabase = "ProductivityTracker";
-    public static String MySqlUser = "root";
-    public static String MySqlPassword = "capnsdelight12";
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -61,23 +57,6 @@ public class LoginActivity extends AppCompatActivity
         userNameValue = userNameInput.getText().toString();
         passwordValue = passwordInput.getText().toString();
 
-        Intent startDashboard = new Intent(LoginActivity.this,DashboardActivity.class );
-        startDashboard.putExtra("put","username and password here"); //Optional parameters
-        LoginActivity.this.startActivity(startDashboard);
-
-//        if (UserAPI.verifyUser(userNameValue, passwordValue)) {
-//            // todo GO TO DASHBOARD ACTIVITY IF SUCCESSFULL
-//            Log.i("Login Activity", "Inputs: "+userNameValue+" | "+passwordValue);
-//        } else {
-//            Log.i("Login Activity", "Error");
-//        }
-        /*
-        if (UserAPI.verifyUser(userNameValue, passwordValue)) {
-            Log.i("Login Activity", "Inputs: "+userNameValue+" | "+passwordValue);
-        } else {
-            Log.i("Login Activity", "Error");
-        }
-        */
 
         //Send message to connection thread
         Log.i(TAG, "verify user message sent to connection thread");
@@ -98,7 +77,10 @@ public class LoginActivity extends AppCompatActivity
     public void onSuccessfulLogin()
     {
         Toast.makeText(LoginActivity.this,"Login Successful",Toast.LENGTH_SHORT).show();
-        //TODO: Go to dashboard activity
+
+        Intent startDashboard = new Intent(LoginActivity.this,DashboardActivity.class );
+        startDashboard.putExtra("put","username and password here"); //Optional parameters
+        LoginActivity.this.startActivity(startDashboard);
     }
 
 
