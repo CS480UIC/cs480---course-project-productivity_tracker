@@ -4,6 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#15202B"
+    android:paddingTop="20dp"
+    android:paddingHorizontal="20dp"
     tools:context=".CreateUserActivity">
+    <TextView
+        android:id="@+id/create_user_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create User"
+        android:textColor="@color/white"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="20dp" />
+
+    <EditText
+        android:id="@+id/password_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_grey_box"
+        android:ems="10"
+        android:hint="Username"
+        android:textColorHint="#8B8F96"
+        android:padding="15dp"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.447"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginVertical="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/create_user_header" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

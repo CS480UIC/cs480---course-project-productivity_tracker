@@ -121,7 +121,8 @@
             android:backgroundTint="#1DA1F2"
             android:padding="15dp"
             android:layout_marginRight="10dp"
-            android:text="View Team" />
+            android:text="View Team"
+            android:onClick="handleViewTeamBtn"/>
 
         <TextView
             android:id="@+id/completed_tasks_header"

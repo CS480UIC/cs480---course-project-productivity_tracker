@@ -8,7 +8,6 @@ import android.view.View;
 
 public class DashboardActivity extends AppCompatActivity
 {
-
     //TODO: (Jacob) We might need the logged in user's username in this activity at the least
     private String currentUser;
 
@@ -35,5 +34,11 @@ public class DashboardActivity extends AppCompatActivity
         Intent startDeleteTask = new Intent(DashboardActivity.this,DeleteTaskActivity.class );
         startDeleteTask.putExtra("",""); //Optional parameters
         DashboardActivity.this.startActivity(startDeleteTask);
+    }
+
+    public void handleViewTeamBtn(View view) {
+        Intent startViewTeam = new Intent(DashboardActivity.this,ViewTeamActivity.class );
+        startViewTeam.putExtra("",""); //Optional parameters
+        DashboardActivity.this.startActivity(startViewTeam);
     }
 }
