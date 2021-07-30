@@ -73,13 +73,28 @@ public class MyHttpHandler implements HttpHandler
 		  if(function.contains("User"))
 			  return userCrudOperations(function, params);
 		  
+		  else if(function.contains("complex"))
+			  return complexQueryOperations(function, params);
 		  
 		return null;
 		  
       }
 	  
+	  
+	  private String  complexQueryOperations(String function, String[] params) {
+		  if(function.equals("complexGetTestCases")){
+			  //Eg: http://192.168.1.69:8080/complexGetTestCases?none
+			  String result = ComplexQueriesAPI.getAllUsers();
+			  return result;
+		  }
+		  return null;
+		  
+	  }
+	  
 	  private String userCrudOperations(String function, String[] params)
 	  {
+		  
+
 		  //Create
 		  if(function.equals("addUser"))
 		  {
@@ -95,6 +110,7 @@ public class MyHttpHandler implements HttpHandler
 			  String result = UserAPI.getAllUsers();
 			  return result;
 		  }
+		 
 		  
 		//Delete
 		  if(function.equals("getUser"))
