@@ -6,7 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class DashboardActivity extends AppCompatActivity {
+public class DashboardActivity extends AppCompatActivity
+{
+
+    //TODO: (Jacob) We might need the logged in user's username in this activity at the least
+    private String currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
