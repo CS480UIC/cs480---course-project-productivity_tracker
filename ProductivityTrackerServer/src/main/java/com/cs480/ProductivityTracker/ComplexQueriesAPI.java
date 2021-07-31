@@ -129,6 +129,39 @@ public class ComplexQueriesAPI {
 		      return ja.toString();
 		    }  
 	  }
+	  
+	  public static String getTeamsProjectManagerEmail(String teamId){
+		  JSONArray ja = new JSONArray();
+		  try {
+		      executeQuery("SELECT User.email, User.user_name\n"
+		      		+ "FROM User\n"
+		      		+ "JOIN TeamUser ON TeamUser.user_id =  User.user_id\n"
+		      		+ "JOIN Team ON Team.team_id = TeamUser.team_id\n"
+		      		+ "WHERE Team.team_id = "+teamId+" AND User.team_position = \"Project Manager\"");
+		      
+		      while (resultSet.next()) {
+		        String email = resultSet.getString("email");
+		        String user_name = resultSet.getString("user_name");
+
+		        //Create JSON Object
+		        JSONObject jo = new JSONObject();
+		        jo.put("email", email);
+		        jo.put("user_name", user_name);
+		        
+		        //Add to JSONArray
+		        ja.put(jo);	        
+		      }
+		    } catch (Exception e) {
+		      System.out.println(e.getMessage());
+		      return "error";
+		    }
+		  	finally {
+		      close();
+		      return ja.toString();
+		    }  
+	  }
+	  
+	  
 	private static void executeQuery(String sql) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
@@ -139,18 +172,6 @@ public class ComplexQueriesAPI {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-	}
-	private static void executeUpdate(String sql) {
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-			connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + App.MySqlDatabase + "?" + "user="
-					+ App.MySqlUser + "&password=" + App.MySqlPassword);
-			preparedStatement = connect.prepareStatement(sql);
-			preparedStatement.executeUpdate();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		
 	}
 	  private static void close() {
 		    try {

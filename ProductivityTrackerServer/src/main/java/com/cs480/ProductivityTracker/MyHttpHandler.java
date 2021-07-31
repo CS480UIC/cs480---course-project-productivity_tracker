@@ -1,3 +1,4 @@
+
 package com.cs480.ProductivityTracker;
 
 import java.io.IOException;
@@ -82,19 +83,38 @@ public class MyHttpHandler implements HttpHandler
 	  
 	  
 	  private String  complexQueryOperations(String function, String[] params) {
+		  // Produces tasks with the category of test cases give a team_id
 		  if(function.equals("complexGetTestCases")){
 			  //Eg: http://192.168.1.69:8080/complexGetTestCases?1
 			  String result = ComplexQueriesAPI.getTeamTestCaseTasks(params[0]);
 			  return result;
 		  }
+		  
+		  // Produces highest priority tasks given a user_id
 		  if(function.equals("complexGetHPTasks")){
+			  //Eg: http://192.168.1.69:8080/complexGetHPTasks?1007
 			  String result = ComplexQueriesAPI.getUsersHighestPriorityTasks(params[0]);
 			  return result;
 		  }
+		  
+		  // Produces a team's tasks where the uses position is Software Engineering
 		  if(function.equals("complexGetSWETasks")){
+			  //Eg: http://192.168.1.69:8080/complexGetSWETasks?1
 			  String result = ComplexQueriesAPI.getTeamsSoftwareEngineeringTasks(params[0]);
 			  return result;
 		  }
+		  
+		  // Produces the email of the project manager given a team_id
+		  if(function.equals("complexGetPMEmail")){
+			  //Eg: http://192.168.1.69:8080/complexGetSWETasks?1
+			  String result = ComplexQueriesAPI.getTeamsProjectManagerEmail(params[0]);
+			  return result;
+		  }
+		  
+		  
+		  
+		  
+		  
 		  return null;
 	  }
 	  
