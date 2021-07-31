@@ -62,14 +62,19 @@ public class MyHttpHandler implements HttpHandler {
 	}
 
 	private String getResponseFromFunction(String function, String[] params) {
-		if (function.contains("User"))
+		if (function.contains("User")) {
 			return userCrudOperations(function, params);
+		}
+		
+		else if (function.contains("Task")) {
+			return taskCrudOperations(function, params);
+		}
 
-		if (function.contains("complex"))
+		else if (function.contains("complex")) {
 			return complexQueryOperations(function, params);
-
+		}
+		
 		return null;
-
 	}
 
 	private String complexQueryOperations(String function, String[] params) {
@@ -119,11 +124,23 @@ public class MyHttpHandler implements HttpHandler {
 
 		return null;
 	}
+	
+	private String taskCrudOperations(String function, String[] params) {
+		// Create
+		if (function.equals("addTask")) {
+			// Eg: http://192.168.0.110:8080/addUser?username&email&password
+			boolean result = TaskAPI.addTask(params[0],params[1],params[2],params[3]);
+			return Boolean.toString(result);
+		}
+		return null;
+	}
+
+
 
 	private String userCrudOperations(String function, String[] params) {
 		// Create
 		if (function.equals("addUser")) {
-			// Eg: http://192.168.0.110:8080/addUser?username&email&password
+			// Eg: http://192.168.0.110:`8080/addUser?username&email&password
 			boolean result = UserAPI.addUser(params[0], params[1], params[2]);
 			return Boolean.toString(result);
 		}

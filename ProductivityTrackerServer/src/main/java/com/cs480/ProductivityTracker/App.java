@@ -398,8 +398,9 @@ public class App {
       switch (option) {
         case 1:
           {
-            //TODO: Create new task
-            break;
+              System.out.println("Add Task");
+              System.out.println("__________________\n");           
+              break;
           }
         case 2:
           {

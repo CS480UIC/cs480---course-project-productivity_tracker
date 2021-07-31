@@ -6,7 +6,9 @@ import android.os.Message;
 import android.util.Log;
 
 import com.cs480.databaseAPI.userCrud;
+import com.cs480.databaseAPI.taskCrud;
 import com.cs480.staticData.UserData;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,6 +37,7 @@ public class ConnectionThreadHandler extends Handler
     public final static int LOAD_USER_DATA_INTO_USERDATA_CLASS = 120;
     public final static int PROFILE_ACTIVITY_UPDATE_USER_ATTRIBUTES = 130;
     public final static int PROFILE_ACTIVITY_DELETE_USER = 140;
+    public final static int ADD_TASK_ACTIVITY_ADD_TASK = 150;
 
 
 
@@ -50,6 +53,29 @@ public class ConnectionThreadHandler extends Handler
 
         switch(what)
         {
+
+            case ADD_TASK_ACTIVITY_ADD_TASK:
+            {
+                String taskName = (String) msg.getData().get("taskName");
+                String taskDesc = (String) msg.getData().get("taskDesc");
+                String userId = (String) msg.getData().get("userId");
+                String teamId = (String) msg.getData().get("teamId");
+
+                Boolean result = taskCrud.addTask(taskName, taskDesc, userId, teamId);
+
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("addTask",result);
+
+                //create message with reply and bundle
+                Message replyMsg = new Message();
+                replyMsg.what = UIHandler.ADD_TASK_RESULT;
+                replyMsg.setData(bundle);
+
+                Log.i(TAG, "Sending add task result");
+
+                //send message to ui thread
+                uiHandler.sendMessage(replyMsg);
+            }
 
             case LOGIN_ACTIVITY_VERIFY_USER:
             {

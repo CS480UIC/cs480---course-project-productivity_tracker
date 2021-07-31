@@ -6,9 +6,11 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.cs480.productivitytracker.AddTaskActivity;
 import com.cs480.productivitytracker.CreateUserActivity;
 import com.cs480.productivitytracker.LoginActivity;
 import com.cs480.productivitytracker.ProfileActivity;
+import com.cs480.productivitytracker.TaskActivity;
 
 public class UIHandler
 {
@@ -23,6 +25,8 @@ public class UIHandler
     public static final int CREATE_USER_RESULT = 150;
     public static final int MODIFY_USER_RESULT = 200;
     public static final int DELETE_USER_RESULT = 250;
+    public static final int ADD_TASK_RESULT = 300;
+
 
     public static void initUIHandler()
     {
@@ -51,6 +55,19 @@ public class UIHandler
                             Log.i(TAG, "createUserActivityInstance was null");
                         }
                         break;
+                    }
+
+                    case ADD_TASK_RESULT:
+                    {
+                        boolean result  = msg.getData().getBoolean("addTask");
+                        Log.i(TAG, "Received add task result");
+                        if(AddTaskActivity.addTaskActivityInstance != null){
+                            AddTaskActivity.addTaskActivityInstance.onQueryResultForAddTask(result);
+                        }
+                        else
+                        {
+                            Log.i(TAG, "addTaskActivityInstance was null");
+                        }
                     }
 
                     case VERIFY_USER_RESULT:

@@ -11,7 +11,6 @@ public class userCrud
     public static final int UPDATE_PASSWORD = 100;
     public static final int UPDATE_TEAM_POSITION = 101;
     public static final int UPDATE_EMAIL = 102;
-
     public static final String TAG = "UserCRUD";
 
     public static Boolean verifyUser(String user, String password)
