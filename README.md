@@ -21,4 +21,4 @@ Our application allows teams and individual users to organize tasks and be able 
 
 ![drawSQL-export-2021-07-03_13_45](https://github.com/diamalab/cs480---course-project-productivity_tracker/blob/main/documentation/ER_diagram.png)
 
-Alternatively you can view the ER diagram in the documentaion folder or [here](https://drawsql.app/uic-1/diagrams/cs-480-productivity-tracker)
+Alternatively you can view the ER diagram in the documentaion folder or [here](https://drawsql.app/uic-1/diagrams/copy-of-cs-480-project#)
