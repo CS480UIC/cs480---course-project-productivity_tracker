@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity
                 .sendMessage(msgToConnectionThread);
     }
 
-    public void onSuccessfulLogin(boolean result)
+    public void onQueryResultForLogin(boolean result)
     {
         /*
         result = true => Login successful
@@ -92,9 +92,21 @@ public class LoginActivity extends AppCompatActivity
             //make toast to indicate success
             Toast.makeText(LoginActivity.this,"Login Successful",Toast.LENGTH_SHORT).show();
 
+            //Attempt to load user data into userData static fields
+            Bundle bundle = new Bundle();
+            bundle.putString("user", userNameValue);
+
+            Message msgToConnectionThread = new Message();
+            msgToConnectionThread.what = ConnectionThreadHandler.LOAD_USER_DATA_INTO_USERDATA_CLASS;
+            msgToConnectionThread.setData(bundle);
+            connectionThread
+                    .getConnectionThreadHandler()
+                    .sendMessage(msgToConnectionThread);
+
             //start dashboard activity
             Intent startDashboard = new Intent(LoginActivity.this,DashboardActivity.class );
-            startDashboard.putExtra("put","username and password here"); //Optional parameters
+            //startDashboard.putExtra("put","username and password here"); //Optional parameters
+            startDashboard.putExtra("user_name", userNameValue);
             LoginActivity.this.startActivity(startDashboard);
         }
         else
@@ -115,6 +127,14 @@ public class LoginActivity extends AppCompatActivity
     protected void onDestroy()
     {
         loginActivityInstance =  null;
+        ConnectionThread
+                .getConnectionThread()
+                .getConnectionThreadHandler()
+                .getLooper()
+                .quit();
+
+        ConnectionThread.getConnectionThread().deleteThread();
+
         super.onDestroy();
     }
 }

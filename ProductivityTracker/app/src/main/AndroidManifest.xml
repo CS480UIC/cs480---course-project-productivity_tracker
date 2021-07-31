@@ -21,7 +21,8 @@
             android:exported="true" />
         <activity
             android:name=".ProfileActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:noHistory="true"/>
         <activity
             android:name=".TaskActivity"
             android:exported="true" />

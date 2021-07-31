@@ -16,7 +16,7 @@ import com.cs480.threadingConstructs.ConnectionThreadHandler;
 public class CreateUserActivity extends AppCompatActivity {
 
     //Logcat TAG
-    private static final String TAG = "Login Activity";
+    private static final String TAG = "Create User Activity";
 
     //Activity Instance: Used to access methods from UIHandler
     public static CreateUserActivity createUserActivityInstance;
@@ -70,13 +70,20 @@ public class CreateUserActivity extends AppCompatActivity {
                 .sendMessage(msgToConnectionThread);
     }
 
-    public void onSuccessfulCreation(boolean result)
+    public void onQueryResultForCreate(boolean result)
     {
-        //TODO: (Jacob)Re route to login activity if user was succesfully created
+        //TODO: (Jacob)Re route to login activity if user was successfully created
         //Notes:
         //result = true => user was successfully created
         //result = false => user was not created successfully
         //Suggestion => display toast of result and go to login activity regardless of success or failure
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        createUserActivityInstance =  null;
+        super.onDestroy();
     }
 
 }

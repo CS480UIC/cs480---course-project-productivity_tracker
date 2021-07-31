@@ -5,23 +5,49 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.cs480.staticData.UserData;
+import com.cs480.threadingConstructs.ConnectionThread;
 
 public class DashboardActivity extends AppCompatActivity
 {
-    //TODO: (Jacob) We might need the logged in user's username in this activity at the least
+    //Logged in user
     private String currentUser;
+
+    //Activity Instance
+    public static DashboardActivity dashboardActivityInstance;
+
+    //Threading Constructs
+    ConnectionThread connectionThread;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide(); // hide the title bar
         setContentView(R.layout.activity_dashboard);
+
+        //Get Threading constructs
+        connectionThread = ConnectionThread.getConnectionThread();
+
+        //Populate Profile Details
+        loadProfileDetails();
+
+        dashboardActivityInstance = this;
     }
 
     public void handleEditProfileBtn(View view) {
         Intent startProfile = new Intent(DashboardActivity.this,ProfileActivity.class );
         startProfile.putExtra("",""); //Optional parameters
         DashboardActivity.this.startActivity(startProfile);
+
+        //Note: After Editing repopulate list view of profile details
+
+
     }
 
     public void handleAddTaskBtn(View view) {
@@ -40,5 +66,27 @@ public class DashboardActivity extends AppCompatActivity
         Intent startViewTeam = new Intent(DashboardActivity.this,ViewTeamActivity.class );
         startViewTeam.putExtra("",""); //Optional parameters
         DashboardActivity.this.startActivity(startViewTeam);
+    }
+
+    public void loadProfileDetails()
+    {
+        String[] userDetailsStringArray = {
+                "User Name: " + UserData.user_name,
+                "User ID: " + UserData.user_id,
+                "Email: " + UserData.email,
+                "Team Position: " + UserData.team_position
+        };
+
+        ((TextView)findViewById(R.id.user_name_text_view)).setText(userDetailsStringArray[0]);
+        ((TextView)findViewById(R.id.user_id_text_view)).setText(userDetailsStringArray[1]);
+        ((TextView)findViewById(R.id.user_email_text_view)).setText(userDetailsStringArray[2]);
+        ((TextView)findViewById(R.id.user_team_position_text_view)).setText(userDetailsStringArray[3]);
+    }
+
+    @Override
+    protected void onResume()
+    {
+        loadProfileDetails();
+        super.onResume();
     }
 }

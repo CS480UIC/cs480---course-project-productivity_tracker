@@ -77,7 +77,7 @@ public class userCrud
     }
 
     //TODO: (YASH) Test getUsers
-    public static String getUsers(String user)
+    public static String getUser(String user)
     {
         String request = "http://" + ConnectionThread.IP + ":" + Integer.toString(ConnectionThread.PORT) +
                 "/getUser?" +
@@ -111,8 +111,6 @@ public class userCrud
     //TODO: (YASH) Test ModifyUser
     public static Boolean modifyUser(String user, String param, int option)
     {
-        if(option != UPDATE_EMAIL || option != UPDATE_PASSWORD || option != UPDATE_TEAM_POSITION)
-            return false;
 
         String request = "http://" + ConnectionThread.IP + ":" + Integer.toString(ConnectionThread.PORT) +
                 "/modifyUser?" +
@@ -124,7 +122,7 @@ public class userCrud
                 .getConnectionThread()
                 .getConnectionThreadHandler().httpRequest(request);
 
-        Log.i(TAG, "getAllUsers result = " + response);
+        Log.i(TAG, "modifyUser result = " + response);
 
         if( response == null || response.equals("false"))
         {

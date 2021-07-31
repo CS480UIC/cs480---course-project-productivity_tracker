@@ -71,4 +71,9 @@ public class ConnectionThread extends Thread
         //Kill thread
         Log.i(TAG, "exit run()");
     }
+
+    public void deleteThread()
+    {
+        ConnectionThread.connectionThread = null;
+    }
 }
