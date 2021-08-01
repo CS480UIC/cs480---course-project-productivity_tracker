@@ -233,7 +233,7 @@ public class ComplexQueriesAPI {
 
 		        //Create JSON Object
 		        JSONObject jo = new JSONObject();
-		        jo.put("task_id", task_name);
+		        jo.put("task_id", task_id);
 		        jo.put("task_name", task_name);
 				jo.put("task_description", task_description);
 				jo.put("user_name", user_name);
