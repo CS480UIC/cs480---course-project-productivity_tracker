@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.cs480.productivitytracker.AddTaskActivity;
+import com.cs480.productivitytracker.ComplexQueryActivity;
 import com.cs480.productivitytracker.CreateUserActivity;
 import com.cs480.productivitytracker.DashboardActivity;
 import com.cs480.productivitytracker.DeleteTaskActivity;
@@ -40,6 +41,7 @@ public class UIHandler
     public static final int DASH_BOARD_LOAD_USER_TASKS_GUI = 400;
     public static final int DASH_BOARD_LOAD_USER_TEAMS_GUI = 450;
     public static final int VIEW_TEAM_LOAD_TEAM_MEMBERS_GUI = 500;
+    public static final int COMPLEX_LOAD_PM_EMAILS_GUI = 550;
 
 
 
@@ -198,6 +200,23 @@ public class UIHandler
                         break;
                     }
 
+                    case COMPLEX_LOAD_PM_EMAILS_GUI: {
+                        JSONArray ja = null;
+                        try {
+                            ja = new JSONArray(msg.getData().getString("complexLoadPmEmails"));
+
+                            if (ComplexQueryActivity.complexQueryActivityInstance != null) {
+                                UserData.user_teams = ja;
+                                ComplexQueryActivity.complexQueryActivityInstance.loadProjectManagersEmail(ja);
+                            } else {
+                                Log.i(TAG, "complexQueryActivityInstance was null");
+                            }
+                        } catch (JSONException e) {
+                            Log.i(TAG, "complex activity could not load JSONArray for PM Emails");
+                        }
+                        break;
+                    }
+
                     case VIEW_TEAM_LOAD_TEAM_MEMBERS_GUI:
                     {
                         JSONArray ja = null;
@@ -216,20 +235,14 @@ public class UIHandler
                         } catch (JSONException e) {
                             Log.i(TAG, "viewTeamActivity could not load JSONArray for teams members");
                         }
-
-
                         break;
                     }
                 }
-
             }
 
         };
 
     }
-
-
-
 }
 
 

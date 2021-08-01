@@ -22,9 +22,6 @@ import java.net.URL;
 
 public class ConnectionThreadHandler extends Handler
 {
-
-
-
     //TAG for Logcat
     private String TAG = "ConnectionThreadHandler";
 
@@ -46,7 +43,8 @@ public class ConnectionThreadHandler extends Handler
     public final static int DELETE_TASK_ACTIVITY_DELETE_TASK = 160;
     public static final int DASHBOARD_ACTIVITY_LOAD_USER_TASKS = 170;
     public static final int DASHBOARD_ACTIVITY_LOAD_USER_TEAMS = 180;
-    public static final int VIEW_TEAM_ACTIVITY_LOAD_TEAM_MEMBERS = 190;
+    public static final int COMPLEX_ACTIVITY_LOAD_PM_EMAILS = 190;
+    public static final int VIEW_TEAM_ACTIVITY_LOAD_TEAM_MEMBERS = 200;
 
 
 
@@ -62,6 +60,7 @@ public class ConnectionThreadHandler extends Handler
 
         switch(what)
         {
+
             case ADD_TASK_ACTIVITY_ADD_TASK:
             {
                 String taskName = (String) msg.getData().get("taskName");
@@ -251,6 +250,21 @@ public class ConnectionThreadHandler extends Handler
                 //send message to ui thread
                 uiHandler.sendMessage(replyMsg);
 
+                break;
+            }
+
+//            Complex Queries
+            case COMPLEX_ACTIVITY_LOAD_PM_EMAILS: {
+                String team_id = (String) msg.getData().get("team_id");
+                String result = complexQueries.getTeamsProjectManagerEmail(team_id);
+                Bundle bundle = new Bundle();
+                bundle.putString("complexLoadPmEmails",result);
+
+                Message replyMsg = new Message();
+                replyMsg.what = UIHandler.COMPLEX_LOAD_PM_EMAILS_GUI;
+                replyMsg.setData(bundle);
+                Log.i(TAG, "Sending PM Email to complex");
+                uiHandler.sendMessage(replyMsg);
                 break;
             }
 
