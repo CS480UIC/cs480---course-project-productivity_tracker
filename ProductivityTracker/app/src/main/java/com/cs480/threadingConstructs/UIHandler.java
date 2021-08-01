@@ -46,8 +46,8 @@ public class UIHandler
 
                     case CREATE_USER_RESULT:
                     {
-                        boolean result  = msg.getData().getBoolean(" addUser");
-                        Log.i(TAG, "Received add user result");
+                        boolean result  = msg.getData().getBoolean("addUser");
+                        Log.i(TAG, "Received add user result " + result);
 
                         if(CreateUserActivity.createUserActivityInstance != null)
                         {

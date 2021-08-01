@@ -54,7 +54,7 @@ public class CreateUserActivity extends AppCompatActivity {
         passwordValue = passwordInput.getText().toString();
         emailValue = emailInput.getText().toString();
 
-        //TODO: (Yash) test working after addition of GUI
+
         //Send message to connection thread
         Log.i(TAG, "create user message sent to connection thread");
         Bundle bundle = new Bundle();
@@ -71,7 +71,7 @@ public class CreateUserActivity extends AppCompatActivity {
                 .sendMessage(msgToConnectionThread);
     }
 
-    // todo figure out why onQueryResultForCreate is not being called
+
     public void onQueryResultForCreate(boolean result)
     {
         if(result)
