@@ -38,6 +38,7 @@ public class ConnectionThreadHandler extends Handler
     public final static int PROFILE_ACTIVITY_UPDATE_USER_ATTRIBUTES = 130;
     public final static int PROFILE_ACTIVITY_DELETE_USER = 140;
     public final static int ADD_TASK_ACTIVITY_ADD_TASK = 150;
+    public final static int DELETE_TASK_ACTIVITY_DELETE_TASK = 160;
 
 
 
@@ -53,7 +54,6 @@ public class ConnectionThreadHandler extends Handler
 
         switch(what)
         {
-
             case ADD_TASK_ACTIVITY_ADD_TASK:
             {
                 String taskName = (String) msg.getData().get("taskName");
@@ -66,14 +66,30 @@ public class ConnectionThreadHandler extends Handler
                 Bundle bundle = new Bundle();
                 bundle.putBoolean("addTask",result);
 
-                //create message with reply and bundle
                 Message replyMsg = new Message();
                 replyMsg.what = UIHandler.ADD_TASK_RESULT;
                 replyMsg.setData(bundle);
 
                 Log.i(TAG, "Sending add task result");
 
-                //send message to ui thread
+                uiHandler.sendMessage(replyMsg);
+            }
+
+            case DELETE_TASK_ACTIVITY_DELETE_TASK:
+            {
+                String taskId = (String) msg.getData().get("deleteTaskIdValue");
+
+                Boolean result = taskCrud.deleteTask(taskId);
+
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("delete",result);
+
+                Message replyMsg = new Message();
+                replyMsg.what = UIHandler.DELETE_TASK_RESULT;
+                replyMsg.setData(bundle);
+
+                Log.i(TAG, "Sending delete task result");
+
                 uiHandler.sendMessage(replyMsg);
             }
 

@@ -132,6 +132,11 @@ public class MyHttpHandler implements HttpHandler {
 			boolean result = TaskAPI.addTask(params[0],params[1],params[2],params[3]);
 			return Boolean.toString(result);
 		}
+		if (function.equals("deleteTask")) {
+			// Eg: http://192.168.0.110:8080/deleteTask?10
+			boolean result = TaskAPI.deleteTask(Integer.valueOf(params[0]));
+			return Boolean.toString(result);
+		}
 		return null;
 	}
 

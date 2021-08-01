@@ -8,6 +8,8 @@ import android.widget.Toast;
 
 import com.cs480.productivitytracker.AddTaskActivity;
 import com.cs480.productivitytracker.CreateUserActivity;
+import com.cs480.productivitytracker.DashboardActivity;
+import com.cs480.productivitytracker.DeleteTaskActivity;
 import com.cs480.productivitytracker.LoginActivity;
 import com.cs480.productivitytracker.ProfileActivity;
 import com.cs480.productivitytracker.TaskActivity;
@@ -26,6 +28,8 @@ public class UIHandler
     public static final int MODIFY_USER_RESULT = 200;
     public static final int DELETE_USER_RESULT = 250;
     public static final int ADD_TASK_RESULT = 300;
+    public static final int DELETE_TASK_RESULT = 350;
+
 
 
     public static void initUIHandler()
@@ -42,7 +46,6 @@ public class UIHandler
 
                     case CREATE_USER_RESULT:
                     {
-
                         boolean result  = msg.getData().getBoolean(" addUser");
                         Log.i(TAG, "Received add user result");
 
@@ -57,6 +60,7 @@ public class UIHandler
                         break;
                     }
 
+
                     case ADD_TASK_RESULT:
                     {
                         boolean result  = msg.getData().getBoolean("addTask");
@@ -67,6 +71,19 @@ public class UIHandler
                         else
                         {
                             Log.i(TAG, "addTaskActivityInstance was null");
+                        }
+                    }
+                    case DELETE_TASK_RESULT:
+                    {
+                        Log.i(TAG, "Delete task result: "+msg.getData() );
+                        boolean result  = msg.getData().getBoolean("delete");
+                        Log.i(TAG, "Received delete task result");
+                        if(DeleteTaskActivity.deleteTaskActivityInstance != null){
+                            DeleteTaskActivity.deleteTaskActivityInstance.onQueryResultForDeleteTask(result);
+                        }
+                        else
+                        {
+                            Log.i(TAG, "deleteTaskActivityInstance was null");
                         }
                     }
 
