@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProductivityTracker"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CreateUserActivity"></activity>
+        <activity
+            android:name=".ComplexQueryActivity"
+            android:exported="true" />
+        <activity android:name=".CreateUserActivity" />
         <activity
             android:name=".DeleteTaskActivity"
             android:exported="true" />
@@ -22,7 +25,7 @@
         <activity
             android:name=".ProfileActivity"
             android:exported="true"
-            android:noHistory="true"/>
+            android:noHistory="true" />
         <activity
             android:name=".TaskActivity"
             android:exported="true" />

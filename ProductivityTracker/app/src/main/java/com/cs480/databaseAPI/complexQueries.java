@@ -31,7 +31,7 @@ public class complexQueries
     public static String getUsersHighestPriorityTasks(String user_id)
     {
         String request = "http://" + ConnectionThread.IP + ":" + Integer.toString(ConnectionThread.PORT) +
-                "/complexGetHPTasks?" +
+                "/complexGetHP?" +
                 user_id;
 
         String response = ConnectionThread
@@ -49,7 +49,7 @@ public class complexQueries
     public static String getTeamsSoftwareEngineeringTasks(String team_id)
     {
         String request = "http://" + ConnectionThread.IP + ":" + Integer.toString(ConnectionThread.PORT) +
-                "/complexGetSWETasks?" +
+                "/complexGetSWE?" +
                 team_id;
 
         String response = ConnectionThread
@@ -86,7 +86,7 @@ public class complexQueries
     public static String getTeamsSortedTask(String team_id)
     {
         String request = "http://" + ConnectionThread.IP + ":" + Integer.toString(ConnectionThread.PORT) +
-                "/complexGetTeamsSortedTasks?" +
+                "/complexGetTeamsSorted?" +
                 team_id;
 
         String response = ConnectionThread

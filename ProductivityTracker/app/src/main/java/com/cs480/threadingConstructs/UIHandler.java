@@ -42,6 +42,7 @@ public class UIHandler
     public static final int DASH_BOARD_LOAD_USER_TEAMS_GUI = 450;
     public static final int VIEW_TEAM_LOAD_TEAM_MEMBERS_GUI = 500;
     public static final int COMPLEX_LOAD_PM_EMAILS_GUI = 550;
+    public static final int COMPLEX_ACTIVITY_LOAD_SWE_TASKS_GUI = 600;
 
 
 
@@ -185,7 +186,6 @@ public class UIHandler
 
                             if(DashboardActivity.dashboardActivityInstance != null)
                             {
-                                UserData.user_teams = ja;
                                 DashboardActivity.dashboardActivityInstance.loadUserTeams(ja);
                             }
                             else
@@ -200,6 +200,24 @@ public class UIHandler
                         break;
                     }
 
+                    case COMPLEX_ACTIVITY_LOAD_SWE_TASKS_GUI: {
+                        JSONArray ja = null;
+                        try{
+                            ja = new JSONArray(msg.getData().getString("complexGetSWE")); // Key is url function
+
+                            if(ComplexQueryActivity.complexQueryActivityInstance != null) {
+                                UserData.user_teams = ja;
+                                ComplexQueryActivity.complexQueryActivityInstance.loadSoftwareEngineeringTasks(ja);
+                            }
+                            else {
+                                Log.i(TAG, "dashboardActivityInstance was null");
+                            }
+
+                        }catch (JSONException e){
+                            Log.i(TAG, "dashboard could not load JSONArray for teams | "+e.getMessage());
+                        }
+                        break;
+                    }
                     case COMPLEX_LOAD_PM_EMAILS_GUI: {
                         JSONArray ja = null;
                         try {
@@ -216,6 +234,8 @@ public class UIHandler
                         }
                         break;
                     }
+
+
 
                     case VIEW_TEAM_LOAD_TEAM_MEMBERS_GUI:
                     {
