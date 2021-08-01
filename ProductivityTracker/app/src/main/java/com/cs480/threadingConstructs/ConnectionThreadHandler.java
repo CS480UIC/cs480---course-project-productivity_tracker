@@ -73,6 +73,8 @@ public class ConnectionThreadHandler extends Handler
                 Log.i(TAG, "Sending add task result");
 
                 uiHandler.sendMessage(replyMsg);
+
+                break;
             }
 
             case DELETE_TASK_ACTIVITY_DELETE_TASK:
@@ -91,6 +93,8 @@ public class ConnectionThreadHandler extends Handler
                 Log.i(TAG, "Sending delete task result");
 
                 uiHandler.sendMessage(replyMsg);
+
+                break;
             }
 
             case LOGIN_ACTIVITY_VERIFY_USER:
@@ -135,7 +139,7 @@ public class ConnectionThreadHandler extends Handler
                 replyMsg.what = UIHandler.CREATE_USER_RESULT;
                 replyMsg.setData(bundle);
 
-                Log.i(TAG, "Sending add user result");
+                Log.i(TAG, "Sending add user result = " + result);
                 //send message to ui thread
                 uiHandler.sendMessage(replyMsg);
 

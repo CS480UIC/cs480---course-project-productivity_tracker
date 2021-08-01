@@ -88,8 +88,8 @@ public class UserAPI {
 
   public static boolean addUser(
     String user_name,
-    String email,
-    String password
+    String password,
+    String email
   ) {
     try {
       Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
