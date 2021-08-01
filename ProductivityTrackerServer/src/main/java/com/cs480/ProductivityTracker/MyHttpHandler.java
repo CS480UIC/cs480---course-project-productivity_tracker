@@ -101,6 +101,15 @@ public class MyHttpHandler implements HttpHandler {
 			return result;
 		}
 		
+		if(function.equals("simpleMarkTaskAsComplete"))
+		{
+			//Eg: http://192.168.0.110:8080/simpleMarkTaskAsComplete?6
+			String result = Boolean.toString(SimpleQueriesAPI.markTaskAsComplete(params[0]));
+			return result;
+			
+			
+		}
+		
 		return null;
 	}
 	

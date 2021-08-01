@@ -89,18 +89,49 @@ public class SimpleQueriesAPI
 		    }
 	  }
 	  
+	  public static Boolean markTaskAsComplete(String task_id)
+	  {
+		  try {
+		      
+		      String sql ="UPDATE Task SET is_completed = 1 WHERE task_id ="+ task_id  +";";
+		      executeUpdate(sql);
+		      
+		    } catch (Exception e) {
+		      System.out.println(e.getMessage());
+		      close();
+		      return false;
+		    }
+		    close();
+		    return true;  
+	  }
 	  
 	  
-	  private static void executeQuery(String sql) {
-			try {
+	  
+	  private static void executeUpdate(String sql) throws Exception
+	  {
+		      Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+		      connect =
+		        DriverManager.getConnection(
+		          "jdbc:mysql://localhost:3306/" +
+		          App.MySqlDatabase +
+		          "?" +
+		          "user=" +
+		          App.MySqlUser +
+		          "&password=" +
+		          App.MySqlPassword
+		        );
+		      preparedStatement = connect.prepareStatement(sql);
+		      preparedStatement.executeUpdate();
+		  }
+	  
+	  private static void executeQuery(String sql) throws Exception
+	  {
 				Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 				connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + App.MySqlDatabase + "?" + "user="
 						+ App.MySqlUser + "&password=" + App.MySqlPassword);
 				preparedStatement = connect.prepareStatement(sql);
 				resultSet = preparedStatement.executeQuery();
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
+
 		}
 		  private static void close() {
 			    try {
