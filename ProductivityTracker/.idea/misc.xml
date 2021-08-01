@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_add_task.xml" value="0.271875" />
+        <entry key="app/src/main/res/layout/activity_complex_query.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_create_user.xml" value="0.29635416666666664" />
         <entry key="app/src/main/res/layout/activity_dashboard.xml" value="0.1859375" />
         <entry key="app/src/main/res/layout/activity_delete_task.xml" value="0.271875" />
@@ -11,7 +12,7 @@
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_task.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_view_team.xml" value="0.1859375" />
-        <entry key="app/src/main/res/layout/login_activity.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/login_activity.xml" value="0.29912919340164196" />
       </map>
     </option>
   </component>

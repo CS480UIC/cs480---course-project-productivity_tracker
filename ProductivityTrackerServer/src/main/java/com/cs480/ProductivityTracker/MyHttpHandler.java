@@ -113,8 +113,6 @@ public class MyHttpHandler implements HttpHandler {
 		return null;
 	}
 	
-	
-	
 
 	private String complexQueryOperations(String function, String[] params) {
 		

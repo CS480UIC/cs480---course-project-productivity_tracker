@@ -48,20 +48,91 @@ public class ComplexQueryActivity extends AppCompatActivity {
 
     public void handleGetTeamsSortedTask(View view) {
         Log.i(TAG,"Get teams sorted tasks button pressed...");
+        queryForTeamSortedTasks();
+    }
+    public void queryForTeamSortedTasks(){
+        // Get value form input field
+        team_id_value = team_id_input.getText().toString();
 
+        Message msg = new Message();
+        msg.what = ConnectionThreadHandler.COMPLEX_ACTIVITY_LOAD_SORTED_TEAM_TASKS;
+
+        Bundle bundle = new Bundle();
+        bundle.putString("team_id",team_id_value);
+        msg.setData(bundle);
+
+        ConnectionThread
+                .getConnectionThread()
+                .getConnectionThreadHandler()
+                .sendMessage(msg);
+    }
+    public void loadTeamSortedTasks(JSONArray ja) throws JSONException{
+        ArrayList<String> taskNames = new ArrayList<>();
+        ListView lv  = findViewById(R.id.complex_queries_lv);
+
+        for(int n = 0; n < ja.length(); n++){
+            JSONObject object = ja.getJSONObject(n);
+            String taskName = object.getString("task_name");
+            String userName = object.getString("user_name");
+            String dueDate = object.getString("dead_line_date");
+            taskNames.add(taskName + " - ("+ userName +") - DUE:"+dueDate);
+        }
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>( this, R.layout.simpe_list_item,taskNames);
+        lv.setAdapter(arrayAdapter);
     }
 
+
+
+
+    // -- SWE Tasks ------
     public void handleGetTeamsSoftwareEngineeringTasks(View view) {
         Log.i(TAG,"Get Teams SWE Tasks button pressed...");
-
+        queryForSoftwareEngineeringTasks();
     }
+
+    public void queryForSoftwareEngineeringTasks(){
+        // Get value form input field
+        team_id_value = team_id_input.getText().toString();
+
+        Message msg = new Message();
+        msg.what = ConnectionThreadHandler.COMPLEX_ACTIVITY_LOAD_SWE_TASKS;
+
+        Bundle bundle = new Bundle();
+        bundle.putString("team_id",team_id_value);
+        msg.setData(bundle);
+
+        ConnectionThread
+                .getConnectionThread()
+                .getConnectionThreadHandler()
+                .sendMessage(msg);
+    }
+
+    public void loadSoftwareEngineeringTasks(JSONArray ja) throws JSONException{
+        ArrayList<String> taskNames = new ArrayList<>();
+        ListView lv  = findViewById(R.id.complex_queries_lv);
+
+        for(int n = 0; n < ja.length(); n++){
+            JSONObject object = ja.getJSONObject(n);
+            String taskName = object.getString("task_name");
+            String userName = object.getString("user_name");
+            taskNames.add(taskName + " - (" + userName + ")");
+        }
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>( this, R.layout.simpe_list_item,taskNames);
+        lv.setAdapter(arrayAdapter);
+    }
+
+
+
+
+//   ---------- PM Email Query ----------
 
     public void handleGetTeamsProjectManagerEmail(View view) {
         Log.i(TAG,"Get Teams PM Email button pressed...");
         queryForLoadProjectManagersEmail();
     }
 
-//   ---------- PM Email Query ----------
     public void loadProjectManagersEmail(JSONArray ja) throws JSONException {
         ArrayList<String> emails = new ArrayList<>();
 

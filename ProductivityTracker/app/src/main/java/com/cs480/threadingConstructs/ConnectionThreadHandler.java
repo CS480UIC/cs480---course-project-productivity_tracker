@@ -46,6 +46,8 @@ public class ConnectionThreadHandler extends Handler
     public static final int DASHBOARD_ACTIVITY_LOAD_USER_TEAMS = 180;
     public static final int COMPLEX_ACTIVITY_LOAD_PM_EMAILS = 190;
     public static final int VIEW_TEAM_ACTIVITY_LOAD_TEAM_MEMBERS = 200;
+    public static final int COMPLEX_ACTIVITY_LOAD_SWE_TASKS = 220;
+    public static final int COMPLEX_ACTIVITY_LOAD_SORTED_TEAM_TASKS = 230;
     public static final int DASHBOARD_ACTIVITY_MARK_TASK_CHECKED = 210;
 
 
@@ -266,6 +268,37 @@ public class ConnectionThreadHandler extends Handler
                 replyMsg.what = UIHandler.COMPLEX_LOAD_PM_EMAILS_GUI;
                 replyMsg.setData(bundle);
                 Log.i(TAG, "Sending PM Email to complex");
+                uiHandler.sendMessage(replyMsg);
+                break;
+            }
+
+            case COMPLEX_ACTIVITY_LOAD_SWE_TASKS: {
+                String team_id = (String) msg.getData().get("team_id");
+                String result = complexQueries.getTeamsSoftwareEngineeringTasks(team_id);
+
+                Bundle bundle = new Bundle();
+                // URL FUNCTION
+                bundle.putString("complexGetSWE",result);
+
+                Message replyMsg = new Message();
+                replyMsg.what = UIHandler.COMPLEX_ACTIVITY_LOAD_SWE_TASKS_GUI;
+                replyMsg.setData(bundle);
+
+                uiHandler.sendMessage(replyMsg);
+                break;
+            }
+            case COMPLEX_ACTIVITY_LOAD_SORTED_TEAM_TASKS: {
+                String team_id = (String) msg.getData().get("team_id");
+                String result = complexQueries.getTeamsSortedTask(team_id);
+
+                Bundle bundle = new Bundle();
+                // URL FUNCTION
+                bundle.putString("complexGetTeamsSorted",result);
+
+                Message replyMsg = new Message();
+                replyMsg.what = UIHandler.COMPLEX_ACTIVITY_LOAD_SORTED_TEAM_TASKS_GUI;
+                replyMsg.setData(bundle);
+
                 uiHandler.sendMessage(replyMsg);
                 break;
             }

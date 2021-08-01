@@ -199,7 +199,6 @@ public class DashboardActivity extends AppCompatActivity
                 .getConnectionThread()
                 .getConnectionThreadHandler()
                 .sendMessage(msg);
-
     }
 
     public void queryForLoadUserTeams()
@@ -259,6 +258,11 @@ public class DashboardActivity extends AppCompatActivity
         queryForLoadUserTasks();
     }
 
+    public void handleComplexQueriesBtn(View view) {
+        Intent startComplexQueryActivity = new Intent(DashboardActivity.this,ComplexQueryActivity.class );
+        DashboardActivity.this.startActivity(startComplexQueryActivity);
+    }
+
     @Override
     protected void onResume()
     {
@@ -268,8 +272,5 @@ public class DashboardActivity extends AppCompatActivity
         super.onResume();
     }
 
-    public void handleComplexQueriesBtn(View view) {
-        Intent startComplexQueryActivity = new Intent(DashboardActivity.this,ComplexQueryActivity.class );
-        DashboardActivity.this.startActivity(startComplexQueryActivity);
-    }
+
 }
