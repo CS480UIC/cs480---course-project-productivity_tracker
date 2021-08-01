@@ -42,6 +42,7 @@ public class UIHandler
     public static final int DASH_BOARD_LOAD_USER_TEAMS_GUI = 450;
     public static final int VIEW_TEAM_LOAD_TEAM_MEMBERS_GUI = 500;
     public static final int COMPLEX_LOAD_PM_EMAILS_GUI = 550;
+    public static final int DASH_BOARD_MARK_TASK_COMPLETE_RESULT = 600;
 
 
 
@@ -235,6 +236,21 @@ public class UIHandler
                         } catch (JSONException e) {
                             Log.i(TAG, "viewTeamActivity could not load JSONArray for teams members");
                         }
+                        break;
+                    }
+
+                    case DASH_BOARD_MARK_TASK_COMPLETE_RESULT:
+                    {
+                            Boolean result  = Boolean.parseBoolean(msg.getData().getString("markTaskAsCompleted"));
+
+                            if(DashboardActivity.dashboardActivityInstance != null)
+                            {
+                                DashboardActivity.dashboardActivityInstance.onMarkedTaskAsComplete(result);
+                            }
+                            else
+                            {
+                                Log.i(TAG, "viewTeamActivityInstance was null");
+                            }
                         break;
                     }
                 }

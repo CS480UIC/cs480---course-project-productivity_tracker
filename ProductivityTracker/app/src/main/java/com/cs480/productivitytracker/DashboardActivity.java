@@ -2,16 +2,22 @@ package com.cs480.productivitytracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
+import android.text.InputType;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.cs480.databaseAPI.userCrud;
 import com.cs480.staticData.UserData;
 import com.cs480.threadingConstructs.ConnectionThread;
 import com.cs480.threadingConstructs.ConnectionThreadHandler;
@@ -38,6 +44,7 @@ public class DashboardActivity extends AppCompatActivity
     ConnectionThread connectionThread;
 
     ListView teamListView;
+    ListView taskListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +58,7 @@ public class DashboardActivity extends AppCompatActivity
 
         //GUI Elements
         teamListView = findViewById(R.id.team_lv);
+        taskListView = findViewById(R.id.task_lv);
         setListeners();
 
         //Populate Profile Details
@@ -83,6 +91,62 @@ public class DashboardActivity extends AppCompatActivity
             }
         });
 
+        taskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                String taskName  = ((String)((TextView) view).getText()).split(" - ")[0];
+                String taskId = "";
+                for(int n = 0; n < UserData.user_tasks.length(); n++)
+                {
+                    try {
+                        JSONObject object = UserData.user_tasks.getJSONObject(n);
+                        if(object.getString("task_name").equals(taskName))
+                            taskId =  object.getString("task_id");
+
+                    } catch (JSONException e) {
+                        continue;
+                    }
+                }
+
+                Log.i(TAG,"Clicked on =  " + taskName + ", " + taskId);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(DashboardActivity.this);
+                builder.setTitle("Mark as complete?");
+
+
+                String finalTaskId = taskId;
+                builder.setPositiveButton("Yes!", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+
+                        //message to db
+                        Message msg = new Message();
+                        msg.what = ConnectionThreadHandler.DASHBOARD_ACTIVITY_MARK_TASK_CHECKED;
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString("task_id", finalTaskId);
+                        msg.setData(bundle);
+
+                        ConnectionThread
+                                .getConnectionThread()
+                                .getConnectionThreadHandler()
+                                .sendMessage(msg);
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                builder.show();
+
+            }
+        });
+
     }
 
     public void handleEditProfileBtn(View view) {
@@ -105,12 +169,6 @@ public class DashboardActivity extends AppCompatActivity
         Intent startDeleteTask = new Intent(DashboardActivity.this,DeleteTaskActivity.class );
         startDeleteTask.putExtra("",""); //Optional parameters
         DashboardActivity.this.startActivity(startDeleteTask);
-    }
-
-    public void handleViewTeamBtn(View view) {
-        Intent startViewTeam = new Intent(DashboardActivity.this,ViewTeamActivity.class );
-        startViewTeam.putExtra("",""); //Optional parameters
-        DashboardActivity.this.startActivity(startViewTeam);
     }
 
     public void loadProfileDetails()
@@ -163,7 +221,7 @@ public class DashboardActivity extends AppCompatActivity
     public void loadUserTasks(JSONArray ja) throws JSONException
     {
         ArrayList<String> taskNames = new ArrayList<>();
-        ListView lv = findViewById(R.id.task_lv);
+        taskListView = findViewById(R.id.task_lv);
         for(int n = 0; n < ja.length(); n++)
         {
             JSONObject object = ja.getJSONObject(n);
@@ -175,7 +233,7 @@ public class DashboardActivity extends AppCompatActivity
         Log.i(TAG,"Received num of tasks =  " + taskNames.size());
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>( this, R.layout.simpe_list_item,taskNames);
-        lv.setAdapter(arrayAdapter);
+        taskListView.setAdapter(arrayAdapter);
     }
 
     public void loadUserTeams(JSONArray ja) throws JSONException
@@ -194,6 +252,11 @@ public class DashboardActivity extends AppCompatActivity
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>( this, R.layout.simpe_list_item,teamNames);
         teamListView.setAdapter(arrayAdapter);
+    }
+
+    public void onMarkedTaskAsComplete(Boolean result)
+    {
+        queryForLoadUserTasks();
     }
 
     @Override

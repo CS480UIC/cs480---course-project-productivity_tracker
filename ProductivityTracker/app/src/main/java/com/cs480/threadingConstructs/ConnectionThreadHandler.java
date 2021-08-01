@@ -22,6 +22,7 @@ import java.net.URL;
 
 public class ConnectionThreadHandler extends Handler
 {
+
     //TAG for Logcat
     private String TAG = "ConnectionThreadHandler";
 
@@ -45,6 +46,7 @@ public class ConnectionThreadHandler extends Handler
     public static final int DASHBOARD_ACTIVITY_LOAD_USER_TEAMS = 180;
     public static final int COMPLEX_ACTIVITY_LOAD_PM_EMAILS = 190;
     public static final int VIEW_TEAM_ACTIVITY_LOAD_TEAM_MEMBERS = 200;
+    public static final int DASHBOARD_ACTIVITY_MARK_TASK_CHECKED = 210;
 
 
 
@@ -323,6 +325,26 @@ public class ConnectionThreadHandler extends Handler
                 replyMsg.setData(bundle);
 
                 Log.i(TAG, "Sending list of team members in team to view team");
+
+                uiHandler.sendMessage(replyMsg);
+
+                break;
+            }
+
+            case DASHBOARD_ACTIVITY_MARK_TASK_CHECKED:
+            {
+                String task_id = (String) msg.getData().get("task_id");
+
+                String result = simpleQueries.markTaskAsCompleted(task_id);
+
+                Bundle bundle = new Bundle();
+                bundle.putString("markTaskAsCompleted",result);
+
+                Message replyMsg = new Message();
+                replyMsg.what = UIHandler.DASH_BOARD_MARK_TASK_COMPLETE_RESULT;
+                replyMsg.setData(bundle);
+
+                Log.i(TAG, "Sending markTaskAsCompleted result");
 
                 uiHandler.sendMessage(replyMsg);
 

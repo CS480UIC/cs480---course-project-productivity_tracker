@@ -30,6 +30,9 @@
             android:name=".ViewTeamActivity"
             android:exported="true" />
         <activity
+            android:name=".ComplexQueryActivity"
+            android:exported="true" />
+        <activity
             android:name=".DashboardActivity"
             android:exported="true" />
         <activity android:name=".LoginActivity">
