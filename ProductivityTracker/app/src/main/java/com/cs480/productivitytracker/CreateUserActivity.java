@@ -31,8 +31,7 @@ public class CreateUserActivity extends AppCompatActivity {
     String userNameValue, passwordValue, emailValue;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user);
 
@@ -48,8 +47,7 @@ public class CreateUserActivity extends AppCompatActivity {
         createUserActivityInstance = this;
     }
 
-    public void handleCreateUser(View view)
-    {
+    public void handleCreateUser(View view) {
         userNameValue = userNameInput.getText().toString();
         passwordValue = passwordInput.getText().toString();
         emailValue = emailInput.getText().toString();
@@ -72,23 +70,18 @@ public class CreateUserActivity extends AppCompatActivity {
     }
 
 
-    public void onQueryResultForCreate(boolean result)
-    {
-        if(result)
-        {
-            Toast.makeText(CreateUserActivity.this,"Create new user successful",Toast.LENGTH_SHORT).show();
+    public void onQueryResultForCreate(boolean result) {
+        if (result) {
+            Toast.makeText(CreateUserActivity.this, "Create new user successful", Toast.LENGTH_SHORT).show();
             this.finish(); // Go back to dashboard
-        }
-        else
-        {
-            Toast.makeText(CreateUserActivity.this,"Create new user failed",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(CreateUserActivity.this, "Create new user failed", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
-    protected void onDestroy()
-    {
-        createUserActivityInstance =  null;
+    protected void onDestroy() {
+        createUserActivityInstance = null;
         super.onDestroy();
     }
 

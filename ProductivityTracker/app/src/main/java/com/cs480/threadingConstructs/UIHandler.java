@@ -20,9 +20,7 @@ import com.cs480.staticData.UserData;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-public class UIHandler
-{
-
+public class UIHandler {
 
 
     //ui handler instance
@@ -44,131 +42,102 @@ public class UIHandler
     public static final int COMPLEX_LOAD_PM_EMAILS_GUI = 550;
     public static final int COMPLEX_ACTIVITY_LOAD_SWE_TASKS_GUI = 600;
     public static final int COMPLEX_ACTIVITY_LOAD_SORTED_TEAM_TASKS_GUI = 650;
+    public static final int COMPLEX_ACTIVITY_TEST_CASE_TEAM_TASKS_GUI = 700;
 
 
+    public static void initUIHandler() {
 
-    public static void initUIHandler()
-    {
-
-        uiHandler = new Handler(Looper.getMainLooper())
-        {
+        uiHandler = new Handler(Looper.getMainLooper()) {
             public void handleMessage(Message msg) {
                 Log.i(TAG, "New message");
                 int what = msg.what;
 
-                switch(what)
-                {
+                switch (what) {
 
-                    case CREATE_USER_RESULT:
-                    {
-                        boolean result  = msg.getData().getBoolean("addUser");
+                    case CREATE_USER_RESULT: {
+                        boolean result = msg.getData().getBoolean("addUser");
                         Log.i(TAG, "Received add user result " + result);
 
-                        if(CreateUserActivity.createUserActivityInstance != null)
-                        {
+                        if (CreateUserActivity.createUserActivityInstance != null) {
                             CreateUserActivity.createUserActivityInstance.onQueryResultForCreate(result);
-                        }
-                        else
-                        {
+                        } else {
                             Log.i(TAG, "createUserActivityInstance was null");
                         }
                         break;
                     }
 
 
-                    case ADD_TASK_RESULT:
-                    {
-                        boolean result  = msg.getData().getBoolean("addTask");
+                    case ADD_TASK_RESULT: {
+                        boolean result = msg.getData().getBoolean("addTask");
                         Log.i(TAG, "Received add task result");
-                        if(AddTaskActivity.addTaskActivityInstance != null){
+                        if (AddTaskActivity.addTaskActivityInstance != null) {
                             AddTaskActivity.addTaskActivityInstance.onQueryResultForAddTask(result);
-                        }
-                        else
-                        {
+                        } else {
                             Log.i(TAG, "addTaskActivityInstance was null");
                         }
                         break;
                     }
-                    case DELETE_TASK_RESULT:
-                    {
-                        Log.i(TAG, "Delete task result: "+msg.getData() );
-                        boolean result  = msg.getData().getBoolean("delete");
+                    case DELETE_TASK_RESULT: {
+                        Log.i(TAG, "Delete task result: " + msg.getData());
+                        boolean result = msg.getData().getBoolean("delete");
                         Log.i(TAG, "Received delete task result");
-                        if(DeleteTaskActivity.deleteTaskActivityInstance != null){
+                        if (DeleteTaskActivity.deleteTaskActivityInstance != null) {
                             DeleteTaskActivity.deleteTaskActivityInstance.onQueryResultForDeleteTask(result);
-                        }
-                        else
-                        {
+                        } else {
                             Log.i(TAG, "deleteTaskActivityInstance was null");
                         }
                         break;
                     }
 
-                    case VERIFY_USER_RESULT:
-                    {
+                    case VERIFY_USER_RESULT: {
 
-                        boolean result  = msg.getData().getBoolean("verifyUser");
+                        boolean result = msg.getData().getBoolean("verifyUser");
                         Log.i(TAG, "Received verify user result");
 
-                        if(LoginActivity.loginActivityInstance != null)
-                        {
+                        if (LoginActivity.loginActivityInstance != null) {
                             LoginActivity.loginActivityInstance.onQueryResultForLogin(result);
-                        }
-                        else
-                        {
+                        } else {
                             Log.i(TAG, "loginActivityInstance was null");
                         }
 
                         break;
                     }
 
-                    case MODIFY_USER_RESULT:
-                    {
-                        boolean result  = msg.getData().getBoolean("modifyUser");
+                    case MODIFY_USER_RESULT: {
+                        boolean result = msg.getData().getBoolean("modifyUser");
                         Log.i(TAG, "Received modify user result");
 
-                        if(ProfileActivity.profileActivityInstance != null)
-                        {
+                        if (ProfileActivity.profileActivityInstance != null) {
                             ProfileActivity.profileActivityInstance.onQueryResultForUpdate(result);
-                        }
-                        else
-                        {
+                        } else {
                             Log.i(TAG, "profileActivityInstance was null");
                         }
 
                         break;
                     }
 
-                    case DELETE_USER_RESULT:
-                    {
+                    case DELETE_USER_RESULT: {
 
-                        boolean result  = msg.getData().getBoolean("deleteUser");
+                        boolean result = msg.getData().getBoolean("deleteUser");
                         Log.i(TAG, "Received delete user result");
 
-                        if(ProfileActivity.profileActivityInstance != null)
-                        {
+                        if (ProfileActivity.profileActivityInstance != null) {
                             ProfileActivity.profileActivityInstance.onQueryResultForDelete(result);
-                        }
-                        else
-                        {
+                        } else {
                             Log.i(TAG, "profileActivityInstance was null");
                         }
                         break;
                     }
 
-                    case DASH_BOARD_LOAD_USER_TASKS_GUI:
-                    {
+                    case DASH_BOARD_LOAD_USER_TASKS_GUI: {
                         JSONArray ja = null;
                         try {
                             ja = new JSONArray(msg.getData().getString("complexGetUserSorted"));
 
-                            if(DashboardActivity.dashboardActivityInstance != null)
-                            {
+                            if (DashboardActivity.dashboardActivityInstance != null) {
                                 UserData.user_tasks = ja;
                                 DashboardActivity.dashboardActivityInstance.loadUserTasks(ja);
-                            }
-                            else
-                            {
+                            } else {
                                 Log.i(TAG, "dashboardActivityInstance was null");
                             }
                         } catch (JSONException e) {
@@ -179,18 +148,14 @@ public class UIHandler
                         break;
                     }
 
-                    case DASH_BOARD_LOAD_USER_TEAMS_GUI:
-                    {
+                    case DASH_BOARD_LOAD_USER_TEAMS_GUI: {
                         JSONArray ja = null;
                         try {
                             ja = new JSONArray(msg.getData().getString("getUserTeams"));
 
-                            if(DashboardActivity.dashboardActivityInstance != null)
-                            {
+                            if (DashboardActivity.dashboardActivityInstance != null) {
                                 DashboardActivity.dashboardActivityInstance.loadUserTeams(ja);
-                            }
-                            else
-                            {
+                            } else {
                                 Log.i(TAG, "dashboardActivityInstance was null");
                             }
                         } catch (JSONException e) {
@@ -203,19 +168,18 @@ public class UIHandler
 
                     case COMPLEX_ACTIVITY_LOAD_SWE_TASKS_GUI: {
                         JSONArray ja = null;
-                        try{
+                        try {
                             ja = new JSONArray(msg.getData().getString("complexGetSWE")); // Key is url function
 
-                            if(ComplexQueryActivity.complexQueryActivityInstance != null) {
+                            if (ComplexQueryActivity.complexQueryActivityInstance != null) {
                                 UserData.user_teams = ja;
                                 ComplexQueryActivity.complexQueryActivityInstance.loadSoftwareEngineeringTasks(ja);
-                            }
-                            else {
+                            } else {
                                 Log.i(TAG, "dashboardActivityInstance was null");
                             }
 
-                        }catch (JSONException e){
-                            Log.i(TAG, "dashboard could not load JSONArray for teams | "+e.getMessage());
+                        } catch (JSONException e) {
+                            Log.i(TAG, "dashboard could not load JSONArray for teams | " + e.getMessage());
                         }
                         break;
                     }
@@ -250,21 +214,32 @@ public class UIHandler
                         }
                         break;
                     }
+                    case COMPLEX_ACTIVITY_TEST_CASE_TEAM_TASKS_GUI: {
+                        JSONArray ja = null;
+                        try {
+                            ja = new JSONArray(msg.getData().getString("complexGetTestCases"));
+
+                            if (ComplexQueryActivity.complexQueryActivityInstance != null) {
+                                ComplexQueryActivity.complexQueryActivityInstance.loadTeamTestCaseTasks(ja);
+                            } else {
+                                Log.i(TAG, "complexQueryActivityInstance was null");
+                            }
+                        } catch (JSONException e) {
+                            Log.i(TAG, "complex activity could not load JSONArray for complexGetTestCases");
+                        }
+                        break;
+                    }
 
 
-                    case VIEW_TEAM_LOAD_TEAM_MEMBERS_GUI:
-                    {
+                    case VIEW_TEAM_LOAD_TEAM_MEMBERS_GUI: {
                         JSONArray ja = null;
                         try {
                             ja = new JSONArray(msg.getData().getString("getListOfMembersInTeam"));
 
-                            if(ViewTeamActivity.viewTeamActivityInstance != null)
-                            {
+                            if (ViewTeamActivity.viewTeamActivityInstance != null) {
                                 UserData.user_teams = ja;
                                 ViewTeamActivity.viewTeamActivityInstance.loadTeamMembers(ja);
-                            }
-                            else
-                            {
+                            } else {
                                 Log.i(TAG, "viewTeamActivityInstance was null");
                             }
                         } catch (JSONException e) {

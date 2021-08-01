@@ -22,8 +22,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class DashboardActivity extends AppCompatActivity
-{
+public class DashboardActivity extends AppCompatActivity {
 
     //TAG for Logcat
     private String TAG = "Dashboard Activity";
@@ -63,21 +62,20 @@ public class DashboardActivity extends AppCompatActivity
         dashboardActivityInstance = this;
     }
 
-    public void setListeners()
-    {
+    public void setListeners() {
         teamListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView item = (TextView) view;
 
-                String teamName = ""+((String)item.getText()).split(" \\(")[0];
-                String teamId = ""+((String)item.getText()).split("id: ")[1].charAt(0);
+                String teamName = "" + ((String) item.getText()).split(" \\(")[0];
+                String teamId = "" + ((String) item.getText()).split("id: ")[1].charAt(0);
 
                 Log.i(TAG, "Clicked on: " + teamName + " " + teamId);
 
-                Intent startViewTeam = new Intent(DashboardActivity.this,ViewTeamActivity.class );
-                startViewTeam.putExtra("team_name",teamName); //Optional parameters
-                startViewTeam.putExtra("team_id",teamId);
+                Intent startViewTeam = new Intent(DashboardActivity.this, ViewTeamActivity.class);
+                startViewTeam.putExtra("team_name", teamName); //Optional parameters
+                startViewTeam.putExtra("team_id", teamId);
                 DashboardActivity.this.startActivity(startViewTeam);
 
             }
@@ -86,8 +84,8 @@ public class DashboardActivity extends AppCompatActivity
     }
 
     public void handleEditProfileBtn(View view) {
-        Intent startProfile = new Intent(DashboardActivity.this,ProfileActivity.class );
-        startProfile.putExtra("",""); //Optional parameters
+        Intent startProfile = new Intent(DashboardActivity.this, ProfileActivity.class);
+        startProfile.putExtra("", ""); //Optional parameters
         DashboardActivity.this.startActivity(startProfile);
 
         //Note: After Editing repopulate list view of profile details
@@ -96,25 +94,24 @@ public class DashboardActivity extends AppCompatActivity
     }
 
     public void handleAddTaskBtn(View view) {
-        Intent startAddTask = new Intent(DashboardActivity.this,AddTaskActivity.class );
-        startAddTask.putExtra("",""); //Optional parameters
+        Intent startAddTask = new Intent(DashboardActivity.this, AddTaskActivity.class);
+        startAddTask.putExtra("", ""); //Optional parameters
         DashboardActivity.this.startActivity(startAddTask);
     }
 
     public void handleDeleteTaskBtn(View view) {
-        Intent startDeleteTask = new Intent(DashboardActivity.this,DeleteTaskActivity.class );
-        startDeleteTask.putExtra("",""); //Optional parameters
+        Intent startDeleteTask = new Intent(DashboardActivity.this, DeleteTaskActivity.class);
+        startDeleteTask.putExtra("", ""); //Optional parameters
         DashboardActivity.this.startActivity(startDeleteTask);
     }
 
     public void handleViewTeamBtn(View view) {
-        Intent startViewTeam = new Intent(DashboardActivity.this,ViewTeamActivity.class );
-        startViewTeam.putExtra("",""); //Optional parameters
+        Intent startViewTeam = new Intent(DashboardActivity.this, ViewTeamActivity.class);
+        startViewTeam.putExtra("", ""); //Optional parameters
         DashboardActivity.this.startActivity(startViewTeam);
     }
 
-    public void loadProfileDetails()
-    {
+    public void loadProfileDetails() {
         String[] userDetailsStringArray = {
                 "User Name: " + UserData.user_name,
                 "User ID: " + UserData.user_id,
@@ -122,14 +119,13 @@ public class DashboardActivity extends AppCompatActivity
                 "Team Position: " + UserData.team_position
         };
 
-        ((TextView)findViewById(R.id.user_name_text_view)).setText(userDetailsStringArray[0]);
-        ((TextView)findViewById(R.id.user_id_text_view)).setText(userDetailsStringArray[1]);
-        ((TextView)findViewById(R.id.user_email_text_view)).setText(userDetailsStringArray[2]);
-        ((TextView)findViewById(R.id.user_team_position_text_view)).setText(userDetailsStringArray[3]);
+        ((TextView) findViewById(R.id.user_name_text_view)).setText(userDetailsStringArray[0]);
+        ((TextView) findViewById(R.id.user_id_text_view)).setText(userDetailsStringArray[1]);
+        ((TextView) findViewById(R.id.user_email_text_view)).setText(userDetailsStringArray[2]);
+        ((TextView) findViewById(R.id.user_team_position_text_view)).setText(userDetailsStringArray[3]);
     }
 
-    public void queryForLoadUserTasks()
-    {
+    public void queryForLoadUserTasks() {
         Message msg = new Message();
         msg.what = ConnectionThreadHandler.DASHBOARD_ACTIVITY_LOAD_USER_TASKS;
 
@@ -143,8 +139,7 @@ public class DashboardActivity extends AppCompatActivity
                 .sendMessage(msg);
     }
 
-    public void queryForLoadUserTeams()
-    {
+    public void queryForLoadUserTeams() {
         Message msg = new Message();
         msg.what = ConnectionThreadHandler.DASHBOARD_ACTIVITY_LOAD_USER_TEAMS;
 
@@ -159,50 +154,45 @@ public class DashboardActivity extends AppCompatActivity
 
     }
 
-    public void loadUserTasks(JSONArray ja) throws JSONException
-    {
+    public void loadUserTasks(JSONArray ja) throws JSONException {
         ArrayList<String> taskNames = new ArrayList<>();
         ListView lv = findViewById(R.id.task_lv);
-        for(int n = 0; n < ja.length(); n++)
-        {
+        for (int n = 0; n < ja.length(); n++) {
             JSONObject object = ja.getJSONObject(n);
             String taskName = object.getString("task_name");
             String taskPriority = object.getString("task_priority");
             taskNames.add(taskName + " - P(" + taskPriority + ")");
         }
 
-        Log.i(TAG,"Received num of tasks =  " + taskNames.size());
+        Log.i(TAG, "Received num of tasks =  " + taskNames.size());
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>( this, R.layout.simpe_list_item,taskNames);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.simpe_list_item, taskNames);
         lv.setAdapter(arrayAdapter);
     }
 
-    public void loadUserTeams(JSONArray ja) throws JSONException
-    {
+    public void loadUserTeams(JSONArray ja) throws JSONException {
         ArrayList<String> teamNames = new ArrayList<>();
         teamListView = findViewById(R.id.team_lv);
-        for(int n = 0; n < ja.length(); n++)
-        {
+        for (int n = 0; n < ja.length(); n++) {
             JSONObject object = ja.getJSONObject(n);
             String teamName = object.getString("team_name");
             String teamId = object.getString("team_id");
-            teamNames.add(teamName + " (id: "+teamId+ ")");
+            teamNames.add(teamName + " (id: " + teamId + ")");
         }
 
-        Log.i(TAG,"Received num of teams =  " + teamNames.size());
+        Log.i(TAG, "Received num of teams =  " + teamNames.size());
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>( this, R.layout.simpe_list_item,teamNames);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.simpe_list_item, teamNames);
         teamListView.setAdapter(arrayAdapter);
     }
 
     public void handleComplexQueriesBtn(View view) {
-        Intent startComplexQueryActivity = new Intent(DashboardActivity.this,ComplexQueryActivity.class );
+        Intent startComplexQueryActivity = new Intent(DashboardActivity.this, ComplexQueryActivity.class);
         DashboardActivity.this.startActivity(startComplexQueryActivity);
     }
 
     @Override
-    protected void onResume()
-    {
+    protected void onResume() {
         loadProfileDetails();
         queryForLoadUserTasks();
         queryForLoadUserTeams();

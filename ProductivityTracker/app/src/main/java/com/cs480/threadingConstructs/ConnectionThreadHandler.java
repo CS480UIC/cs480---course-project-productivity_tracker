@@ -20,8 +20,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class ConnectionThreadHandler extends Handler
-{
+public class ConnectionThreadHandler extends Handler {
     //TAG for Logcat
     private String TAG = "ConnectionThreadHandler";
 
@@ -47,24 +46,20 @@ public class ConnectionThreadHandler extends Handler
     public static final int VIEW_TEAM_ACTIVITY_LOAD_TEAM_MEMBERS = 200;
     public static final int COMPLEX_ACTIVITY_LOAD_SWE_TASKS = 220;
     public static final int COMPLEX_ACTIVITY_LOAD_SORTED_TEAM_TASKS = 230;
+    public static final int COMPLEX_ACTIVITY_TEST_CASE_TEAM_TASKS = 240;
 
 
-
-    ConnectionThreadHandler(Handler uiHandler)
-    {
+    ConnectionThreadHandler(Handler uiHandler) {
         this.uiHandler = uiHandler;
     }
 
     //Handles messages posted to message queue
-    public void handleMessage(Message msg)
-    {
+    public void handleMessage(Message msg) {
         int what = msg.what;
 
-        switch(what)
-        {
+        switch (what) {
 
-            case ADD_TASK_ACTIVITY_ADD_TASK:
-            {
+            case ADD_TASK_ACTIVITY_ADD_TASK: {
                 String taskName = (String) msg.getData().get("taskName");
                 String taskDesc = (String) msg.getData().get("taskDesc");
                 String userId = (String) msg.getData().get("userId");
@@ -74,7 +69,7 @@ public class ConnectionThreadHandler extends Handler
                 Boolean result = taskCrud.addTask(taskName, taskDesc, userId, teamId, priority);
 
                 Bundle bundle = new Bundle();
-                bundle.putBoolean("addTask",result);
+                bundle.putBoolean("addTask", result);
 
                 Message replyMsg = new Message();
                 replyMsg.what = UIHandler.ADD_TASK_RESULT;
@@ -87,14 +82,13 @@ public class ConnectionThreadHandler extends Handler
                 break;
             }
 
-            case DELETE_TASK_ACTIVITY_DELETE_TASK:
-            {
+            case DELETE_TASK_ACTIVITY_DELETE_TASK: {
                 String taskId = (String) msg.getData().get("deleteTaskIdValue");
 
                 Boolean result = taskCrud.deleteTask(taskId);
 
                 Bundle bundle = new Bundle();
-                bundle.putBoolean("delete",result);
+                bundle.putBoolean("delete", result);
 
                 Message replyMsg = new Message();
                 replyMsg.what = UIHandler.DELETE_TASK_RESULT;
@@ -107,8 +101,7 @@ public class ConnectionThreadHandler extends Handler
                 break;
             }
 
-            case LOGIN_ACTIVITY_VERIFY_USER:
-            {
+            case LOGIN_ACTIVITY_VERIFY_USER: {
                 String user = (String) msg.getData().get("user");
                 String password = (String) msg.getData().get("password");
 
@@ -131,8 +124,7 @@ public class ConnectionThreadHandler extends Handler
                 break;
             }
 
-            case CREATE_USER_ACTIVITY_CREATE_USER:
-            {
+            case CREATE_USER_ACTIVITY_CREATE_USER: {
                 String user = (String) msg.getData().get("user");
                 String password = (String) msg.getData().get("password");
                 String email = (String) msg.getData().get("email");
@@ -156,28 +148,39 @@ public class ConnectionThreadHandler extends Handler
                 break;
             }
 
-            case LOAD_USER_DATA_INTO_USERDATA_CLASS:
-            {
+            case LOAD_USER_DATA_INTO_USERDATA_CLASS: {
                 String user = (String) msg.getData().get("user");
 
                 String result = userCrud.getUser(user);
 
-                try
-                {
-                   JSONObject jo = new JSONObject(result.trim());
+                try {
+                    JSONObject jo = new JSONObject(result.trim());
 
-                   UserData.user_name = user;
+                    UserData.user_name = user;
 
-                   try{UserData.email = jo.getString("email");}catch(Exception e){UserData.email = "NA";};
+                    try {
+                        UserData.email = jo.getString("email");
+                    } catch (Exception e) {
+                        UserData.email = "NA";
+                    }
+                    ;
 
-                   try{UserData.team_position = jo.getString("team_position");}catch(Exception e){UserData.team_position = "NA";};
+                    try {
+                        UserData.team_position = jo.getString("team_position");
+                    } catch (Exception e) {
+                        UserData.team_position = "NA";
+                    }
+                    ;
 
-                   try{UserData.user_id = jo.getString("user_id");}catch(Exception e){UserData.user_id = "NA";};
+                    try {
+                        UserData.user_id = jo.getString("user_id");
+                    } catch (Exception e) {
+                        UserData.user_id = "NA";
+                    }
+                    ;
 
 
-                }
-                catch(Exception e)
-                {
+                } catch (Exception e) {
                     Log.i(TAG, "Could not convert result to JSON for userData class");
                     UserData.email = "NA";
                     UserData.team_position = "NA";
@@ -189,25 +192,20 @@ public class ConnectionThreadHandler extends Handler
                 break;
             }
 
-            case PROFILE_ACTIVITY_UPDATE_USER_ATTRIBUTES:
-            {
+            case PROFILE_ACTIVITY_UPDATE_USER_ATTRIBUTES: {
 
                 String updateAttribute = msg.getData().getString("update");
                 int whichAttribute = msg.getData().getInt("attributeOption");
 
                 Boolean result = userCrud.modifyUser(UserData.user_name, updateAttribute, whichAttribute);
 
-                if(result)
-                {
-                    switch(whichAttribute)
-                    {
-                        case userCrud.UPDATE_EMAIL:
-                        {
+                if (result) {
+                    switch (whichAttribute) {
+                        case userCrud.UPDATE_EMAIL: {
                             UserData.email = updateAttribute;
                             break;
                         }
-                        case userCrud.UPDATE_TEAM_POSITION:
-                        {
+                        case userCrud.UPDATE_TEAM_POSITION: {
                             UserData.team_position = updateAttribute;
                             break;
                         }
@@ -232,8 +230,7 @@ public class ConnectionThreadHandler extends Handler
                 break;
             }
 
-            case PROFILE_ACTIVITY_DELETE_USER:
-            {
+            case PROFILE_ACTIVITY_DELETE_USER: {
                 String user = (String) msg.getData().get("user");
 
                 //get result from db
@@ -260,7 +257,7 @@ public class ConnectionThreadHandler extends Handler
                 String team_id = (String) msg.getData().get("team_id");
                 String result = complexQueries.getTeamsProjectManagerEmail(team_id);
                 Bundle bundle = new Bundle();
-                bundle.putString("complexLoadPmEmails",result);
+                bundle.putString("complexLoadPmEmails", result);
 
                 Message replyMsg = new Message();
                 replyMsg.what = UIHandler.COMPLEX_LOAD_PM_EMAILS_GUI;
@@ -276,7 +273,7 @@ public class ConnectionThreadHandler extends Handler
 
                 Bundle bundle = new Bundle();
                 // URL FUNCTION
-                bundle.putString("complexGetSWE",result);
+                bundle.putString("complexGetSWE", result);
 
                 Message replyMsg = new Message();
                 replyMsg.what = UIHandler.COMPLEX_ACTIVITY_LOAD_SWE_TASKS_GUI;
@@ -291,7 +288,7 @@ public class ConnectionThreadHandler extends Handler
 
                 Bundle bundle = new Bundle();
                 // URL FUNCTION
-                bundle.putString("complexGetTeamsSorted",result);
+                bundle.putString("complexGetTeamsSorted", result);
 
                 Message replyMsg = new Message();
                 replyMsg.what = UIHandler.COMPLEX_ACTIVITY_LOAD_SORTED_TEAM_TASKS_GUI;
@@ -300,15 +297,29 @@ public class ConnectionThreadHandler extends Handler
                 uiHandler.sendMessage(replyMsg);
                 break;
             }
+            case COMPLEX_ACTIVITY_TEST_CASE_TEAM_TASKS: {
+                String team_id = (String) msg.getData().get("team_id");
+                String result = complexQueries.getTeamTestCaseTask(team_id);
 
-            case DASHBOARD_ACTIVITY_LOAD_USER_TASKS:
-            {
+                Bundle bundle = new Bundle();
+                // URL FUNCTION
+                bundle.putString("complexGetTestCases", result);
+
+                Message replyMsg = new Message();
+                replyMsg.what = UIHandler.COMPLEX_ACTIVITY_TEST_CASE_TEAM_TASKS_GUI;
+                replyMsg.setData(bundle);
+
+                uiHandler.sendMessage(replyMsg);
+                break;
+            }
+
+            case DASHBOARD_ACTIVITY_LOAD_USER_TASKS: {
                 String user_id = (String) msg.getData().get("user_id");
 
                 String result = complexQueries.complexGetUserSorted(user_id);
 
                 Bundle bundle = new Bundle();
-                bundle.putString("complexGetUserSorted",result);
+                bundle.putString("complexGetUserSorted", result);
 
                 Message replyMsg = new Message();
                 replyMsg.what = UIHandler.DASH_BOARD_LOAD_USER_TASKS_GUI;
@@ -321,14 +332,13 @@ public class ConnectionThreadHandler extends Handler
                 break;
             }
 
-            case DASHBOARD_ACTIVITY_LOAD_USER_TEAMS:
-            {
+            case DASHBOARD_ACTIVITY_LOAD_USER_TEAMS: {
                 String user_id = (String) msg.getData().get("user_id");
 
                 String result = simpleQueries.getUserTeams(user_id);
 
                 Bundle bundle = new Bundle();
-                bundle.putString("getUserTeams",result);
+                bundle.putString("getUserTeams", result);
 
                 Message replyMsg = new Message();
                 replyMsg.what = UIHandler.DASH_BOARD_LOAD_USER_TEAMS_GUI;
@@ -341,15 +351,14 @@ public class ConnectionThreadHandler extends Handler
                 break;
             }
 
-            case VIEW_TEAM_ACTIVITY_LOAD_TEAM_MEMBERS:
-            {
+            case VIEW_TEAM_ACTIVITY_LOAD_TEAM_MEMBERS: {
                 String team_id = (String) msg.getData().get("team_id");
 
                 //TODO
                 String result = simpleQueries.getListOfMembersInTeam(team_id);
 
                 Bundle bundle = new Bundle();
-                bundle.putString("getListOfMembersInTeam",result);
+                bundle.putString("getListOfMembersInTeam", result);
 
                 Message replyMsg = new Message();
                 replyMsg.what = UIHandler.VIEW_TEAM_LOAD_TEAM_MEMBERS_GUI;
@@ -366,7 +375,7 @@ public class ConnectionThreadHandler extends Handler
 
     }
 
-    public String httpRequest(String sUrl){
+    public String httpRequest(String sUrl) {
 
         String inputLine;
         String result;
@@ -375,7 +384,7 @@ public class ConnectionThreadHandler extends Handler
 
             Log.i("cmnd", sUrl);
             URL myUrl = new URL(sUrl);
-            HttpURLConnection connection =(HttpURLConnection) myUrl.openConnection();
+            HttpURLConnection connection = (HttpURLConnection) myUrl.openConnection();
             connection.setRequestMethod(REQUEST_METHOD);
             connection.setReadTimeout(READ_TIMEOUT);
             connection.setConnectTimeout(CONNECTION_TIMEOUT);
@@ -387,7 +396,7 @@ public class ConnectionThreadHandler extends Handler
 
             StringBuilder stringBuilder = new StringBuilder();
 
-            while((inputLine = reader.readLine()) != null){
+            while ((inputLine = reader.readLine()) != null) {
                 stringBuilder.append(inputLine);
             }
             reader.close();
@@ -395,9 +404,7 @@ public class ConnectionThreadHandler extends Handler
 
             result = stringBuilder.toString();
 
-        }
-
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             result = null;
         }

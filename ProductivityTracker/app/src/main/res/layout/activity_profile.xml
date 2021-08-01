@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#15202B"
-    tools:context=".ProfileActivity"
+    android:paddingHorizontal="20dp"
     android:paddingTop="20dp"
-    android:paddingHorizontal="20dp">
+    tools:context=".ProfileActivity">
 
     <TextView
         android:id="@+id/profile_header"
@@ -20,47 +20,55 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="20dp" />
 
-    <Button
-        android:id="@+id/update_email_btn"
-        android:onClick="handleUpdateEmail"
+    <TextView
+        android:id="@+id/edit_profile_h3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:text="Manage your profile'"
+        android:textColor="#8B8F96"
+        app:layout_constraintTop_toBottomOf="@+id/profile_header" />
+
+    <Button
+        android:id="@+id/update_email_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#123b4d"
+        android:onClick="handleUpdateEmail"
+        android:padding="15dp"
         android:text="Update Email"
-        android:textSize="24dp"
         android:textColor="@color/white"
-        android:paddingTop="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/profile_header"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/edit_profile_h3" />
 
     <Button
         android:id="@+id/update_password_btn"
-        android:onClick="handleUpdateTeamPosition"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#123b4d"
+        android:onClick="handleUpdateTeamPosition"
+        android:padding="15dp"
         android:text="Update Team Position"
-        android:textSize="24dp"
         android:textColor="@color/white"
-        android:paddingTop="10dp"
         app:layout_constraintTop_toBottomOf="@+id/update_email_btn"
         tools:layout_editor_absoluteX="20dp" />
 
     <Button
         android:id="@+id/update_team_position_btn"
-        android:onClick="handleUpdatePassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#123b4d"
+        android:onClick="handleUpdatePassword"
+        android:padding="15dp"
         android:text="Update Password"
-        android:textSize="24dp"
         android:textColor="@color/white"
-        android:paddingTop="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/update_password_btn"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/update_password_btn" />
 
     <Button
         android:id="@+id/delete_profile_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="25dp"
         android:layout_marginBottom="30dp"
         android:backgroundTint="#1DA1F2"
         android:onClick="handleDeleteProfile"

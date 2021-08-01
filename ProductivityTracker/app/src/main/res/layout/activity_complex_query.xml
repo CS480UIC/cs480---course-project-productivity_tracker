@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#15202B"
-    tools:context=".ComplexQueryActivity"
+    android:paddingHorizontal="20dp"
     android:paddingTop="20dp"
-    android:paddingHorizontal="20dp">
+    tools:context=".ComplexQueryActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,23 +26,41 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="20dp" />
 
-        <ListView
-        android:layout_marginTop="25dp"
-        android:id="@+id/complex_queries_lv"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:background="@drawable/rounded_grey_box"
-        android:minHeight="200dp"
-        android:padding="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/cq_header"
-        tools:layout_editor_absoluteX="-88dp" />
+        <TextView
+            android:id="@+id/resultHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Query Results "
+            android:textColor="#1DA1F2"
+            android:textSize="22dp" />
 
-<!--        GET TEAM TEST CASES -->
+        <ListView
+            android:id="@+id/complex_queries_lv"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/rounded_grey_box"
+            android:minHeight="200dp"
+            android:padding="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/cq_header"
+            tools:layout_editor_absoluteX="-88dp" />
+
+        <!--        GET TEAM TEST CASES -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Team ID"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/complex_team_id_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/rounded_grey_box"
             android:ems="10"
             android:hint="Team ID"
@@ -51,89 +69,84 @@
             android:textColorHint="#8B8F96" />
 
         <TextView
-            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#8B8F96"
+            android:layout_marginTop="15dp"
             android:text="Query for all tasks for a given team with the category of 'Test Case'"
-            />
+            android:textColor="#8B8F96" />
 
         <Button
-        android:id="@+id/getTeamTestCaseTasks_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#1DA1F2"
-        android:onClick="handleGetTeamTestCaseTasks"
-        android:padding="15dp"
-        android:text="Get Team Test Cases"
-        app:layout_constraintTop_toBottomOf="@+id/complex_queries_lv"
-        tools:layout_editor_absoluteX="20dp"
-        android:layout_marginTop="10dp"
-            android:layout_marginBottom="35dp"/>
-
-<!--        Get Teams Sorted Tasks-->
-        <TextView
-            android:layout_marginTop="15dp"
+            android:id="@+id/getTeamTestCaseTasks_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#8B8F96"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="35dp"
+            android:backgroundTint="#1DA1F2"
+            android:onClick="handleGetTeamTestCaseTasks"
+            android:padding="15dp"
+            android:text="Get Team Test Cases"
+            app:layout_constraintTop_toBottomOf="@+id/complex_queries_lv"
+            tools:layout_editor_absoluteX="20dp" />
+
+        <!--        Get Teams Sorted Tasks-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:text="Query for a team's tasks sorted by high priority and being incomplete"
-            />
+            android:textColor="#8B8F96" />
 
         <Button
-        android:id="@+id/getTeamsSortedTasks_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#1DA1F2"
-        android:onClick="handleGetTeamsSortedTask"
-        android:padding="15dp"
-        android:text="Get Teams Sorted Tasks"
-        app:layout_constraintTop_toBottomOf="@+id/getTeamTestCaseTasks_btn"
-        tools:layout_editor_absoluteX="20dp"
-        android:layout_marginBottom="30dp"
-        />
+            android:id="@+id/getTeamsSortedTasks_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:backgroundTint="#1DA1F2"
+            android:onClick="handleGetTeamsSortedTask"
+            android:padding="15dp"
+            android:text="Get Teams Sorted Tasks"
+            app:layout_constraintTop_toBottomOf="@+id/getTeamTestCaseTasks_btn"
+            tools:layout_editor_absoluteX="20dp" />
 
         <!--        Get SWE Tasks-->
         <TextView
-            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#8B8F96"
+            android:layout_marginTop="15dp"
             android:text="Query for a team's tasks for users with the position Software Engineer"
-            />
-
-    <Button
-        android:id="@+id/getTeamsSoftwareEngineeringTasks_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#1DA1F2"
-        android:onClick="handleGetTeamsSoftwareEngineeringTasks"
-        android:padding="15dp"
-        android:text="Get teams software engineering tasks"
-        app:layout_constraintTop_toBottomOf="@+id/getTeamsSortedTasks_btn"
-        tools:layout_editor_absoluteX="20dp"
-        android:layout_marginBottom="30dp"/>
-
-<!--        Get PM Email -->
-        <TextView
-            android:layout_marginTop="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#8B8F96"
-            android:text="Query for the emails of the project managers of a team"
-            />
+            android:textColor="#8B8F96" />
 
         <Button
-        android:id="@+id/getTeamsProjectManagerEmail_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#1DA1F2"
-        android:onClick="handleGetTeamsProjectManagerEmail"
-        android:padding="15dp"
-        android:text="Get Project Manager Email"
-        app:layout_constraintTop_toBottomOf="@+id/getTeamsSoftwareEngineeringTasks_btn"
-        tools:layout_editor_absoluteX="20dp"
-            android:layout_marginBottom="50dp"/>
+            android:id="@+id/getTeamsSoftwareEngineeringTasks_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:backgroundTint="#1DA1F2"
+            android:onClick="handleGetTeamsSoftwareEngineeringTasks"
+            android:padding="15dp"
+            android:text="Get teams software engineering tasks"
+            app:layout_constraintTop_toBottomOf="@+id/getTeamsSortedTasks_btn"
+            tools:layout_editor_absoluteX="20dp" />
+
+        <!--        Get PM Email -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Query for the emails of the project managers of a team"
+            android:textColor="#8B8F96" />
+
+        <Button
+            android:id="@+id/getTeamsProjectManagerEmail_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:backgroundTint="#1DA1F2"
+            android:onClick="handleGetTeamsProjectManagerEmail"
+            android:padding="15dp"
+            android:text="Get Project Manager Email"
+            app:layout_constraintTop_toBottomOf="@+id/getTeamsSoftwareEngineeringTasks_btn"
+            tools:layout_editor_absoluteX="20dp" />
     </LinearLayout>
 
 </ScrollView>

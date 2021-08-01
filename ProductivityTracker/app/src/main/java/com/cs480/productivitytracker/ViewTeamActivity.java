@@ -48,8 +48,7 @@ public class ViewTeamActivity extends AppCompatActivity {
         queryForTeamMembers();
     }
 
-    public void queryForTeamMembers()
-    {
+    public void queryForTeamMembers() {
         Message msg = new Message();
         msg.what = ConnectionThreadHandler.VIEW_TEAM_ACTIVITY_LOAD_TEAM_MEMBERS;
 
@@ -66,22 +65,20 @@ public class ViewTeamActivity extends AppCompatActivity {
     public void loadTeamMembers(JSONArray teamMembers) throws JSONException {
         ArrayList<String> members = new ArrayList<>();
         ListView lv = findViewById(R.id.team_member_lv);
-        for(int n = 0; n < teamMembers.length(); n++)
-        {
+        for (int n = 0; n < teamMembers.length(); n++) {
             JSONObject object = teamMembers.getJSONObject(n);
             String userName = object.getString("user_name");
             String userId = object.getString("user_id");
             members.add(userName + " - id:" + userId);
         }
 
-        Log.i(TAG,"Received num of users =  " + members.size());
+        Log.i(TAG, "Received num of users =  " + members.size());
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>( this, R.layout.simpe_list_item,members);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.simpe_list_item, members);
         lv.setAdapter(arrayAdapter);
     }
 
-    public void handleAddNewTMBtn(View view)
-    {
+    public void handleAddNewTMBtn(View view) {
     }
 
     @Override

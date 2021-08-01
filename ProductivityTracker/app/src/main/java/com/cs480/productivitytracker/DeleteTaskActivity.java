@@ -53,8 +53,8 @@ public class DeleteTaskActivity extends AppCompatActivity {
         try {
             tasks = UserData.getTasksNameAndIDs();
         } catch (JSONException e) {
-            Toast.makeText(DeleteTaskActivity.this,"Failed to load tasks",Toast.LENGTH_SHORT).show();
-            tasks =  new ArrayList<>();
+            Toast.makeText(DeleteTaskActivity.this, "Failed to load tasks", Toast.LENGTH_SHORT).show();
+            tasks = new ArrayList<>();
         }
 
         deleteTaskId = (EditText) findViewById(R.id.delete_task_id);
@@ -65,11 +65,9 @@ public class DeleteTaskActivity extends AppCompatActivity {
         deleteTaskActivityInstance = this;
     }
 
-    public void handleDeleteTaskBtn(View view)
-    {
-        if(selectedTaskId == null)
-        {
-            Toast.makeText(DeleteTaskActivity.this,"Please select task",Toast.LENGTH_SHORT).show();
+    public void handleDeleteTaskBtn(View view) {
+        if (selectedTaskId == null) {
+            Toast.makeText(DeleteTaskActivity.this, "Please select task", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -90,27 +88,21 @@ public class DeleteTaskActivity extends AppCompatActivity {
                 .sendMessage(msg);
     }
 
-    public void onQueryResultForDeleteTask(boolean result)
-    {
-        if(result)
-        {
+    public void onQueryResultForDeleteTask(boolean result) {
+        if (result) {
             // Todo figure out why a toast that says "error logging in" occurs
-            Toast.makeText(DeleteTaskActivity.this,"Delete Task successful",Toast.LENGTH_SHORT).show();
+            Toast.makeText(DeleteTaskActivity.this, "Delete Task successful", Toast.LENGTH_SHORT).show();
             this.finish(); // Go back to dashboard
-        }
-        else
-        {
-            Toast.makeText(DeleteTaskActivity.this,"Delete Task failed",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(DeleteTaskActivity.this, "Delete Task failed", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void initSpinner()
-    {
-        Spinner taskSpinner = (Spinner)findViewById(R.id.task_spinner);
+    public void initSpinner() {
+        Spinner taskSpinner = (Spinner) findViewById(R.id.task_spinner);
         List<String> taskNames = new ArrayList<String>();
 
-        for(Pair<String, String> x : tasks)
-        {
+        for (Pair<String, String> x : tasks) {
             taskNames.add(x.second);
         }
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, taskNames);
@@ -134,11 +126,9 @@ public class DeleteTaskActivity extends AppCompatActivity {
     }
 
 
-
     @Override
-    protected void onDestroy()
-    {
-        deleteTaskActivityInstance =  null;
+    protected void onDestroy() {
+        deleteTaskActivityInstance = null;
         super.onDestroy();
     }
 }

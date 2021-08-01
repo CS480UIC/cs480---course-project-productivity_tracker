@@ -10,12 +10,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
+
 import com.cs480.databaseAPI.taskCrud;
 import com.cs480.threadingConstructs.ConnectionThread;
 import com.cs480.threadingConstructs.ConnectionThreadHandler;
 
-public class AddTaskActivity extends AppCompatActivity
-{
+public class AddTaskActivity extends AppCompatActivity {
     //Logcat TAG
     private static final String TAG = "AddTaskActivity";
 
@@ -47,7 +47,7 @@ public class AddTaskActivity extends AppCompatActivity
         ((RadioButton) findViewById(R.id.radio_priority_1)).setChecked(true);
 
         addTaskActivityInstance = this;
-     }
+    }
 
     public void handleAddTask(View view) {
         //todo (Not too important) Figure out how to remove %20 for any words with spaces
@@ -64,10 +64,10 @@ public class AddTaskActivity extends AppCompatActivity
         msg.what = ConnectionThreadHandler.ADD_TASK_ACTIVITY_ADD_TASK;
 
         Bundle bundle = new Bundle();
-        bundle.putString("taskName",taskNameValue);
-        bundle.putString("taskDesc",taskDescValue);
-        bundle.putString("userId",userIDValue);
-        bundle.putString("teamId",teamIdValue);
+        bundle.putString("taskName", taskNameValue);
+        bundle.putString("taskDesc", taskDescValue);
+        bundle.putString("userId", userIDValue);
+        bundle.putString("teamId", teamIdValue);
         bundle.putString("priority", priorityValue);
         bundle.putInt("attributeOption", taskCrud.ADD_TASK);
         msg.setData(bundle);
@@ -77,44 +77,40 @@ public class AddTaskActivity extends AppCompatActivity
                 .getConnectionThreadHandler()
                 .sendMessage(msg);
     }
-    public void onQueryResultForAddTask(boolean result)
-    {
-        if(result)
-        {
+
+    public void onQueryResultForAddTask(boolean result) {
+        if (result) {
             // Todo figure out why a toast that says "error logging in" occurs
-            Toast.makeText(AddTaskActivity.this,"Add Task successful",Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddTaskActivity.this, "Add Task successful", Toast.LENGTH_SHORT).show();
             this.finish(); // Go back to dashboard
-        }
-        else
-        {
-            Toast.makeText(AddTaskActivity.this,"Add Task failed",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(AddTaskActivity.this, "Add Task failed", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void onRadioButtonClicked(View view)
-    {
+    public void onRadioButtonClicked(View view) {
         boolean checked = ((RadioButton) view).isChecked();
 
-        switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.radio_priority_1:
                 if (checked)
                     priorityValue = "1";
-                    break;
+                break;
 
             case R.id.radio_priority_2:
                 if (checked)
                     priorityValue = "2";
-                    break;
+                break;
 
             case R.id.radio_priority_3:
                 if (checked)
                     priorityValue = "3";
-                    break;
+                break;
 
             case R.id.radio_priority_4:
                 if (checked)
                     priorityValue = "4";
-                    break;
+                break;
 
         }
 
@@ -123,9 +119,8 @@ public class AddTaskActivity extends AppCompatActivity
 
 
     @Override
-    protected void onDestroy()
-    {
-        addTaskActivityInstance =  null;
+    protected void onDestroy() {
+        addTaskActivityInstance = null;
         super.onDestroy();
     }
 

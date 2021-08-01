@@ -51,11 +51,10 @@ public class ProfileActivity extends AppCompatActivity {
         updatePasswordBtn = (Button) findViewById(R.id.update_password_btn);
         deleteAccountBtn = (Button) findViewById(R.id.delete_profile_btn);
 
-        profileActivityInstance  = this;
+        profileActivityInstance = this;
     }
 
-    public void handleUpdateEmail(View view)
-    {
+    public void handleUpdateEmail(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Enter new email");
 
@@ -97,8 +96,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
-    public void handleUpdateTeamPosition(View view)
-    {
+    public void handleUpdateTeamPosition(View view) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Enter new team position");
@@ -140,8 +138,7 @@ public class ProfileActivity extends AppCompatActivity {
         builder.show();
     }
 
-    public void handleUpdatePassword(View view)
-    {
+    public void handleUpdatePassword(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Enter new team position");
 
@@ -183,8 +180,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
 
-    public void handleDeleteProfile(View view)
-    {
+    public void handleDeleteProfile(View view) {
         Message msg = new Message();
         msg.what = ConnectionThreadHandler.PROFILE_ACTIVITY_DELETE_USER;
 
@@ -198,48 +194,39 @@ public class ProfileActivity extends AppCompatActivity {
                 .sendMessage(msg);
     }
 
-    public void onQueryResultForUpdate(boolean result)
-    {
-        if(result)
-        {
-            Toast.makeText(ProfileActivity.this,"Update successful",Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
-            Toast.makeText(ProfileActivity.this,"Update failed",Toast.LENGTH_SHORT).show();
+    public void onQueryResultForUpdate(boolean result) {
+        if (result) {
+            Toast.makeText(ProfileActivity.this, "Update successful", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(ProfileActivity.this, "Update failed", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void onQueryResultForDelete(boolean result)
-    {
-        if(result)
-        {
+    public void onQueryResultForDelete(boolean result) {
+        if (result) {
             UserData.user_name = null;
             UserData.user_id = null;
             UserData.email = null;
             UserData.team_position = null;
 
-            Toast.makeText(ProfileActivity.this,"Delete successful",Toast.LENGTH_SHORT).show();
+            Toast.makeText(ProfileActivity.this, "Delete successful", Toast.LENGTH_SHORT).show();
 
             Intent mStartActivity = new Intent(ProfileActivity.this, LoginActivity.class);
             int mPendingIntentId = 123456;
-            PendingIntent mPendingIntent = PendingIntent.getActivity(ProfileActivity.this, mPendingIntentId,    mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
-            AlarmManager mgr = (AlarmManager)ProfileActivity.this.getSystemService(Context.ALARM_SERVICE);
+            PendingIntent mPendingIntent = PendingIntent.getActivity(ProfileActivity.this, mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
+            AlarmManager mgr = (AlarmManager) ProfileActivity.this.getSystemService(Context.ALARM_SERVICE);
             mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 10, mPendingIntent);
             finishAffinity();
 
 
-        }
-        else
-        {
-            Toast.makeText(ProfileActivity.this,"Delete failed",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(ProfileActivity.this, "Delete failed", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
-    protected void onDestroy()
-    {
-        profileActivityInstance =  null;
+    protected void onDestroy() {
+        profileActivityInstance = null;
         super.onDestroy();
     }
 

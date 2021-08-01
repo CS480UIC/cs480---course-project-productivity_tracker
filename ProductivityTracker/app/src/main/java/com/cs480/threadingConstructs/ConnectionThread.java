@@ -6,8 +6,7 @@ import android.util.Log;
 
 import com.cs480.config;
 
-public class ConnectionThread extends Thread
-{
+public class ConnectionThread extends Thread {
 
 
     //TAG for Logcat
@@ -28,36 +27,29 @@ public class ConnectionThread extends Thread
     //Port
     public static int PORT = config.PORT;
 
-    private ConnectionThread()
-    {
+    private ConnectionThread() {
         //Private constructor for singleton
     }
 
-    public static ConnectionThread getConnectionThread()
-    {
-        if(connectionThread == null)
-        {
+    public static ConnectionThread getConnectionThread() {
+        if (connectionThread == null) {
             connectionThread = new ConnectionThread();
         }
         return connectionThread;
     }
 
-    public void setuiHandler(Handler uiHandler)
-    {
+    public void setuiHandler(Handler uiHandler) {
         this.uiHandler = uiHandler;
     }
 
-    public ConnectionThreadHandler getConnectionThreadHandler()
-    {
+    public ConnectionThreadHandler getConnectionThreadHandler() {
         return connectionThreadHandler;
     }
 
     @Override
-    public void run()
-    {
+    public void run() {
         //Prepare the looper
-        if (Looper.myLooper() == null)
-        {
+        if (Looper.myLooper() == null) {
             Looper.prepare();
         }
         Log.i(TAG, "Looper.prepare() ran successfully");
@@ -72,8 +64,7 @@ public class ConnectionThread extends Thread
         Log.i(TAG, "exit run()");
     }
 
-    public void deleteThread()
-    {
+    public void deleteThread() {
         ConnectionThread.connectionThread = null;
     }
 }

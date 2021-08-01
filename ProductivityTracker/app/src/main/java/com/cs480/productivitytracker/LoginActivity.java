@@ -19,8 +19,7 @@ import com.cs480.threadingConstructs.ConnectionThreadHandler;
 import com.cs480.threadingConstructs.UIHandler;
 
 
-public class LoginActivity extends AppCompatActivity
-{
+public class LoginActivity extends AppCompatActivity {
     //Logcat TAG
     private static final String TAG = "Login Activity";
 
@@ -31,12 +30,11 @@ public class LoginActivity extends AppCompatActivity
     ConnectionThread connectionThread;
 
     String userNameValue, passwordValue;
-    EditText userNameInput,passwordInput;
+    EditText userNameInput, passwordInput;
     Button signInBtn;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide(); // hide the title bar
         setContentView(R.layout.login_activity);
@@ -56,6 +54,7 @@ public class LoginActivity extends AppCompatActivity
         //Activity Instance: Used to access methods from UIHandler
         loginActivityInstance = this;
     }
+
     public void handleSignIn(View view) {
         // Grab field values
         userNameValue = userNameInput.getText().toString();
@@ -77,20 +76,18 @@ public class LoginActivity extends AppCompatActivity
                 .sendMessage(msgToConnectionThread);
     }
 
-    public void onQueryResultForLogin(boolean result)
-    {
+    public void onQueryResultForLogin(boolean result) {
         /*
         result = true => Login successful
         result = false => Login unsuccessful
          */
 
         //Update GUI accroding to result
-        if (result)
-        {
+        if (result) {
             Log.i(TAG, "Login Successful");
 
             //make toast to indicate success
-            Toast.makeText(LoginActivity.this,"Login Successful",Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
 
             //Attempt to load user data into userData static fields
             Bundle bundle = new Bundle();
@@ -104,30 +101,26 @@ public class LoginActivity extends AppCompatActivity
                     .sendMessage(msgToConnectionThread);
 
             //start dashboard activity
-            Intent startDashboard = new Intent(LoginActivity.this,DashboardActivity.class );
+            Intent startDashboard = new Intent(LoginActivity.this, DashboardActivity.class);
             //startDashboard.putExtra("put","username and password here"); //Optional parameters
             startDashboard.putExtra("user_name", userNameValue);
             LoginActivity.this.startActivity(startDashboard);
-        }
-        else
-        {
+        } else {
             Log.i(TAG, "Error Logging in");
 
             //make toast to indicate failure
-            Toast.makeText(LoginActivity.loginActivityInstance,"Error logging in",Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.loginActivityInstance, "Error logging in", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void handleCreateNewUser(View view)
-    {
-        Intent startCreateUser = new Intent(LoginActivity.this,CreateUserActivity.class );
+    public void handleCreateNewUser(View view) {
+        Intent startCreateUser = new Intent(LoginActivity.this, CreateUserActivity.class);
         LoginActivity.this.startActivity(startCreateUser);
     }
 
     @Override
-    protected void onDestroy()
-    {
-        loginActivityInstance =  null;
+    protected void onDestroy() {
+        loginActivityInstance = null;
         ConnectionThread
                 .getConnectionThread()
                 .getConnectionThreadHandler()
