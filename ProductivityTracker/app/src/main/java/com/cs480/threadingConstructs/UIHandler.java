@@ -43,6 +43,7 @@ public class UIHandler
     public static final int VIEW_TEAM_LOAD_TEAM_MEMBERS_GUI = 500;
     public static final int COMPLEX_LOAD_PM_EMAILS_GUI = 550;
     public static final int COMPLEX_ACTIVITY_LOAD_SWE_TASKS_GUI = 600;
+    public static final int COMPLEX_ACTIVITY_LOAD_SORTED_TEAM_TASKS_GUI = 650;
 
 
 
@@ -234,7 +235,21 @@ public class UIHandler
                         }
                         break;
                     }
+                    case COMPLEX_ACTIVITY_LOAD_SORTED_TEAM_TASKS_GUI: {
+                        JSONArray ja = null;
+                        try {
+                            ja = new JSONArray(msg.getData().getString("complexGetTeamsSorted"));
 
+                            if (ComplexQueryActivity.complexQueryActivityInstance != null) {
+                                ComplexQueryActivity.complexQueryActivityInstance.loadTeamSortedTasks(ja);
+                            } else {
+                                Log.i(TAG, "complexQueryActivityInstance was null");
+                            }
+                        } catch (JSONException e) {
+                            Log.i(TAG, "complex activity could not load JSONArray for complexGetTeamsSorted");
+                        }
+                        break;
+                    }
 
 
                     case VIEW_TEAM_LOAD_TEAM_MEMBERS_GUI:
