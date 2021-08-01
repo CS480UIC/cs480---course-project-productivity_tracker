@@ -66,8 +66,9 @@ public class ConnectionThreadHandler extends Handler
                 String taskDesc = (String) msg.getData().get("taskDesc");
                 String userId = (String) msg.getData().get("userId");
                 String teamId = (String) msg.getData().get("teamId");
+                String priority = (String) msg.getData().get("priority");
 
-                Boolean result = taskCrud.addTask(taskName, taskDesc, userId, teamId);
+                Boolean result = taskCrud.addTask(taskName, taskDesc, userId, teamId, priority);
 
                 Bundle bundle = new Bundle();
                 bundle.putBoolean("addTask",result);

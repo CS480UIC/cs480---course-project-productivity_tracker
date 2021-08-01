@@ -213,16 +213,17 @@ public class ComplexQueriesAPI {
 		  JSONArray ja = new JSONArray();
 		  try {
 		      executeQuery("-- email of a users project manage\n"
-		      		+ "SELECT  Task.task_id, Task.task_name, Task.task_description, User.user_name, User.team_position ,PD.description, Task.creation_date,Task.dead_line_date\n"
+		      		+ "SELECT  Task.task_id, Task.priority, Task.task_name, Task.task_description, User.user_name, User.team_position ,PD.description, Task.creation_date,Task.dead_line_date\n"
 		      		+ "FROM Task\n"
 		      		+ "JOIN User ON User.user_id = Task.user_id\n"
 		      		+ "JOIN PriorityDescription as PD ON PD.priority = Task.priority\n"
 		      		+ "WHERE User.user_id = "+userId+" AND Task.is_completed = 0 \n"
-		      		+ "ORDER BY Task.priority desc\n"
+		      		+ "ORDER BY Task.priority ASC\n"
 		      		+ "");
 		      
 		      while (resultSet.next()) {
 		    	String task_id = resultSet.getString("task_id");
+		    	String task_priority = resultSet.getString("priority");
 		        String task_name = resultSet.getString("task_name");
 		        String task_description = resultSet.getString("task_description");
 		        String user_name = resultSet.getString("user_name");
@@ -234,6 +235,7 @@ public class ComplexQueriesAPI {
 		        //Create JSON Object
 		        JSONObject jo = new JSONObject();
 		        jo.put("task_id", task_id);
+		        jo.put("task_priority", task_priority);
 		        jo.put("task_name", task_name);
 				jo.put("task_description", task_description);
 				jo.put("user_name", user_name);

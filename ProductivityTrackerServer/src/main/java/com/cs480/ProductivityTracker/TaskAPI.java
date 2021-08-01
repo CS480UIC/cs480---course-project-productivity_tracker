@@ -50,10 +50,10 @@ public class TaskAPI {
 		}
 	}
 
-	public static boolean addTask(String taskName, String taskDesc, String userId, String teamId) {
+	public static boolean addTask(String taskName, String taskDesc, String userId, String teamId, String priority) {
 		try {
-			executeUpdate("INSERT INTO Task(task_name, task_description, user_id, team_id, is_completed) \n"
-					+ "Values (\"" + taskName + "\",\"" + taskDesc + "\",\"" + userId + "\",\"" + teamId + "\",0);");
+			executeUpdate("INSERT INTO Task(task_name, task_description, user_id, team_id, is_completed, priority) \n"
+					+ "Values (\"" + taskName + "\",\"" + taskDesc + "\",\"" + userId + "\",\"" + teamId + "\",0,"+priority+");");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			close();

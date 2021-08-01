@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 import com.cs480.databaseAPI.taskCrud;
 import com.cs480.threadingConstructs.ConnectionThread;
@@ -25,7 +26,7 @@ public class AddTaskActivity extends AppCompatActivity
     ConnectionThread connectionThread;
 
     EditText taskName, taskDesc, userId, teamId;
-    String taskNameValue, taskDescValue, userIDValue, teamIdValue;
+    String taskNameValue, taskDescValue, userIDValue, teamIdValue, priorityValue;
     Button addTaskBtn;
 
     @Override
@@ -43,6 +44,7 @@ public class AddTaskActivity extends AppCompatActivity
         userId = (EditText) findViewById(R.id.task_user_id);
         teamId = (EditText) findViewById(R.id.task_team_id);
         addTaskBtn = (Button) findViewById(R.id.add_task_btn);
+        ((RadioButton) findViewById(R.id.radio_priority_1)).setChecked(true);
 
         addTaskActivityInstance = this;
      }
@@ -66,6 +68,7 @@ public class AddTaskActivity extends AppCompatActivity
         bundle.putString("taskDesc",taskDescValue);
         bundle.putString("userId",userIDValue);
         bundle.putString("teamId",teamIdValue);
+        bundle.putString("priority", priorityValue);
         bundle.putInt("attributeOption", taskCrud.ADD_TASK);
         msg.setData(bundle);
 
@@ -87,6 +90,37 @@ public class AddTaskActivity extends AppCompatActivity
             Toast.makeText(AddTaskActivity.this,"Add Task failed",Toast.LENGTH_SHORT).show();
         }
     }
+
+    public void onRadioButtonClicked(View view)
+    {
+        boolean checked = ((RadioButton) view).isChecked();
+
+        switch(view.getId()) {
+            case R.id.radio_priority_1:
+                if (checked)
+                    priorityValue = "1";
+                    break;
+
+            case R.id.radio_priority_2:
+                if (checked)
+                    priorityValue = "2";
+                    break;
+
+            case R.id.radio_priority_3:
+                if (checked)
+                    priorityValue = "3";
+                    break;
+
+            case R.id.radio_priority_4:
+                if (checked)
+                    priorityValue = "4";
+                    break;
+
+        }
+
+
+    }
+
 
     @Override
     protected void onDestroy()

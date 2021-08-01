@@ -157,7 +157,7 @@ public class MyHttpHandler implements HttpHandler {
 		// Create
 		if (function.equals("addTask")) {
 			// Eg: http://192.168.0.110:8080/addUser?username&email&password
-			boolean result = TaskAPI.addTask(params[0],params[1],params[2],params[3]);
+			boolean result = TaskAPI.addTask(params[0],params[1],params[2],params[3], params[4]);
 			return Boolean.toString(result);
 		}
 		if (function.equals("deleteTask")) {

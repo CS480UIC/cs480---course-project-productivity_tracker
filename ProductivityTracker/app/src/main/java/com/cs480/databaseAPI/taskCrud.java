@@ -8,14 +8,15 @@ public class taskCrud {
     public static final String TAG = "TaskCRUD";
     public static final int ADD_TASK = 200;
 
-    public static Boolean addTask(String taskName, String taskDesc, String userId, String teamId){
+    public static Boolean addTask(String taskName, String taskDesc, String userId, String teamId, String priority){
 
         String request = "http://" + ConnectionThread.IP + ":" + Integer.toString(ConnectionThread.PORT) +
                 "/addTask?" +
                 taskName + "&"+
                 taskDesc+ "&"+
                 userId+"&"+
-                teamId;
+                teamId+"&"+
+                priority;
 
         String response = ConnectionThread
                 .getConnectionThread()

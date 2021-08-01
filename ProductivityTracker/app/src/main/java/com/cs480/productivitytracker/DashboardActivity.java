@@ -140,7 +140,8 @@ public class DashboardActivity extends AppCompatActivity
         {
             JSONObject object = ja.getJSONObject(n);
             String taskName = object.getString("task_name");
-            taskNames.add(taskName);
+            String taskPriority = object.getString("task_priority");
+            taskNames.add(taskName + " - P(" + taskPriority + ")");
         }
 
         Log.i(TAG,"Received num of tasks =  " + taskNames.size());
@@ -157,7 +158,8 @@ public class DashboardActivity extends AppCompatActivity
         {
             JSONObject object = ja.getJSONObject(n);
             String teamName = object.getString("team_name");
-            teamNames.add(teamName);
+            String teamId = object.getString("team_id");
+            teamNames.add(teamName + " (id: "+teamId+ ")");
         }
 
         Log.i(TAG,"Received num of teams =  " + teamNames.size());
