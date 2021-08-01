@@ -37,6 +37,9 @@ public class DashboardActivity extends AppCompatActivity
         //Populate Profile Details
         loadProfileDetails();
 
+        //User task list
+        loadUserTasks();
+
         dashboardActivityInstance = this;
     }
 
@@ -81,6 +84,10 @@ public class DashboardActivity extends AppCompatActivity
         ((TextView)findViewById(R.id.user_id_text_view)).setText(userDetailsStringArray[1]);
         ((TextView)findViewById(R.id.user_email_text_view)).setText(userDetailsStringArray[2]);
         ((TextView)findViewById(R.id.user_team_position_text_view)).setText(userDetailsStringArray[3]);
+    }
+
+    public void loadUserTasks(){
+
     }
 
     @Override

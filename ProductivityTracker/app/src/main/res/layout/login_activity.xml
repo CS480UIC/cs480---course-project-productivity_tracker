@@ -78,10 +78,24 @@
         android:layout_marginHorizontal="25dp"
         android:backgroundTint="#1DA1F2"
         android:padding="15dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:text="Sign In"
         app:layout_constraintTop_toBottomOf="@+id/password_input"
         tools:layout_editor_absoluteX="25dp"
         android:onClick="handleSignIn"
         />
+    <Button
+        android:id="@+id/create_new_user_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:backgroundTint="#123b4d"
+        android:padding="15dp"
+        android:layout_marginTop="10dp"
+        android:text="Create User"
+        app:layout_constraintTop_toBottomOf="@+id/sign_in_btn"
+        tools:layout_editor_absoluteX="25dp"
+        android:onClick="handleCreateNewUser"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

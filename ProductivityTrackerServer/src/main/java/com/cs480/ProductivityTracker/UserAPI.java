@@ -105,16 +105,16 @@ public class UserAPI {
         );
       
       String sql =
-    	        "INSERT INTO User(user_name, email, password) " +
+    	        "INSERT INTO User(user_name, password, email) " +
     	        "VALUES (" +
     	        "'" +
     	        user_name +
     	        "'," +
     	        "'" +
-    	        email +
+    	        password +
     	        "'," +
     	        "'" +
-    	        password +
+    	        email +
     	        "'" +
     	        ");"; 
       preparedStatement = connect.prepareStatement(sql);

@@ -120,7 +120,8 @@ public class LoginActivity extends AppCompatActivity
 
     public void handleCreateNewUser(View view)
     {
-        //TODO: (Jacob) Start CreateUserActivity on Button press
+        Intent startCreateUser = new Intent(LoginActivity.this,CreateUserActivity.class );
+        LoginActivity.this.startActivity(startCreateUser);
     }
 
     @Override

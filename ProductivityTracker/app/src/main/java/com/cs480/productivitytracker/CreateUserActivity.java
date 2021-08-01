@@ -8,6 +8,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.cs480.threadingConstructs.ConnectionThread;
@@ -24,6 +25,8 @@ public class CreateUserActivity extends AppCompatActivity {
     //Threading Constructs
     ConnectionThread connectionThread;
 
+    EditText userNameInput, passwordInput, emailInput;
+
     //For username,password and email editTexts
     String userNameValue, passwordValue, emailValue;
 
@@ -33,25 +36,23 @@ public class CreateUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user);
 
+        getSupportActionBar().hide(); // hide the title bar
+
         //Get Threading constructs
         connectionThread = ConnectionThread.getConnectionThread();
 
-
-        //TODO: (Jacob) Add Required UI
-        //Note: This activity will open once the user clicks on "Create new user" from the login screen.
-        //Also
-
-
+        userNameInput = (EditText) findViewById(R.id.new_user_name);
+        passwordInput = (EditText) findViewById(R.id.new_user_password);
+        emailInput = (EditText) findViewById(R.id.new_user_email);
 
         createUserActivityInstance = this;
     }
 
     public void handleCreateUser(View view)
     {
-        //TODO: (Jacob)Uncomment when GUI elements are added
-        //userNameValue = userNameInput.getText().toString();
-        //passwordValue = passwordInput.getText().toString();
-        //emailValue = emailInput.getText().toString();
+        userNameValue = userNameInput.getText().toString();
+        passwordValue = passwordInput.getText().toString();
+        emailValue = emailInput.getText().toString();
 
         //TODO: (Yash) test working after addition of GUI
         //Send message to connection thread
@@ -70,13 +71,18 @@ public class CreateUserActivity extends AppCompatActivity {
                 .sendMessage(msgToConnectionThread);
     }
 
+    // todo figure out why onQueryResultForCreate is not being called
     public void onQueryResultForCreate(boolean result)
     {
-        //TODO: (Jacob)Re route to login activity if user was successfully created
-        //Notes:
-        //result = true => user was successfully created
-        //result = false => user was not created successfully
-        //Suggestion => display toast of result and go to login activity regardless of success or failure
+        if(result)
+        {
+            Toast.makeText(CreateUserActivity.this,"Create new user successful",Toast.LENGTH_SHORT).show();
+            this.finish(); // Go back to dashboard
+        }
+        else
+        {
+            Toast.makeText(CreateUserActivity.this,"Create new user failed",Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

@@ -18,7 +18,7 @@ CREATE TABLE TeamUser (
     user_id INTEGER NOT NULL
 );
 CREATE TABLE User (
-    user_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL AUTO_INCREMENT,
     user_name VARCHAR(20) UNIQUE NOT NULL,
     email TEXT NOT NULL,
     team_position VARCHAR(20),
