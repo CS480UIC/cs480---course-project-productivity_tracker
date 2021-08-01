@@ -13,6 +13,7 @@ import com.cs480.productivitytracker.DeleteTaskActivity;
 import com.cs480.productivitytracker.LoginActivity;
 import com.cs480.productivitytracker.ProfileActivity;
 import com.cs480.productivitytracker.TaskActivity;
+import com.cs480.productivitytracker.ViewTeamActivity;
 import com.cs480.staticData.UserData;
 
 import org.json.JSONArray;
@@ -20,6 +21,7 @@ import org.json.JSONException;
 
 public class UIHandler
 {
+
 
 
     //ui handler instance
@@ -37,6 +39,7 @@ public class UIHandler
     public static final int DELETE_TASK_RESULT = 350;
     public static final int DASH_BOARD_LOAD_USER_TASKS_GUI = 400;
     public static final int DASH_BOARD_LOAD_USER_TEAMS_GUI = 450;
+    public static final int VIEW_TEAM_LOAD_TEAM_MEMBERS_GUI = 500;
 
 
 
@@ -189,6 +192,29 @@ public class UIHandler
                             }
                         } catch (JSONException e) {
                             Log.i(TAG, "dashboard could not load JSONArray for teams");
+                        }
+
+
+                        break;
+                    }
+
+                    case VIEW_TEAM_LOAD_TEAM_MEMBERS_GUI:
+                    {
+                        JSONArray ja = null;
+                        try {
+                            ja = new JSONArray(msg.getData().getString("getListOfMembersInTeam"));
+
+                            if(ViewTeamActivity.viewTeamActivityInstance != null)
+                            {
+                                UserData.user_teams = ja;
+                                ViewTeamActivity.viewTeamActivityInstance.loadTeamMembers(ja);
+                            }
+                            else
+                            {
+                                Log.i(TAG, "viewTeamActivityInstance was null");
+                            }
+                        } catch (JSONException e) {
+                            Log.i(TAG, "viewTeamActivity could not load JSONArray for teams members");
                         }
 
 

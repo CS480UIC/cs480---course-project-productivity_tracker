@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -36,7 +37,7 @@ public class DashboardActivity extends AppCompatActivity
     //Threading Constructs
     ConnectionThread connectionThread;
 
-
+    ListView teamListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +45,13 @@ public class DashboardActivity extends AppCompatActivity
         getSupportActionBar().hide(); // hide the title bar
         setContentView(R.layout.activity_dashboard);
 
+
         //Get Threading constructs
         connectionThread = ConnectionThread.getConnectionThread();
+
+        //GUI Elements
+        teamListView = findViewById(R.id.team_lv);
+        setListeners();
 
         //Populate Profile Details
         loadProfileDetails();
@@ -55,6 +61,28 @@ public class DashboardActivity extends AppCompatActivity
         queryForLoadUserTeams();
 
         dashboardActivityInstance = this;
+    }
+
+    public void setListeners()
+    {
+        teamListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView item = (TextView) view;
+
+                String teamName = ""+((String)item.getText()).split(" \\(")[0];
+                String teamId = ""+((String)item.getText()).split("id: ")[1].charAt(0);
+
+                Log.i(TAG, "Clicked on: " + teamName + " " + teamId);
+
+                Intent startViewTeam = new Intent(DashboardActivity.this,ViewTeamActivity.class );
+                startViewTeam.putExtra("team_name",teamName); //Optional parameters
+                startViewTeam.putExtra("team_id",teamId);
+                DashboardActivity.this.startActivity(startViewTeam);
+
+            }
+        });
+
     }
 
     public void handleEditProfileBtn(View view) {
@@ -153,7 +181,7 @@ public class DashboardActivity extends AppCompatActivity
     public void loadUserTeams(JSONArray ja) throws JSONException
     {
         ArrayList<String> teamNames = new ArrayList<>();
-        ListView lv = findViewById(R.id.team_lv);
+        teamListView = findViewById(R.id.team_lv);
         for(int n = 0; n < ja.length(); n++)
         {
             JSONObject object = ja.getJSONObject(n);
@@ -165,7 +193,7 @@ public class DashboardActivity extends AppCompatActivity
         Log.i(TAG,"Received num of teams =  " + teamNames.size());
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>( this, R.layout.simpe_list_item,teamNames);
-        lv.setAdapter(arrayAdapter);
+        teamListView.setAdapter(arrayAdapter);
     }
 
     @Override

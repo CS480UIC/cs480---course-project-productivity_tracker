@@ -8,8 +8,8 @@ public class simpleQueries
 {
     public static final String TAG = "simpleQueries";
 
-    //Complex Query 1 via HTTP
-    // Produces tasks with the category of "test cases" given a team_id
+
+    // Produces list of teams a user is a part of
     public static String getUserTeams(String user_id)
     {
         String request = "http://" + ConnectionThread.IP + ":" + Integer.toString(ConnectionThread.PORT) +
@@ -22,6 +22,23 @@ public class simpleQueries
                 .httpRequest(request);
 
         Log.i(TAG, "getUserTeams result = " + response);
+
+        return response;
+    }
+
+    // Produces list of users on a certain team
+    public static String getListOfMembersInTeam(String team_id)
+    {
+        String request = "http://" + ConnectionThread.IP + ":" + Integer.toString(ConnectionThread.PORT) +
+                "/simpleGetListOfUsersInTeam?" +
+                team_id;
+
+        String response = ConnectionThread
+                .getConnectionThread()
+                .getConnectionThreadHandler()
+                .httpRequest(request);
+
+        Log.i(TAG, "getListOfMembersInTeam = " + response);
 
         return response;
     }
