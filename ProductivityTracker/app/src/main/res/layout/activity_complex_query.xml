@@ -63,7 +63,7 @@
         android:backgroundTint="#1DA1F2"
         android:onClick="handleGetTeamsProjectManagerEmail"
         android:padding="15dp"
-        android:text="Get teams software engineering tasks"
+        android:text="Get teams software engineering Tasks"
         app:layout_constraintTop_toBottomOf="@+id/getTeamsSoftwareEngineeringTasks_btn"
         tools:layout_editor_absoluteX="20dp" />
 

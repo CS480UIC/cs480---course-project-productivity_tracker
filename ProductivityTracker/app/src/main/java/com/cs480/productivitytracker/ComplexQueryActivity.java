@@ -11,6 +11,7 @@ public class ComplexQueryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complex_query);
+        getSupportActionBar().hide(); // hide the title bar
     }
 
     public void handleGetTeamTestCaseTasks(View view) {
