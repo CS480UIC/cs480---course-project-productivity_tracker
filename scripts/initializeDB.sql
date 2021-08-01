@@ -209,7 +209,7 @@ VALUES (
 INSERT INTO User(user_name, email, team_position, password)
 VALUES (
         'user15',
-        'user13@uic.edu',
+        'user15@uic.edu',
         'Project Manager',
         'user'
 );
@@ -217,7 +217,7 @@ VALUES (
 INSERT INTO User(user_name, email, team_position, password)
 VALUES (
         'user16',
-        'user14@uic.edu',
+        'user16@uic.edu',
         'HR Manager',
         'user'
 );
@@ -225,7 +225,7 @@ VALUES (
 INSERT INTO User(user_name, email, team_position, password)
 VALUES (
         'user17',
-        'user14@uic.edu',
+        'user17@uic.edu',
         'Project Manager',
         'user'
 );
@@ -288,11 +288,6 @@ VALUES ( (SELECT team_id FROM Team WHERE team_name = 'Team Evens')
 INSERT INTO TeamUser(team_id, user_id)
 VALUES ( (SELECT team_id FROM Team WHERE team_name = 'Team Evens')
 	,(SELECT user_id FROM User WHERE user_name = 'user12')
-);
-
-INSERT INTO TeamUser(team_id, user_id)
-VALUES ( (SELECT team_id FROM Team WHERE team_name = 'Team Evens')
-	,(SELECT user_id FROM User WHERE user_name = 'user14')
 );
 
 INSERT INTO TeamUser(team_id, user_id)
