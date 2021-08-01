@@ -166,22 +166,19 @@ public class ComplexQueriesAPI {
 		  //System.out.println("Inside getTeamsSortedTask");
 		  JSONArray ja = new JSONArray();
 		  try {
-		      executeQuery("SELECT  Task.task_name, Task.task_description, User.user_name, User.team_position ,\n"
-		      		+ "PD.description, Task.creation_date,Task.dead_line_date\n"
+		      executeQuery("SELECT *\n"
 		      		+ "FROM Task\n"
-		      		+ "JOIN Team ON Team.team_id = Task.task_id\n"
+		      		+ "JOIN Team ON Team.team_id = Task.team_id\n"
 		      		+ "JOIN User ON User.user_id = Task.user_id\n"
-		      		+ "JOIN PriorityDescription as PD ON PD.priority = Task.priority\n"
-		      		+ "WHERE Team.team_id = 3 AND Task.is_completed = 0 \n"
-		      		+ "ORDER BY Task.priority desc\n"
-		      		+ "");
+		      		+ "WHERE Team.team_id = "+teamId+" AND Task.is_completed = 0\n"
+		      		+ "ORDER BY Task.priority");
 		      
 		      while (resultSet.next()) {
 		        String task_name = resultSet.getString("task_name");
 		        String task_description = resultSet.getString("task_description");
 		        String user_name = resultSet.getString("user_name");
 		        String team_position = resultSet.getString("team_position");
-		        String description = resultSet.getString("description");
+		        
 		        String creation_date = resultSet.getString("creation_date");
 		        String dead_line_date = resultSet.getString("dead_line_date");
 
@@ -191,7 +188,7 @@ public class ComplexQueriesAPI {
 		        jo.put("task_description", task_description);
 		        jo.put("user_name", user_name);
 		        jo.put("team_position", team_position);
-		        jo.put("description", description);
+
 		        jo.put("creation_date", creation_date);
 		        jo.put("dead_line_date", dead_line_date);
 
