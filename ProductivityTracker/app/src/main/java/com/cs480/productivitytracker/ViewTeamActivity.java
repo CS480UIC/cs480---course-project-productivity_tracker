@@ -36,6 +36,7 @@ public class ViewTeamActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_team);
         team_member_new_id = (EditText) findViewById(R.id.team_member_new_id);
+        getSupportActionBar().hide(); // hide the title bar
 
         //Get Team Name and ID
         teamName = this.getIntent().getExtras().getString("team_name");

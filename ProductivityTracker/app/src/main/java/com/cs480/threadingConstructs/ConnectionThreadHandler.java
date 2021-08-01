@@ -47,6 +47,8 @@ public class ConnectionThreadHandler extends Handler {
     public static final int COMPLEX_ACTIVITY_LOAD_SWE_TASKS = 220;
     public static final int COMPLEX_ACTIVITY_LOAD_SORTED_TEAM_TASKS = 230;
     public static final int COMPLEX_ACTIVITY_TEST_CASE_TEAM_TASKS = 240;
+    public static final int DASHBOARD_ACTIVITY_MARK_TASK_CHECKED = 210;
+
 
 
     ConnectionThreadHandler(Handler uiHandler) {
@@ -365,6 +367,26 @@ public class ConnectionThreadHandler extends Handler {
                 replyMsg.setData(bundle);
 
                 Log.i(TAG, "Sending list of team members in team to view team");
+
+                uiHandler.sendMessage(replyMsg);
+
+                break;
+            }
+
+            case DASHBOARD_ACTIVITY_MARK_TASK_CHECKED:
+            {
+                String task_id = (String) msg.getData().get("task_id");
+
+                String result = simpleQueries.markTaskAsCompleted(task_id);
+
+                Bundle bundle = new Bundle();
+                bundle.putString("markTaskAsCompleted",result);
+
+                Message replyMsg = new Message();
+                replyMsg.what = UIHandler.DASH_BOARD_MARK_TASK_COMPLETE_RESULT;
+                replyMsg.setData(bundle);
+
+                Log.i(TAG, "Sending markTaskAsCompleted result");
 
                 uiHandler.sendMessage(replyMsg);
 

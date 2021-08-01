@@ -43,5 +43,21 @@ public class simpleQueries
         return response;
     }
 
+    public static String markTaskAsCompleted(String task_id)
+    {
+        String request = "http://" + ConnectionThread.IP + ":" + Integer.toString(ConnectionThread.PORT) +
+                "/simpleMarkTaskAsComplete?" +
+                task_id;
+
+        String response = ConnectionThread
+                .getConnectionThread()
+                .getConnectionThreadHandler()
+                .httpRequest(request);
+
+        Log.i(TAG, "markTaskAsCompleted = " + response);
+
+        return response;
+    }
+
 
 }

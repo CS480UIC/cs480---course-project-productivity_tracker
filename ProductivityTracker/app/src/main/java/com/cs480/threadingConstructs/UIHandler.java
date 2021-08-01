@@ -42,7 +42,8 @@ public class UIHandler {
     public static final int COMPLEX_LOAD_PM_EMAILS_GUI = 550;
     public static final int COMPLEX_ACTIVITY_LOAD_SWE_TASKS_GUI = 600;
     public static final int COMPLEX_ACTIVITY_LOAD_SORTED_TEAM_TASKS_GUI = 650;
-    public static final int COMPLEX_ACTIVITY_TEST_CASE_TEAM_TASKS_GUI = 700;
+    public static final int COMPLEX_ACTIVITY_TEST_CASE_TEAM_TASKS_GUI = 710;
+    public static final int DASH_BOARD_MARK_TASK_COMPLETE_RESULT = 700;
 
 
     public static void initUIHandler() {
@@ -153,7 +154,10 @@ public class UIHandler {
                         try {
                             ja = new JSONArray(msg.getData().getString("getUserTeams"));
 
-                            if (DashboardActivity.dashboardActivityInstance != null) {
+
+                            if(DashboardActivity.dashboardActivityInstance != null)
+                            {
+                                UserData.user_teams = ja;
                                 DashboardActivity.dashboardActivityInstance.loadUserTeams(ja);
                             } else {
                                 Log.i(TAG, "dashboardActivityInstance was null");
@@ -245,6 +249,21 @@ public class UIHandler {
                         } catch (JSONException e) {
                             Log.i(TAG, "viewTeamActivity could not load JSONArray for teams members");
                         }
+                        break;
+                    }
+
+                    case DASH_BOARD_MARK_TASK_COMPLETE_RESULT:
+                    {
+                            Boolean result  = Boolean.parseBoolean(msg.getData().getString("markTaskAsCompleted"));
+
+                            if(DashboardActivity.dashboardActivityInstance != null)
+                            {
+                                DashboardActivity.dashboardActivityInstance.onMarkedTaskAsComplete(result);
+                            }
+                            else
+                            {
+                                Log.i(TAG, "viewTeamActivityInstance was null");
+                            }
                         break;
                     }
                 }
