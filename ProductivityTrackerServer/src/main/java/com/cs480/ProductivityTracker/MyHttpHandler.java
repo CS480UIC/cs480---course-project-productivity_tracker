@@ -1,4 +1,3 @@
-
 package com.cs480.ProductivityTracker;
 
 import java.io.IOException;
@@ -86,15 +85,15 @@ public class MyHttpHandler implements HttpHandler {
 		}
 
 		// Produces highest priority tasks given a user_id
-		if (function.equals("complexGetHPTasks")) {
-			// Eg: http://192.168.1.69:8080/complexGetHPTasks?1007
+		if (function.equals("complexGetHP")) {
+			// Eg: http://192.168.1.69:8080/complexGetHP?1007
 			String result = ComplexQueriesAPI.getUsersHighestPriorityTasks(params[0]);
 			return result;
 		}
 
 		// Produces a team's tasks where the uses position is Software Engineering
-		if (function.equals("complexGetSWETasks")) {
-			// Eg: http://192.168.1.69:8080/complexGetSWETasks?1
+		if (function.equals("complexGetSWE")) {
+			// Eg: http://192.168.1.69:8080/complexGetSWE?1
 			String result = ComplexQueriesAPI.getTeamsSoftwareEngineeringTasks(params[0]);
 			return result;
 		}
@@ -108,16 +107,16 @@ public class MyHttpHandler implements HttpHandler {
 
 		// Produces all the tasks of a given team that are incomplete and order by high
 		// priority
-		if (function.equals("complexGetTeamsSortedTasks")) {
-			// Eg: http://192.168.1.69:8080/complexGetTeamsSortedTasks?1
+		if (function.equals("complexGetTeamsSorted")) {
+			// Eg: http://192.168.1.69:8080/complexGetTeamsSorted?1
 			String result = ComplexQueriesAPI.getTeamsSortedTask(params[0]);
 			return result;
 		}
 
 		// Produces all the tasks of a given user that are incomplete and order by high
 		// priority
-		if (function.equals("complexGetSortedTasks")) {
-			// Eg: http://192.168.1.69:8080/complexGetSortedTasks?1001
+		if (function.equals("complexGetUserSorted")) {
+			// Eg: http://192.168.1.69:8080/complexGetUserSorted?1001
 			String result = ComplexQueriesAPI.getUserSortedTask(params[0]);
 			return result;
 		}
