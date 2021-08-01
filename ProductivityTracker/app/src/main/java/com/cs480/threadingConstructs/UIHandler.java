@@ -80,6 +80,7 @@ public class UIHandler
                         {
                             Log.i(TAG, "addTaskActivityInstance was null");
                         }
+                        break;
                     }
                     case DELETE_TASK_RESULT:
                     {
@@ -93,6 +94,7 @@ public class UIHandler
                         {
                             Log.i(TAG, "deleteTaskActivityInstance was null");
                         }
+                        break;
                     }
 
                     case VERIFY_USER_RESULT:

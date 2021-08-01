@@ -37,6 +37,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/delete_task_header" />
 
+    <Spinner
+        android:id="@+id/task_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="460dp"
+        android:background="@drawable/rounded_grey_box"
+        android:hint="Task ID"
+        android:padding="15dp"
+        android:textColorHint="#8B8F96"
+        app:layout_constraintBottom_toTopOf="@+id/delete_task_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.175"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <Button
         android:id="@+id/delete_task_btn"
         android:layout_width="match_parent"

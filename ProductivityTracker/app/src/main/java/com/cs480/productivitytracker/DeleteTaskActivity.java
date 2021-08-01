@@ -5,13 +5,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.cs480.staticData.UserData;
 import com.cs480.threadingConstructs.ConnectionThread;
 import com.cs480.threadingConstructs.ConnectionThreadHandler;
+
+import org.json.JSONException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DeleteTaskActivity extends AppCompatActivity {
     //Logcat TAG
@@ -20,6 +30,10 @@ public class DeleteTaskActivity extends AppCompatActivity {
     EditText deleteTaskId;
     Button deleteTaskButton;
     String deleteTaskIdValue;
+
+    ArrayList<Pair<String, String>> tasks;
+
+    String selectedTaskId;
 
     public static DeleteTaskActivity deleteTaskActivityInstance;
 
@@ -35,15 +49,32 @@ public class DeleteTaskActivity extends AppCompatActivity {
         //Get Threading constructs
         connectionThread = ConnectionThread.getConnectionThread();
 
+        //Load tasks from userData
+        try {
+            tasks = UserData.getTasksNameAndIDs();
+        } catch (JSONException e) {
+            Toast.makeText(DeleteTaskActivity.this,"Failed to load tasks",Toast.LENGTH_SHORT).show();
+            tasks =  new ArrayList<>();
+        }
+
         deleteTaskId = (EditText) findViewById(R.id.delete_task_id);
         deleteTaskButton = (Button) findViewById(R.id.delete_task_btn);
+
+        initSpinner();
 
         deleteTaskActivityInstance = this;
     }
 
-    public void handleDeleteTaskBtn(View view) {
+    public void handleDeleteTaskBtn(View view)
+    {
+        if(selectedTaskId == null)
+        {
+            Toast.makeText(DeleteTaskActivity.this,"Please select task",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         // Field Values
-        deleteTaskIdValue = deleteTaskId.getText().toString();
+        deleteTaskIdValue = selectedTaskId;
 
         Log.i(TAG, "verify user message sent to connection thread");
         Message msg = new Message();
@@ -72,6 +103,36 @@ public class DeleteTaskActivity extends AppCompatActivity {
             Toast.makeText(DeleteTaskActivity.this,"Delete Task failed",Toast.LENGTH_SHORT).show();
         }
     }
+
+    public void initSpinner()
+    {
+        Spinner taskSpinner = (Spinner)findViewById(R.id.task_spinner);
+        List<String> taskNames = new ArrayList<String>();
+
+        for(Pair<String, String> x : tasks)
+        {
+            taskNames.add(x.second);
+        }
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, taskNames);
+        taskSpinner.setAdapter(dataAdapter);
+
+        taskSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                selectedTaskId = tasks.get(position).first;
+                deleteTaskId.setText(selectedTaskId);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                selectedTaskId = null;
+
+            }
+        });
+
+    }
+
 
 
     @Override
