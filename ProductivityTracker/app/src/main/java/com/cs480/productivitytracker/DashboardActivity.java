@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -11,9 +13,20 @@ import android.widget.TextView;
 
 import com.cs480.staticData.UserData;
 import com.cs480.threadingConstructs.ConnectionThread;
+import com.cs480.threadingConstructs.ConnectionThreadHandler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class DashboardActivity extends AppCompatActivity
 {
+
+    //TAG for Logcat
+    private String TAG = "Dashboard Activity";
+
     //Logged in user
     private String currentUser;
 
@@ -38,7 +51,7 @@ public class DashboardActivity extends AppCompatActivity
         loadProfileDetails();
 
         //User task list
-        loadUserTasks();
+        queryForLoadUserTasks();
 
         dashboardActivityInstance = this;
     }
@@ -86,8 +99,37 @@ public class DashboardActivity extends AppCompatActivity
         ((TextView)findViewById(R.id.user_team_position_text_view)).setText(userDetailsStringArray[3]);
     }
 
-    public void loadUserTasks(){
+    public void queryForLoadUserTasks()
+    {
+        Message msg = new Message();
+        msg.what = ConnectionThreadHandler.DASHBOARD_ACTIVITY_LOAD_USER_TASKS;
 
+        Bundle bundle = new Bundle();
+        bundle.putString("user_id", UserData.user_id);
+        msg.setData(bundle);
+
+        ConnectionThread
+                .getConnectionThread()
+                .getConnectionThreadHandler()
+                .sendMessage(msg);
+
+    }
+
+    public void loadUserTasks(JSONArray ja) throws JSONException
+    {
+        ArrayList<String> taskNames = new ArrayList<>();
+        ListView lv = findViewById(R.id.task_lv);
+        for(int n = 0; n < ja.length(); n++)
+        {
+            JSONObject object = ja.getJSONObject(n);
+            String taskName = object.getString("task_name");
+            taskNames.add(taskName);
+        }
+
+        Log.i(TAG,"Received num of tasks =  " + taskNames.size());
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>( this, android.R.layout.simple_list_item_1,taskNames);
+        lv.setAdapter(arrayAdapter);
     }
 
     @Override

@@ -101,10 +101,10 @@ public class complexQueries
 
     // Complex Query 6 via HTTP
     // Produces all the tasks of a given user that are incomplete and order by high priority
-    public static String getUserSortedTask(String user_id)
+    public static String complexGetUserSorted(String user_id)
     {
         String request = "http://" + ConnectionThread.IP + ":" + Integer.toString(ConnectionThread.PORT) +
-                "/complexGetSortedTasks?" +
+                "/complexGetUserSorted?" +
                 user_id;
 
         String response = ConnectionThread
@@ -112,7 +112,7 @@ public class complexQueries
                 .getConnectionThreadHandler()
                 .httpRequest(request);
 
-        Log.i(TAG, "getTeamsSortedTask result = " + response);
+        Log.i(TAG, "complexGetUserSorted result = " + response);
 
         return response;
     }

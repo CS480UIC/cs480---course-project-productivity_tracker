@@ -13,9 +13,14 @@ import com.cs480.productivitytracker.DeleteTaskActivity;
 import com.cs480.productivitytracker.LoginActivity;
 import com.cs480.productivitytracker.ProfileActivity;
 import com.cs480.productivitytracker.TaskActivity;
+import com.cs480.staticData.UserData;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 public class UIHandler
 {
+
     //ui handler instance
     public static Handler uiHandler;
 
@@ -29,6 +34,7 @@ public class UIHandler
     public static final int DELETE_USER_RESULT = 250;
     public static final int ADD_TASK_RESULT = 300;
     public static final int DELETE_TASK_RESULT = 350;
+    public static final int DASH_BOARD_LOAD_USER_TASKS_GUI = 400;
 
 
 
@@ -136,6 +142,29 @@ public class UIHandler
                         {
                             Log.i(TAG, "profileActivityInstance was null");
                         }
+                        break;
+                    }
+
+                    case DASH_BOARD_LOAD_USER_TASKS_GUI:
+                    {
+                        JSONArray ja = null;
+                        try {
+                            ja = new JSONArray(msg.getData().getString("complexGetUserSorted"));
+
+                            if(DashboardActivity.dashboardActivityInstance != null)
+                            {
+                                UserData.user_tasks = ja;
+                                DashboardActivity.dashboardActivityInstance.loadUserTasks(ja);
+                            }
+                            else
+                            {
+                                Log.i(TAG, "dashboardActivityInstance was null");
+                            }
+                        } catch (JSONException e) {
+                            Log.i(TAG, "dashboard could not load JSONArray for tasks");
+                        }
+
+
                         break;
                     }
                 }

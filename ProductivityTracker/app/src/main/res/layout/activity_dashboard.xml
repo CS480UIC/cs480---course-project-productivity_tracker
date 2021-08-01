@@ -109,11 +109,11 @@
             android:textColor="@color/white"
             android:layout_marginTop="15dp"
             />
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/team_rv"
+        <ListView
+            android:id="@+id/task_lv"
             android:layout_width="match_parent"
             android:minHeight="200dp"
-            android:layout_height="wrap_content"
+            android:layout_height="400dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
             android:padding="10dp"
@@ -125,7 +125,7 @@
 
             <Button
                 android:id="@+id/add_task_id"
-                android:layout_width="218dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#1DA1F2"
                 android:padding="15dp"
@@ -135,7 +135,7 @@
 
             <Button
                 android:id="@+id/delete_task_id"
-                android:layout_width="145dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#1E4156"
                 android:padding="15dp"
@@ -153,7 +153,7 @@
             android:textColor="@color/white"
             />
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/task_rv"
+            android:id="@+id/team_rv"
             android:minHeight="200dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

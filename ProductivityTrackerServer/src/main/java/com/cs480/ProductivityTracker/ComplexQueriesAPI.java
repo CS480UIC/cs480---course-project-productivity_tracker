@@ -161,7 +161,9 @@ public class ComplexQueriesAPI {
 		    }  
 	  }
 	  
-	  public static String getTeamsSortedTask(String teamId){
+	  public static String getTeamsSortedTask(String teamId)
+	  {
+		  //System.out.println("Inside getTeamsSortedTask");
 		  JSONArray ja = new JSONArray();
 		  try {
 		      executeQuery("SELECT  Task.task_name, Task.task_description, User.user_name, User.team_position ,\n"
@@ -211,7 +213,7 @@ public class ComplexQueriesAPI {
 		  JSONArray ja = new JSONArray();
 		  try {
 		      executeQuery("-- email of a users project manage\n"
-		      		+ "SELECT  Task.task_name, Task.task_description, User.user_name, User.team_position ,PD.description, Task.creation_date,Task.dead_line_date\n"
+		      		+ "SELECT  Task.task_id, Task.task_name, Task.task_description, User.user_name, User.team_position ,PD.description, Task.creation_date,Task.dead_line_date\n"
 		      		+ "FROM Task\n"
 		      		+ "JOIN User ON User.user_id = Task.user_id\n"
 		      		+ "JOIN PriorityDescription as PD ON PD.priority = Task.priority\n"
@@ -220,6 +222,7 @@ public class ComplexQueriesAPI {
 		      		+ "");
 		      
 		      while (resultSet.next()) {
+		    	String task_id = resultSet.getString("task_id");
 		        String task_name = resultSet.getString("task_name");
 		        String task_description = resultSet.getString("task_description");
 		        String user_name = resultSet.getString("user_name");
@@ -230,6 +233,7 @@ public class ComplexQueriesAPI {
 
 		        //Create JSON Object
 		        JSONObject jo = new JSONObject();
+		        jo.put("task_id", task_name);
 		        jo.put("task_name", task_name);
 				jo.put("task_description", task_description);
 				jo.put("user_name", user_name);

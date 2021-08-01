@@ -61,22 +61,31 @@ public class MyHttpHandler implements HttpHandler {
 	}
 
 	private String getResponseFromFunction(String function, String[] params) {
-		if (function.contains("User")) {
+		
+		//System.out.println("in get resp");
+		
+		if (function.contains("User") && !function.contains("complex")) {
 			return userCrudOperations(function, params);
 		}
 		
-		else if (function.contains("Task")) {
+		else if (function.contains("Task")&& !function.contains("complex")) {
 			return taskCrudOperations(function, params);
 		}
 
-		else if (function.contains("complex")) {
+		else if (function.contains("complex")) 
+		{
+			//System.out.println("in get resp complex");
 			return complexQueryOperations(function, params);
 		}
 		
+		//System.out.println("get resp null");
 		return null;
 	}
 
 	private String complexQueryOperations(String function, String[] params) {
+		
+		//System.out.println("in complex");
+		
 		// Produces tasks with the category of test cases give a team_id
 		if (function.equals("complexGetTestCases")) {
 			// Eg: http://192.168.1.69:8080/complexGetTestCases?1
@@ -117,10 +126,12 @@ public class MyHttpHandler implements HttpHandler {
 		// priority
 		if (function.equals("complexGetUserSorted")) {
 			// Eg: http://192.168.1.69:8080/complexGetUserSorted?1001
+			//System.out.println("Inside complexGetUserSorted");
 			String result = ComplexQueriesAPI.getUserSortedTask(params[0]);
 			return result;
 		}
 
+		//System.out.println("Complex reuturn null");
 		return null;
 	}
 	
