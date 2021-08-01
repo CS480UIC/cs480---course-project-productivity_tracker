@@ -55,6 +55,39 @@ public class SimpleQueriesAPI
 		    }  
 	  }
 	  
+	  public static String getListOfUsersInTeam(String team_id)
+	  {
+		  JSONArray ja = new JSONArray();
+		  try {
+		      executeQuery("SELECT u.user_id, u.user_name "
+		      		+ "FROM User AS u "
+		      		+ "JOIN TeamUser AS tu "
+		      		+ "ON tu.user_id = u.user_id "
+		      		+ "JOIN Team AS t "
+		      		+ "ON t.team_id = tu.team_id "
+		      		+ "WHERE t.team_id =" + team_id +";");
+		      
+		      while (resultSet.next()) {
+		    	String user_id = resultSet.getString("user_id");
+		        String user_name = resultSet.getString("user_name");
+		        
+		        //Create JSON Object
+		        JSONObject jo = new JSONObject();
+		        jo.put("user_id", user_id);
+		        jo.put("user_name", user_name);
+
+		        //Add to JSONArray
+		        ja.put(jo);	        
+		      }
+		    } catch (Exception e) {
+		      System.out.println(e.getMessage());
+		      return "error";
+		    }
+		  	finally {
+		      close();
+		      return ja.toString();
+		    }
+	  }
 	  
 	  
 	  
