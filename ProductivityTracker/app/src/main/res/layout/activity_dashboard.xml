@@ -174,24 +174,25 @@
             android:onClick="handleViewTeamBtn"/>
 
         <TextView
-            android:id="@+id/completed_tasks_header"
+            android:id="@+id/complex_queries_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Completed Tasks"
+            android:text="Complex Queries"
             android:textSize="26dp"
             android:textColor="@color/white"
             android:layout_marginTop="15dp"
             />
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/completed_tasks_rv"
-            android:minHeight="200dp"
+
+        <Button
+            android:id="@+id/complex_queries_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            android:padding="10dp"
-            android:background="@drawable/rounded_grey_box"
-            />
+            android:backgroundTint="#1DA1F2"
+            android:padding="15dp"
+            android:layout_marginBottom="100dp"
+            android:layout_marginRight="10dp"
+            android:text="View Queries"
+            android:onClick="handleComplexQueriesBtn"/>
     </LinearLayout>
 </ScrollView>
 

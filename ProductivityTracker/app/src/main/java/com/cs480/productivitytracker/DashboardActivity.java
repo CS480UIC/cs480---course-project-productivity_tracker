@@ -96,4 +96,9 @@ public class DashboardActivity extends AppCompatActivity
         loadProfileDetails();
         super.onResume();
     }
+
+    public void handleComplexQueriesBtn(View view) {
+        Intent startComplexQueryActivity = new Intent(DashboardActivity.this,ComplexQueryActivity.class );
+        DashboardActivity.this.startActivity(startComplexQueryActivity);
+    }
 }
