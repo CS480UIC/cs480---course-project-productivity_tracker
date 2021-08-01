@@ -98,7 +98,7 @@ INSERT INTO User(user_name, email, team_position, password)
 VALUES (
         'user1',
         'user1@uic.edu',
-        'Manager',
+        'Project Manager',
         'user'
 );
 
@@ -106,7 +106,7 @@ INSERT INTO User(user_name, email, team_position, password)
 VALUES (
         'user2',
         'user2@uic.edu',
-        'Manager',
+        'Project Manager',
         'user'
 );
 
@@ -206,6 +206,31 @@ VALUES (
         'user'
 );
 
+INSERT INTO User(user_name, email, team_position, password)
+VALUES (
+        'user15',
+        'user13@uic.edu',
+        'Project Manager',
+        'user'
+);
+
+INSERT INTO User(user_name, email, team_position, password)
+VALUES (
+        'user16',
+        'user14@uic.edu',
+        'HR Manager',
+        'user'
+);
+
+INSERT INTO User(user_name, email, team_position, password)
+VALUES (
+        'user17',
+        'user14@uic.edu',
+        'Project Manager',
+        'user'
+);
+
+
 
 INSERT INTO Team(team_name)
 VALUES ('Team Admins');
@@ -254,6 +279,7 @@ VALUES ( (SELECT team_id FROM Team WHERE team_name = 'Team Evens')
 	,(SELECT user_id FROM User WHERE user_name = 'user8')
 );
 
+
 INSERT INTO TeamUser(team_id, user_id)
 VALUES ( (SELECT team_id FROM Team WHERE team_name = 'Team Evens')
 	,(SELECT user_id FROM User WHERE user_name = 'user10')
@@ -262,6 +288,11 @@ VALUES ( (SELECT team_id FROM Team WHERE team_name = 'Team Evens')
 INSERT INTO TeamUser(team_id, user_id)
 VALUES ( (SELECT team_id FROM Team WHERE team_name = 'Team Evens')
 	,(SELECT user_id FROM User WHERE user_name = 'user12')
+);
+
+INSERT INTO TeamUser(team_id, user_id)
+VALUES ( (SELECT team_id FROM Team WHERE team_name = 'Team Evens')
+	,(SELECT user_id FROM User WHERE user_name = 'user14')
 );
 
 INSERT INTO TeamUser(team_id, user_id)
@@ -305,6 +336,16 @@ VALUES ( (SELECT team_id FROM Team WHERE team_name = 'Team Odds')
 );
 
 INSERT INTO TeamUser(team_id, user_id)
+VALUES ( (SELECT team_id FROM Team WHERE team_name = 'Team Odds')
+	,(SELECT user_id FROM User WHERE user_name = 'user15')
+);
+
+INSERT INTO TeamUser(team_id, user_id)
+VALUES ( (SELECT team_id FROM Team WHERE team_name = 'Team Odds')
+	,(SELECT user_id FROM User WHERE user_name = 'user17')
+);
+
+INSERT INTO TeamUser(team_id, user_id)
 VALUES ( (SELECT team_id FROM Team WHERE team_name = 'Team 3K')
 	,(SELECT user_id FROM User WHERE user_name = 'user3')
 );
@@ -322,6 +363,11 @@ VALUES ( (SELECT team_id FROM Team WHERE team_name = 'Team 3K')
 INSERT INTO TeamUser(team_id, user_id)
 VALUES ( (SELECT team_id FROM Team WHERE team_name = 'Team 3K')
 	,(SELECT user_id FROM User WHERE user_name = 'user12')
+);
+
+INSERT INTO TeamUser(team_id, user_id)
+VALUES ( (SELECT team_id FROM Team WHERE team_name = 'Team 3K')
+	,(SELECT user_id FROM User WHERE user_name = 'user15')
 );
 
 INSERT INTO TeamUser(team_id, user_id)
@@ -353,6 +399,12 @@ VALUES ( (SELECT team_id FROM Team WHERE team_name = 'Team Primes')
 INSERT INTO TeamUser(team_id, user_id)
 VALUES ( (SELECT team_id FROM Team WHERE team_name = 'Team Primes')
 	,(SELECT user_id FROM User WHERE user_name = 'user13')
+);
+
+
+INSERT INTO TeamUser(team_id, user_id)
+VALUES ( (SELECT team_id FROM Team WHERE team_name = 'Team Primes')
+	,(SELECT user_id FROM User WHERE user_name = 'user17')
 );
 
 
