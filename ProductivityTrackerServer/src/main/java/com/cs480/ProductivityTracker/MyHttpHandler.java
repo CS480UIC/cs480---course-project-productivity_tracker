@@ -94,6 +94,13 @@ public class MyHttpHandler implements HttpHandler {
 			return result;
 		}
 		
+		//getListOfUsersInTeam
+		if(function.equals("simpleGetListOfUsersInTeam"))
+		{// Eg: http://192.168.0.110:8080/simpleGetListOfUsersInTeam?7
+			String result = SimpleQueriesAPI.getListOfUsersInTeam(params[0]);
+			return result;
+		}
+		
 		return null;
 	}
 	

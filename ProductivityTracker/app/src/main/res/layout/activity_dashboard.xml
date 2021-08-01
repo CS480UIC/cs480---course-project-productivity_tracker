@@ -152,6 +152,14 @@
             android:layout_marginTop="15dp"
             android:textColor="@color/white"
             />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="(click on a team to view)"
+            android:textSize="10dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/white"
+            />
         <ListView
             android:id="@+id/team_lv"
             android:minHeight="200dp"
@@ -162,16 +170,6 @@
             android:padding="10dp"
             android:background="@drawable/rounded_grey_box"
             />
-
-        <Button
-            android:id="@+id/view_team_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#1DA1F2"
-            android:padding="15dp"
-            android:layout_marginRight="10dp"
-            android:text="View Team"
-            android:onClick="handleViewTeamBtn"/>
 
         <TextView
             android:id="@+id/complex_queries_header"

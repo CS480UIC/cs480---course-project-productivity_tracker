@@ -22,8 +22,6 @@ import java.net.URL;
 
 public class ConnectionThreadHandler extends Handler
 {
-
-
     //TAG for Logcat
     private String TAG = "ConnectionThreadHandler";
 
@@ -46,6 +44,7 @@ public class ConnectionThreadHandler extends Handler
     public static final int DASHBOARD_ACTIVITY_LOAD_USER_TASKS = 170;
     public static final int DASHBOARD_ACTIVITY_LOAD_USER_TEAMS = 180;
     public static final int COMPLEX_ACTIVITY_LOAD_PM_EMAILS = 190;
+    public static final int VIEW_TEAM_ACTIVITY_LOAD_TEAM_MEMBERS = 200;
 
 
 
@@ -303,6 +302,27 @@ public class ConnectionThreadHandler extends Handler
                 replyMsg.setData(bundle);
 
                 Log.i(TAG, "Sending user teams to dashboard");
+
+                uiHandler.sendMessage(replyMsg);
+
+                break;
+            }
+
+            case VIEW_TEAM_ACTIVITY_LOAD_TEAM_MEMBERS:
+            {
+                String team_id = (String) msg.getData().get("team_id");
+
+                //TODO
+                String result = simpleQueries.getListOfMembersInTeam(team_id);
+
+                Bundle bundle = new Bundle();
+                bundle.putString("getListOfMembersInTeam",result);
+
+                Message replyMsg = new Message();
+                replyMsg.what = UIHandler.VIEW_TEAM_LOAD_TEAM_MEMBERS_GUI;
+                replyMsg.setData(bundle);
+
+                Log.i(TAG, "Sending list of team members in team to view team");
 
                 uiHandler.sendMessage(replyMsg);
 
