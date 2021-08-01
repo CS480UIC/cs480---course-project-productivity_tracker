@@ -26,7 +26,7 @@ public class AddTaskActivity extends AppCompatActivity {
     ConnectionThread connectionThread;
 
     EditText taskName, taskDesc, userId, teamId;
-    String taskNameValue, taskDescValue, userIDValue, teamIdValue, priorityValue;
+    String taskNameValue, taskDescValue, userIDValue, teamIdValue, priorityValue = "1";
     Button addTaskBtn;
 
     @Override
