@@ -52,6 +52,7 @@ public class DashboardActivity extends AppCompatActivity
 
         //User task list
         queryForLoadUserTasks();
+        queryForLoadUserTeams();
 
         dashboardActivityInstance = this;
     }
@@ -115,6 +116,22 @@ public class DashboardActivity extends AppCompatActivity
 
     }
 
+    public void queryForLoadUserTeams()
+    {
+        Message msg = new Message();
+        msg.what = ConnectionThreadHandler.DASHBOARD_ACTIVITY_LOAD_USER_TEAMS;
+
+        Bundle bundle = new Bundle();
+        bundle.putString("user_id", UserData.user_id);
+        msg.setData(bundle);
+
+        ConnectionThread
+                .getConnectionThread()
+                .getConnectionThreadHandler()
+                .sendMessage(msg);
+
+    }
+
     public void loadUserTasks(JSONArray ja) throws JSONException
     {
         ArrayList<String> taskNames = new ArrayList<>();
@@ -128,7 +145,24 @@ public class DashboardActivity extends AppCompatActivity
 
         Log.i(TAG,"Received num of tasks =  " + taskNames.size());
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>( this, android.R.layout.simple_list_item_1,taskNames);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>( this, R.layout.simpe_list_item,taskNames);
+        lv.setAdapter(arrayAdapter);
+    }
+
+    public void loadUserTeams(JSONArray ja) throws JSONException
+    {
+        ArrayList<String> teamNames = new ArrayList<>();
+        ListView lv = findViewById(R.id.team_lv);
+        for(int n = 0; n < ja.length(); n++)
+        {
+            JSONObject object = ja.getJSONObject(n);
+            String teamName = object.getString("team_name");
+            teamNames.add(teamName);
+        }
+
+        Log.i(TAG,"Received num of teams =  " + teamNames.size());
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>( this, R.layout.simpe_list_item,teamNames);
         lv.setAdapter(arrayAdapter);
     }
 
@@ -136,6 +170,8 @@ public class DashboardActivity extends AppCompatActivity
     protected void onResume()
     {
         loadProfileDetails();
+        queryForLoadUserTasks();
+        queryForLoadUserTeams();
         super.onResume();
     }
 

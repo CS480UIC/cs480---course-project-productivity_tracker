@@ -21,6 +21,7 @@ import org.json.JSONException;
 public class UIHandler
 {
 
+
     //ui handler instance
     public static Handler uiHandler;
 
@@ -35,6 +36,7 @@ public class UIHandler
     public static final int ADD_TASK_RESULT = 300;
     public static final int DELETE_TASK_RESULT = 350;
     public static final int DASH_BOARD_LOAD_USER_TASKS_GUI = 400;
+    public static final int DASH_BOARD_LOAD_USER_TEAMS_GUI = 450;
 
 
 
@@ -162,6 +164,29 @@ public class UIHandler
                             }
                         } catch (JSONException e) {
                             Log.i(TAG, "dashboard could not load JSONArray for tasks");
+                        }
+
+
+                        break;
+                    }
+
+                    case DASH_BOARD_LOAD_USER_TEAMS_GUI:
+                    {
+                        JSONArray ja = null;
+                        try {
+                            ja = new JSONArray(msg.getData().getString("getUserTeams"));
+
+                            if(DashboardActivity.dashboardActivityInstance != null)
+                            {
+                                UserData.user_teams = ja;
+                                DashboardActivity.dashboardActivityInstance.loadUserTeams(ja);
+                            }
+                            else
+                            {
+                                Log.i(TAG, "dashboardActivityInstance was null");
+                            }
+                        } catch (JSONException e) {
+                            Log.i(TAG, "dashboard could not load JSONArray for teams");
                         }
 
 

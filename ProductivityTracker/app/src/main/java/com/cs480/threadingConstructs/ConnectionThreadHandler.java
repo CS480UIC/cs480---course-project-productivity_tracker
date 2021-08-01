@@ -6,6 +6,7 @@ import android.os.Message;
 import android.util.Log;
 
 import com.cs480.databaseAPI.complexQueries;
+import com.cs480.databaseAPI.simpleQueries;
 import com.cs480.databaseAPI.userCrud;
 import com.cs480.databaseAPI.taskCrud;
 import com.cs480.staticData.UserData;
@@ -21,6 +22,7 @@ import java.net.URL;
 
 public class ConnectionThreadHandler extends Handler
 {
+
 
     //TAG for Logcat
     private String TAG = "ConnectionThreadHandler";
@@ -42,6 +44,7 @@ public class ConnectionThreadHandler extends Handler
     public final static int ADD_TASK_ACTIVITY_ADD_TASK = 150;
     public final static int DELETE_TASK_ACTIVITY_DELETE_TASK = 160;
     public static final int DASHBOARD_ACTIVITY_LOAD_USER_TASKS = 170;
+    public static final int DASHBOARD_ACTIVITY_LOAD_USER_TEAMS = 180;
 
 
 
@@ -268,6 +271,25 @@ public class ConnectionThreadHandler extends Handler
                 break;
             }
 
+            case DASHBOARD_ACTIVITY_LOAD_USER_TEAMS:
+            {
+                String user_id = (String) msg.getData().get("user_id");
+
+                String result = simpleQueries.getUserTeams(user_id);
+
+                Bundle bundle = new Bundle();
+                bundle.putString("getUserTeams",result);
+
+                Message replyMsg = new Message();
+                replyMsg.what = UIHandler.DASH_BOARD_LOAD_USER_TEAMS_GUI;
+                replyMsg.setData(bundle);
+
+                Log.i(TAG, "Sending user teams to dashboard");
+
+                uiHandler.sendMessage(replyMsg);
+
+                break;
+            }
         }
 
 

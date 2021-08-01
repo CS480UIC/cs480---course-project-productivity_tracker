@@ -147,16 +147,16 @@
             android:id="@+id/your_team"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Your Team"
+            android:text="Your Teams"
             android:textSize="26dp"
             android:layout_marginTop="15dp"
             android:textColor="@color/white"
             />
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/team_rv"
+        <ListView
+            android:id="@+id/team_lv"
             android:minHeight="200dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
             android:padding="10dp"

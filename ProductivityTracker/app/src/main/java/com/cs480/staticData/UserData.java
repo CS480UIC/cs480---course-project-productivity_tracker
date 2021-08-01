@@ -11,5 +11,7 @@ public class UserData
 
     public static JSONArray user_tasks;
 
+    public static JSONArray user_teams;
+
 
 }

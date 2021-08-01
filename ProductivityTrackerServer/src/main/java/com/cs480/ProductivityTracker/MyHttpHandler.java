@@ -64,11 +64,11 @@ public class MyHttpHandler implements HttpHandler {
 		
 		//System.out.println("in get resp");
 		
-		if (function.contains("User") && !function.contains("complex")) {
+		if (function.contains("User") && !function.contains("complex") && !function.contains("simple")) {
 			return userCrudOperations(function, params);
 		}
 		
-		else if (function.contains("Task")&& !function.contains("complex")) {
+		else if (function.contains("Task")&& !function.contains("complex") && !function.contains("simple")) {
 			return taskCrudOperations(function, params);
 		}
 
@@ -77,10 +77,28 @@ public class MyHttpHandler implements HttpHandler {
 			//System.out.println("in get resp complex");
 			return complexQueryOperations(function, params);
 		}
+		else if(function.contains("simple"))
+		{
+			return simpleQueryOperations(function ,params);
+		}
 		
 		//System.out.println("get resp null");
 		return null;
 	}
+	
+	private String simpleQueryOperations(String function, String[] params)
+	{
+		if(function.equals("simpleGetUserTeams"))
+		{// Eg: http://192.168.0.110:8080/simpleGetUserTeams?7
+			String result = SimpleQueriesAPI.getTeamsOfUser(params[0]);
+			return result;
+		}
+		
+		return null;
+	}
+	
+	
+	
 
 	private String complexQueryOperations(String function, String[] params) {
 		
