@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#15202B"
+    android:paddingTop="20dp"
+    android:paddingHorizontal="20dp"
+    tools:context=".ViewTeamActivity">
+
+    <TextView
+        android:id="@+id/team_members_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Team Members"
+        android:textColor="@color/white"
+        android:paddingTop="20dp"
+        android:textSize="26dp"
+        app:layout_constraintTop_toBottomOf="@+id/teamNameAndId"
+        tools:layout_editor_absoluteX="20dp" />
+    <TextView
+        android:id="@+id/teamNameAndId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Team Name"
+        android:textColor="@color/white"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="20dp" />
+
+    <ListView
+        android:id="@+id/team_member_lv"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@drawable/rounded_grey_box"
+        android:minHeight="150dp"
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/team_members_header"
+        tools:layout_editor_absoluteX="20dp" />
+
+    <TextView
+        android:id="@+id/add_new_tm_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Add A Team Member"
+        android:textColor="@color/white"
+        android:textSize="26dp"
+        app:layout_constraintTop_toBottomOf="@+id/team_member_lv"
+        tools:layout_editor_absoluteX="20dp" />
+    <EditText
+        android:id="@+id/team_member_new_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_grey_box"
+        android:ems="10"
+        android:hint="Team Member ID"
+        android:textColorHint="#8B8F96"
+        android:padding="15dp"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.447"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginVertical="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/add_new_tm_header" />
+
+    <Button
+        android:id="@+id/add_team_member_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#1DA1F2"
+        android:onClick="handleAddNewTMBtn"
+        android:padding="15dp"
+        android:layout_marginTop="10dp"
+        android:text="Add Team Member"
+        app:layout_constraintTop_toBottomOf="@+id/team_member_new_id"
+        tools:layout_editor_absoluteX="25dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

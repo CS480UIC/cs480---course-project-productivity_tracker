@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#15202B"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="20dp"
+    tools:context=".DashboardActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/dashboard_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dashboard"
+            android:textColor="@color/white"
+            android:textSize="32dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/your_profile_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Profile Details"
+            android:textColor="@color/white"
+            android:textSize="26dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/rounded_grey_box"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/user_name_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="15dp"
+                android:text="User Name"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/user_id_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="15dp"
+                android:text="User ID"
+                android:textColor="@color/white"
+                android:textSize="10dp" />
+
+            <TextView
+                android:id="@+id/user_email_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="15dp"
+                android:text="Email"
+                android:textColor="@color/white"
+                android:textSize="10dp" />
+
+            <TextView
+                android:id="@+id/user_team_position_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="15dp"
+                android:text="Team Position"
+                android:textColor="@color/white"
+                android:textSize="10dp" />
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/edit_profile_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#1DA1F2"
+            android:onClick="handleEditProfileBtn"
+            android:padding="15dp"
+            android:text="Edit Profile" />
+
+
+        <TextView
+            android:id="@+id/your_tasks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Your Tasks"
+            android:textColor="@color/white"
+            android:textSize="26dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="(click on a task view actions)"
+            android:textColor="@color/white"
+            android:textSize="10dp" />
+
+        <ListView
+            android:id="@+id/task_lv"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/rounded_grey_box"
+            android:minHeight="200dp"
+            android:padding="10dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/add_task_id"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="#1DA1F2"
+                android:onClick="handleAddTaskBtn"
+                android:padding="15dp"
+                android:text="Add Tasks" />
+
+            <Button
+                android:id="@+id/delete_task_id"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#1E4156"
+                android:onClick="handleDeleteTaskBtn"
+                android:padding="15dp"
+                android:text="Delete Task" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/your_team"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Your Teams"
+            android:textColor="@color/white"
+            android:textSize="26dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="(click on a team to view)"
+            android:textColor="@color/white"
+            android:textSize="10dp" />
+
+        <ListView
+            android:id="@+id/team_lv"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/rounded_grey_box"
+            android:minHeight="200dp"
+            android:padding="10dp" />
+
+        <TextView
+            android:id="@+id/complex_queries_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Complex Queries"
+            android:textColor="@color/white"
+            android:textSize="26dp" />
+
+        <Button
+            android:id="@+id/complex_queries_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="100dp"
+            android:backgroundTint="#1DA1F2"
+            android:onClick="handleComplexQueriesBtn"
+            android:padding="15dp"
+            android:text="View Queries" />
+    </LinearLayout>
+</ScrollView>
+
